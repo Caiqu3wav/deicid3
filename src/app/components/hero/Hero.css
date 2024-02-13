@@ -1,0 +1,6 @@
+.hero-container{
+    background: url(../../../../public/assets/img/hero-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

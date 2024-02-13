@@ -1,0 +1,8 @@
+header{
+    background: linear-gradient(rgba(255, 166, 0, 0.788), rgba(0, 0, 0, 0.582));
+    height: 100px;
+}
+
+.login-btn{
+    background: rgba(167, 167, 167, 0.774);
+}
