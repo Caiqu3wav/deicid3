@@ -2,7 +2,7 @@
 import { beats } from "@/app/api/beats/route";
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, VolumeOff, VolumeOn } from '../../icons/index';
-
+import "./styles.css"
 
 type Props = {
     id: string;
@@ -146,7 +146,7 @@ export const Player = ({ id, setId }: Props) => {
                             <div 
                              className='flex gap-3' key={beat.id}>
                                 <>
-                                    <img className="w-[50px] h-[50px]" src={beat.album_img} />
+                                    <img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={beat.album_img} />
                                     <div>
                                         <h1>{beat.name}</h1>
                                     </div>
@@ -160,8 +160,10 @@ export const Player = ({ id, setId }: Props) => {
                 }
             </div>
             <div className='flex items-center'>
-                <div className='flex gap-36 mr-[290px]'>
-                        <div className='progressBar flex gap-2'>
+                <div className='flex gap-32 mr-[290px] majortwo2:gap-20 majortwo3:gap-10 majortwo3:mr-[190px]
+                 majortwo4:mr-0 majorfour:flex-col-reverse majorfour:gap-0 majorfour:items-center majorfour:text-[14px]
+                 midtwo3:mr-10 lowone:mr-4 lowtwo:mr-0 lowtwo2-1:text-[10px]'>
+                        <div className='progressBar flex gap-2 majorfour:ml-4'>
                             <p className='PcurrentTime'>
                             {(currentTime !== null) && calculeDuration(currentTime)}
                             </p>
@@ -179,7 +181,8 @@ export const Player = ({ id, setId }: Props) => {
                             </p>
                         </div> 
 
-                    <div className='buttons text-3xl text-orange-500 space-x-3 '>
+                    <div className='buttons text-3xl text-orange-500 space-x-3 majorfour:text-[28px]
+                    lowtwo2-1:text-[24px]'>
                         <button 
                             onClick={() => setIsRandom(!isRandom)} className='randomMusicsButton'>
                             {isRandom ? <RandomMusicsTrue /> : <RandomMusicsFalse />}
@@ -201,13 +204,14 @@ export const Player = ({ id, setId }: Props) => {
                 </div>
             </div>
 
-                <div className='test mr-5 flex items-center'>
+                <div className='test mr-5 flex items-center majorfour:mr-2'>
                 <button 
-                    className='volumeButton' 
+                    className='volumeButton lowtwo:hidden' 
                     onClick={() => setIsMuted(!isMuted)}>
                     {isMuted ? <VolumeOff/> : <VolumeOn />}
                 </button>
                 <input
+                className="volume-input"
                     type="range" 
                     step="0.01"
                     onChange={(e) => setVolume(e.target.value)} 

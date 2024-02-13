@@ -56,7 +56,9 @@ export default function Home() {
           </select>
         </div>
           <div className='divSongs mt-5'>
-            <div className='grid grid-cols-4 gap-20'>
+            <div className='grid grid-cols-4 gap-20 major1:gap-10 majortwo1:gap-4
+           majortwo1-2:grid-cols-3 majortwo1-2:gap-16 majorthree:gap-[5%]
+            majorthree2:grid-cols-2 lowtwo1:grid-cols-1'>
             {beats.map(beat => (
               <BeatsCard 
                 key={beat.id}
