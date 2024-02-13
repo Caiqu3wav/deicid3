@@ -1,5 +1,5 @@
 'use client';
-import { beats } from "@/app/api/beats";
+import { beats } from "@/app/api/beats/route";
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, VolumeOff, VolumeOn } from '../../icons/index';
 
@@ -7,6 +7,7 @@ import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse
 type Props = {
     id: string;
     setId: (e: string) => void;
+    className?: string; 
 }
 
 export const Player = ({ id, setId }: Props) => {
@@ -134,7 +135,7 @@ export const Player = ({ id, setId }: Props) => {
         
 
         return(
-            <div className="">
+            <div className="w-full flex justify-between bg-slate-400">
             
             <div className='musicDiv'>
                 
@@ -143,7 +144,7 @@ export const Player = ({ id, setId }: Props) => {
                         id === beat.id ?
                         
                             <div 
-                             className='music' key={beat.id}>
+                             className='flex gap-3' key={beat.id}>
                                 <>
                                     <img className="w-[50px] h-[50px]" src={beat.album_img} />
                                     <div>
@@ -152,14 +153,15 @@ export const Player = ({ id, setId }: Props) => {
                                 </> 
                                 
                                 <audio src={beat.audio} ref={audioTag}/>
-                            </div>                         
+                            </div>    
+                                                 
                     : ''
                     ))
                 }
             </div>
-            <div className='player'>
-                <div className='inputButtons'>
-                        <div className='progressBar'>
+            <div className='flex items-center'>
+                <div className='flex gap-36 mr-[290px]'>
+                        <div className='progressBar flex gap-2'>
                             <p className='PcurrentTime'>
                             {(currentTime !== null) && calculeDuration(currentTime)}
                             </p>
@@ -177,7 +179,7 @@ export const Player = ({ id, setId }: Props) => {
                             </p>
                         </div> 
 
-                    <div className='buttons'>
+                    <div className='buttons text-3xl text-orange-500 space-x-3 '>
                         <button 
                             onClick={() => setIsRandom(!isRandom)} className='randomMusicsButton'>
                             {isRandom ? <RandomMusicsTrue /> : <RandomMusicsFalse />}
@@ -199,7 +201,7 @@ export const Player = ({ id, setId }: Props) => {
                 </div>
             </div>
 
-                <div className='test'>
+                <div className='test mr-5 flex items-center'>
                 <button 
                     className='volumeButton' 
                     onClick={() => setIsMuted(!isMuted)}>

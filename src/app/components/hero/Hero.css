@@ -1,6 +1,47 @@
 .hero-container{
     background: url(../../../../public/assets/img/hero-bg.jpg);
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center center;
     background-size: cover;
+    height: 540px;
+background-position: center center;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
 }
+
+.overlay{
+    position: relative;
+   display: flex;
+   flex-direction: column;
+    width: 380px;
+    height: 260px;
+    background-image: linear-gradient(rgba(230, 157, 20, 0.5), rgb(5, 5, 5, 0.5)); /* 0.5 define a opacidade (ajuste conforme necessário) */
+    border-radius: 20px; /* Bordas arredondadas */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.fsho_description{
+    color: white;
+    width: 300px;
+    font-family: 'Pixelify Sans', sans-serif;
+    }
+    
+    @keyframes zoom-in-out {
+        0% {
+          transform: scale(1); /* Sem ampliação */
+        }
+        50% {
+          transform: scale(1.5); /* Ampliação */
+        }
+        100% {
+          transform: scale(1); /* Sem ampliação */
+        }
+      }
+      
+      .animated-arrow {
+        animation: zoom-in-out 2s infinite; /* 2 segundos para concluir a animação e definido para executar em loop */
+      }

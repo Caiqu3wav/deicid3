@@ -32,3 +32,9 @@ export const beats = [
     dataLnc: '2023/07/20',
   },
 ];
+
+export async function GET(request: Request) {
+  return new Response(JSON.stringify(beats), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+}

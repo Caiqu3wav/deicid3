@@ -1,0 +1,62 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(rgba(0, 89, 255, 0.445), rgba(0, 0, 0, 0.781)); /* Cor de fundo do footer, ajuste conforme necessário */
+    padding: 10px; /* Adicione o padding desejado ao footer */
+    z-index: 1000; /* Ajuste conforme necessário para garantir que fique acima de outros elementos */
+    border-radius: 20px;
+  }
+
+  .playlist-cont{
+    background: linear-gradient(170deg, rgba(0,0,0,1) 18%, rgba(214,235,224,1) 52%, rgba(45,38,134,1) 100%);
+  }
+
+  :root {
+    --background-gradient: linear-gradient(178deg, #ffff33 10%, #3333ff);
+    --gray: #34495e;
+    --darkgray: #2c3e50;
+  }
+  
+  select {
+    /* Reset Select */
+    appearance: none;
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    color: #fff;
+    background-color: var(--darkgray);
+    background-image: none;
+    cursor: pointer;
+  }
+  /* Remove IE arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select wrapper */
+  .select {
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    border-radius: .25em;
+    overflow: hidden;
+  }
+  /* Arrow */
+  .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    background-color: #34495e;
+    transition: .25s all ease;
+    pointer-events: none;
+  }
+  /* Transition */
+  .select:hover::after {
+    color: #f39c12;
+  }

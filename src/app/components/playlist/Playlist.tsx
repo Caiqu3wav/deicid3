@@ -1,8 +1,9 @@
 'use client';
-import {useEffect, useState} from 'react';
-import { beats } from '../../api/beats';
+import { useState } from 'react';
+import { beats } from '../../api/beats/route';
 import { Player } from '../player/index';
 import { BeatsCard } from '../musics/index';
+import "./styles.css"
 
 export default function Home() {
   const [id, setId] = useState<string>('')
@@ -13,14 +14,8 @@ export default function Home() {
       <div>
 
         <div className='top'>
-            <>
-
-            <h1 className='searchH1'>Search for music name, author or genre </h1> 
-            </> 
-            <>
-            </>
           <div className='divSongs'>
-            <div>
+            <div className='grid grid-cols-4'>
             {beats.map(beat => (
               <BeatsCard 
                 key={beat.id}
@@ -37,11 +32,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div className='fixed-player'>
           <Player 
             id={id}
             setId={setId}
-          /> 
-
+            /> 
+            </div>
     </div>
     </main>
   );
