@@ -1,5 +1,5 @@
 'use client';
-import { beats } from "@/app/api/beats/route";
+import { beats } from "@/pages/api/beats";
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, VolumeOff, VolumeOn } from '../../icons/index';
 import "./styles.css"
@@ -181,7 +181,7 @@ export const Player = ({ id, setId }: Props) => {
                             </p>
                         </div> 
 
-                    <div className='buttons text-3xl text-orange-500 space-x-3 majorfour:text-[28px]
+                    <div className='buttons text-3xl text-orange-400 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
                         <button 
                             onClick={() => setIsRandom(!isRandom)} className='randomMusicsButton'>
