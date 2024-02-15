@@ -1,0 +1,89 @@
+aside{
+    background-color: rgb(39, 39, 148);
+}
+
+
+nav button{
+
+    position: relative;
+    right: 30%;
+}
+
+
+@media screen and (max-width: 466px){
+    nav {
+        margin-left: 0 !important;
+    }
+    
+    nav ul{
+        display: none;
+        visibility: hidden;
+    }
+
+    nav button{
+        visibility: visible;
+        display: block !important;
+    }
+}
+
+@media screen and (max-width: 546px){
+
+    nav button{
+        right: 43% !important;
+    }
+}
+
+@media screen and (max-width: 472px){
+
+    nav button{
+        right: 50% !important;
+    }
+}
+
+@media screen and (max-width: 434px){
+
+    nav button{
+        right: 58% !important;
+    }
+}
+
+@media screen and (max-width: 352px){
+
+    nav button{
+        right: 110% !important;
+    }
+}
+
+@media screen and (max-width: 330px){
+
+    nav button{
+        right: 160% !important;
+    }
+}
+
+@media screen and (max-width: 330px){
+
+    nav button{
+        right: 200% !important;
+    }
+}
+
+@media screen and (max-width: 394px){
+  
+    nav {
+        width: 90px !important;
+        margin-right: 0 !important;
+    }
+
+}
+
+@media screen and (max-width: 370px){
+  
+    nav {
+        width: 50px !important;
+        margin-right: 0;
+    }
+
+
+
+}
