@@ -1,5 +1,54 @@
+@font-face {
+  font-family: 'Protest Revolution';
+  src: local('Protest Revolution'), url('../../../../public/fonts/ProtestRevolution-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubik Maps';
+  src: local('Rubik Maps'), url('../../../../public/fonts/RubikMaps-Regular.ttf') format('truetype');
+}
+
+.hero-second-h1{
+  font-family: "Rubik Maps", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  color: rgb(25, 25, 235);
+  font-size: 43px;
+}
+
+@media screen and (max-width: 526px) {
+  .hero-second-h1{
+    font-size: 37px;
+  }
+}
+
+@media screen and (max-width: 443px) {
+  .hero-second-h1{
+    font-size: 30px;
+  }
+}
+
+
+
+@media screen and (max-width: 360px) {
+  .hero-second-h1{
+    font-size: 25px;
+  }
+}
+
+
+.hero-title{
+  font-family: "Protest Revolution", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+}
+
+
 .hero-container{
-    background: url(../../../../public/assets/img/hero-bg.jpg);
+    background-image: url(../../../../public/assets/img/hero-bg.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -22,6 +71,18 @@ flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+@media screen and (max-width: 400px) {
+  .overlay{
+    width: 340px;
+  }
+}
+
+@media screen and (max-width: 353px) {
+  .overlay{
+    width: 315px;
+  }
 }
 
 .fsho_description{

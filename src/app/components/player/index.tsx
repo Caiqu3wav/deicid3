@@ -96,7 +96,7 @@ export const Player = ({ id, setId }: Props) => {
 
         const skipRandom = () => {
             const idNum = parseInt(id)
-            const randomNum = Math.floor(Math.random() * 9)
+            const randomNum = Math.floor(Math.random() * beats.length)
             if (randomNum === 0 || randomNum === idNum){
                 const newNum = randomNum + 1
                 setId(newNum.toString())
@@ -162,7 +162,7 @@ export const Player = ({ id, setId }: Props) => {
             <div className='flex items-center'>
                 <div className='flex gap-32 mr-[290px] majortwo2:gap-20 majortwo3:gap-10 majortwo3:mr-[190px]
                  majortwo4:mr-0 majorfour:flex-col-reverse majorfour:gap-0 majorfour:items-center majorfour:text-[14px]
-                 midtwo3:mr-10 lowone:mr-4 lowtwo:mr-0 lowtwo2-1:text-[10px]'>
+                 midtwo3:mr-10 midfour:mr-6 low:mr-3 lowtwo:mr-0 lowtwo2-1:text-[10px]'>
                         <div className='progressBar flex gap-2 majorfour:ml-4'>
                             <p className='PcurrentTime'>
                             {(currentTime !== null) && calculeDuration(currentTime)}
@@ -181,7 +181,7 @@ export const Player = ({ id, setId }: Props) => {
                             </p>
                         </div> 
 
-                    <div className='buttons text-3xl text-orange-400 space-x-3 majorfour:text-[28px]
+                    <div className='buttons flex flex-nowrap text-3xl text-orange-400 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
                         <button 
                             onClick={() => setIsRandom(!isRandom)} className='randomMusicsButton'>
@@ -206,7 +206,7 @@ export const Player = ({ id, setId }: Props) => {
 
                 <div className='test mr-5 flex items-center majorfour:mr-2'>
                 <button 
-                    className='volumeButton lowtwo:hidden' 
+                    className='volumeButton midfour:hidden ' 
                     onClick={() => setIsMuted(!isMuted)}>
                     {isMuted ? <VolumeOff/> : <VolumeOn />}
                 </button>

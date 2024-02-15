@@ -66,7 +66,7 @@ const handlePageChange = (page: number) => {
       <Hero/>
       <div className="playlist-cont h-fit pb-20 flex items-center justify-center flex-col
        majortwo3:pb-24 ">
-      <div className="flex gap-3">
+      <div id="playlist" className="flex gap-3">
           <label className="text-white">Ordenar por:</label>
           <select onChange={(e) => setOrdenacao(e.target.value)}>
             <option value="recentes">Recentes</option>

@@ -50,10 +50,10 @@ export default function Navbar(){
         <nav className="flex items-center justify-center self-center ml-[20%] majortwomin:ml-[25%] majorthree:ml-[16%]
   majorfour1:ml-[10%] midtwo4:ml-[5%] ">
 
-            <ul className="flex gap-4 font-bold text-2xl midthree:text-lg">
-                <li>Home</li>
-                <li>Playlist</li>
-                <li>Informações/Contato</li>
+            <ul className="flex font-bold text-2xl cursor-pointer midthree:text-lg">
+                <li className="border-l-2 border-r-2 border-black px-3 py-8 hover:bg-slate-600">Home</li>
+                <li className="border-r-2 border-black px-3 py-8 hover:bg-slate-600">Playlist</li>
+                <li className=" border-r-2 border-black px-3 py-8 hover:bg-slate-600">Informações/Contato</li>
             </ul>
             <button aria-label="Open Menu" onClick={toggleMenu} className="hidden self-end ml-[47%]">
                 <GiHamburgerMenu size={60} className="" style={{ color: 'black' }} />
