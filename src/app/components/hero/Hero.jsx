@@ -8,7 +8,7 @@ export default function Hero() {
             <div className="main_home flex flex-col items-center justify-center gap-8">
         <div className="overlay">
             <h1 className="hero-title">Deicid3</h1>
-         <p className="fsho_description font-bold">Artista/produtor brasileiro focado em música trap, <br/>
+         <p className="fsho_description font-bold">Artista/produtor brasileiro <br/>
               buscando inovar sem limitações cada <br/>
                vez mais trazendo produções <br/>
                 de diversos estilos/vibes <br/>
