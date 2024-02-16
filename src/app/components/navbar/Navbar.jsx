@@ -14,7 +14,7 @@ export default function Navbar(){
         },
         {
           title: 'Playlist',
-          path: '/',
+          path: '#playlist',
         },
         {
           title: 'Sobre',
@@ -51,8 +51,8 @@ export default function Navbar(){
   majorfour1:ml-[10%] midtwo4:ml-[5%] ">
 
             <ul className="flex font-bold text-2xl cursor-pointer midthree:text-lg">
-                <li className="border-l-2 border-r-2 border-black px-3 py-8 hover:bg-slate-600">Home</li>
-                <li className="border-r-2 border-black px-3 py-8 hover:bg-slate-600">Playlist</li>
+                <Link href="/"><li className="border-l-2 border-r-2 border-black px-3 py-8 hover:bg-slate-600">Home</li></Link>
+                <Link href="#playlist"><li className="border-r-2 border-black px-3 py-8 hover:bg-slate-600">Playlist</li></Link>
                 <li className=" border-r-2 border-black px-3 py-8 hover:bg-slate-600">Informações/Contato</li>
             </ul>
             <button aria-label="Open Menu" onClick={toggleMenu} className="hidden self-end ml-[47%]">
