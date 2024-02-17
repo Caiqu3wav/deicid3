@@ -1,4 +1,5 @@
 import "./styles.css";
+import Link from "next/link";
 
 type Props = {
     album_img: string; 
@@ -11,7 +12,7 @@ type Props = {
 
 export const BeatsCard = ({ album_img, name, audio, beatId, id, setId }: Props) => {
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center">
         <div className='beat-card flex flex-col w-[250px] h-[250px] items-center justify-center
         rounded-xl cursor-pointer midtwo2:w-[200px] midtwo2:h-[230px] midfour1:w-[168px] midfour1:h-[189px]
         lowtwo1:w-[230px] lowtwo1:h-[280px]' onClick={() => setId(beatId)}>
@@ -21,6 +22,8 @@ export const BeatsCard = ({ album_img, name, audio, beatId, id, setId }: Props) 
                             <h1 className='text-2xl self-center text-slate-500'>{name}</h1>
                             <audio src={audio} />
                         </div> 
+                        <Link href="/buybeat"><button className="self-center text-white bg-blue-500 w-fit px-2 mt-4 h-fit py-2 
+                        rounded-2xl ">$BUY/INFO</button></Link>
                     </div>
     )
 

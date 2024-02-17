@@ -405,6 +405,14 @@ export const beats = [
   audio: '/assets/beats/amgcedes.mp3', genres: ['supertrap', 'ambient', 'spacial', 'chill'],
   dataLnc: '2023/12/17',
 },
+{ id: '101', name: 'Synergy X', album_img: '/assets/img-beats/synergyx.png', 
+  audio: '/assets/beats/synergyx.mp3', genres: ['supertrap', 'ambient', 'spacial', 'chill'],
+  dataLnc: '2024/02/14',
+},
+{ id: '102', name: 'Tryptamine', album_img: '/assets/img-beats/tryptamine.png', 
+  audio: '/assets/beats/tryptamine(141).mp3', genres: ['eletronic', 'ambient', 'spacial', 'chill'],
+  dataLnc: '2024/02/16',
+},
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

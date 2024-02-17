@@ -8,6 +8,7 @@ import "./page.css";
 import { SkipBack } from "./icons";
 import { SkipForward } from "./icons";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import Modal from "./components/modal/Modal"
 
 interface Beat {
   id: string;
@@ -17,7 +18,11 @@ interface Beat {
   dataLnc: string;
 }
 
-export default function Home() {
+type SearchParamProps = {
+  searchParams: Record<string, string> | null | undefined;
+};
+
+export default function Home({ searchParams }: SearchParamProps) {
   const [id, setId] = useState<string>('');
   const [ordenacao, setOrdenacao] = useState<string>("recentes"); 
   const [beats, setBeats] = useState<Beat[]>([]);
@@ -25,6 +30,9 @@ export default function Home() {
   const beatsPerPage = 8;
   const [loading, setLoading] = useState<boolean>(true); 
   const [error, setError] = useState<string | null>(null);
+  const [modal, setModal] = useState(false);
+  const show = searchParams?.show;
+
 
   useEffect(() => {
     async function fetchBeats() {
@@ -66,6 +74,7 @@ const handlePageChange = (page: number) => {
       <Hero/>
       <div className="playlist-cont h-fit pb-20 flex items-center justify-center flex-col
        majortwo3:pb-24 ">
+
       <div id="playlist" className="flex gap-3">
           <label className="text-white">Ordenar por:</label>
           <select onChange={(e) => setOrdenacao(e.target.value)}>
@@ -98,7 +107,7 @@ const handlePageChange = (page: number) => {
             }
             </div>
           </div>
-          <div className="pagination mt-3 flex gap-4 majorthree:mt-20 majorthree2:mt-40">
+          <div className="pagination mt-4 flex gap-4 majorthree:mt-28 majorthree2:mt-48">
           <button className="cursor-pointer bg-slate-400 rounded-2xl p-2"
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
@@ -114,7 +123,7 @@ const handlePageChange = (page: number) => {
           </button>
         </div>
     </div>
-<footer>         
+<footer>    
    <Player 
      id={id}
     setId={setId}

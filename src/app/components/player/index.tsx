@@ -1,14 +1,18 @@
 'use client';
 import { beats } from "@/pages/api/beats";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, VolumeOff, VolumeOn } from '../../icons/index';
+import Link from "next/link";
 import "./styles.css"
+import Modal from "../modal/Modal";
+
 
 type Props = {
     id: string;
     setId: (e: string) => void;
     className?: string; 
 }
+
 
 export const Player = ({ id, setId }: Props) => {
     const [isPlaying, setIsPlaying] = useState<boolean | null>(null);
@@ -17,6 +21,17 @@ export const Player = ({ id, setId }: Props) => {
     const [isRandom, setIsRandom] = useState<boolean>(false)
     const [currentTime, setCurrentTime] = useState<number | null>(null);
     const [isMuted, setIsMuted] = useState<boolean | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
 
         const audioTag = useRef<HTMLAudioElement | null>(null);
         const progressBar = useRef<HTMLInputElement | null>(null);
@@ -68,8 +83,9 @@ export const Player = ({ id, setId }: Props) => {
                         }
                     }
                 }
-        }
-        }, [id, isPlaying, volume, isMuted, duration]);
+            }
+     }, [id, isPlaying, volume, isMuted, duration]);
+    
 
         const calculeDuration = (sec: number) => {
             const minutes = Math.floor(sec / 60)
@@ -123,19 +139,22 @@ export const Player = ({ id, setId }: Props) => {
         }
 
         const changeRange = () => {
-            if(audioTag.current && progressBar.current)
-            audioTag.current.currentTime = parseFloat(progressBar.current.value);
-            changeCurrentTime()
-        }
+            if (audioTag.current && progressBar.current) {
+              const value = parseFloat(progressBar.current.value);
+              audioTag.current.currentTime = value;
+              setCurrentTime(value);
+            }
+          };
         
         const changeCurrentTime = () => {
             if(audioTag.current && progressBar.current)
             setCurrentTime(parseFloat(progressBar.current.value));
         }
+
         
 
         return(
-            <div className="w-full flex justify-between bg-slate-400">
+            <div className="w-full flex justify-between bg-slate-200 rounded-md">
             
             <div className='musicDiv'>
                 
@@ -146,12 +165,28 @@ export const Player = ({ id, setId }: Props) => {
                             <div 
                              className='flex gap-3' key={beat.id}>
                                 <>
-                                    <img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={beat.album_img} />
+                                   <button className="flex flex-nowrap gap-1" onClick={() => openModal()}><img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={beat.album_img} />
                                     <div>
                                         <h1>{beat.name}</h1>
                                     </div>
+                                    </button>
                                 </> 
-                                
+                                {isModalOpen && (
+                                        <Modal
+                                            closeModal={closeModal}
+                                            currentBeatId={id}
+                                            onToggleRandom={() => setIsRandom(!isRandom)}
+                                            onSkipBack={skipBack}
+                                            onTogglePlay={() => setIsPlaying(!isPlaying)}
+                                            onSkipForward={skipForward}
+                                            isRandom={isRandom}
+                                            isPlaying={isPlaying}
+                                            currentTime={currentTime !== null ? currentTime : 0}
+                                            duration={duration !== null ? duration : 0}
+                                            onChangeRange={changeCurrentTime}
+                                            calculeDuration={calculeDuration}
+                                        />
+                                        )}
                                 <audio src={beat.audio} ref={audioTag}/>
                             </div>    
                                                  
@@ -188,7 +223,7 @@ export const Player = ({ id, setId }: Props) => {
                             {isRandom ? <RandomMusicsTrue /> : <RandomMusicsFalse />}
                         </button> 
           
-                        <button onClick={skipBack}>
+                        <button onClick={skipForward}>
                             <SkipBack />
                         </button>
                         <button 
@@ -196,7 +231,7 @@ export const Player = ({ id, setId }: Props) => {
                             onClick={() => setIsPlaying(!isPlaying)}>
                                 {isPlaying ?  <Pause /> : <Play />}
                         </button>
-                        <button onClick={skipForward}>
+                        <button onClick={skipBack}>
                             <SkipForward />
                         </button>
                         
