@@ -7,7 +7,7 @@ import "./styles.css"
 import Modal from "../modal/Modal";
 import React from "react";
 
-interface PlayerProps {
+export interface PlayerProps {
     id: string;
     setId: (e: string) => void;
     className?: string; 
@@ -192,8 +192,9 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
                                        isRandom={isRandom}
                                        isPlaying={isPlaying}
                                        currentTime={currentTime !== null ? currentTime : 0}
+                                       setCurrentTime={setCurrentTime}
                                        duration={duration !== null ? duration : 0}
-                                        onChangeRange={changeCurrentTime}
+                                        onChangeRange={changeRange}
                                        calculeDuration={calculeDuration} 
                                        isOpen={isModalOpen}                                            
                                         />
@@ -268,10 +269,6 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
                 </div>
         </div>
         )
-}
-
-function changeCurrentTime() {
-    throw new Error("Function not implemented.");
 }
 
 export { Player };

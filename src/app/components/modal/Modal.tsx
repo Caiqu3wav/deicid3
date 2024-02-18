@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse } from '../../icons/index';
 import { useEffect, useState } from "react";
 
-interface ModalProps {
+interface ModalProps  {
   closeModal: () => void;
   currentBeatId: string;
   onToggleRandom: () => void;
@@ -15,9 +15,10 @@ interface ModalProps {
   isRandom: boolean;
   isPlaying: boolean | null;
   currentTime: number;
+  setCurrentTime: (value: number) => void;
   calculeDuration: (sec: number) => string;
   duration: number | null;
-  onChangeRange: (value: number) => void;
+  onChangeRange: React.ChangeEventHandler<HTMLInputElement>;
   isOpen: boolean;
 
 }
@@ -32,6 +33,7 @@ const Modal: React.FC<ModalProps> = ({
   isRandom,
   isPlaying,
   currentTime,
+  setCurrentTime,
   calculeDuration,
   duration,
   onChangeRange,
@@ -52,12 +54,19 @@ const Modal: React.FC<ModalProps> = ({
     setModalIsOpen(isOpen);
   }, [isOpen]);
 
-  const handleSkipForward = () => {
-    if (isRandom) {
-      onToggleRandom(); // Desativa o modo aleatório antes de pular para a próxima música
+
+  const handleRandom = () =>{
+    if(!isRandom){
+      onToggleRandom();
+    } else if(isRandom){
+      onToggleRandom();
     }
-    onSkipForward(); // Pula para a próxima música
-  };
+  }
+
+  const handleChangeRange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setCurrentTime(value);
+};
 
     return (
 <div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
@@ -66,7 +75,7 @@ const Modal: React.FC<ModalProps> = ({
         <h1 className="text-xl font-semibold">{currentBeat.name}</h1>
         <div className='buttons flex flex-nowrap text-4xl text-orange-400 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
-                        <button onClick={handleSkipForward} className='randomMusicsButton'>
+                        <button onClick={handleRandom} className='randomMusicsButton'>
             {isRandom ? <RandomMusicsTrue /> : <RandomMusicsFalse />}
           </button>
           <button onClick={onSkipForward}>
@@ -87,7 +96,7 @@ const Modal: React.FC<ModalProps> = ({
                             type="range" 
                             className='currentProgress'
                             value={currentTime}
-                            onChange={(e) => onChangeRange(parseFloat(e.target.value))}
+                            onChange={handleChangeRange}
                             max={duration !== null ? duration.toString() : '0'}
                     />
                             
