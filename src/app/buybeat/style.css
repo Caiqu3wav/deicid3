@@ -1,8 +1,47 @@
+@font-face {
+    font-family: 'Protest Revolution';
+    src: local('Protest Revolution'), url('../../../public/fonts/ProtestRevolution-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
 .bb-container{
     background-image: linear-gradient(black, rgb(121, 85, 20));
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    height: 600px;
+    height: fit-content;
+}
+
+.overlay-buy{
+    border-radius: 20px;
+    background-color: rgba(221, 221, 221, 0.479);
+    min-height: 400px;
+    height: fit-content;
+    padding-bottom: 20px;
+}
+
+
+
+.about-title{
+    font-family: "Protest Revolution", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: rgb(223, 156, 31);
+}
+
+.texts-cont{
+    h1{
+        text-align: center;
+        color: rgb(62, 62, 170);
+        font-weight: bold;
+        font-size: 22px;
+    }
+}
+
+.paylink{
+    text-decoration: underline;
+    color: rgb(51, 121, 252);
+    font-weight: bold;
 }

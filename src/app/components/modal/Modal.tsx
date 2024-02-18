@@ -3,7 +3,7 @@ import { beats } from "@/pages/api/beats";
 import "./Modal.css"
 import Image from "next/image";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse } from '../../icons/index';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ModalProps {
   closeModal: () => void;
@@ -18,6 +18,8 @@ interface ModalProps {
   calculeDuration: (sec: number) => string;
   duration: number | null;
   onChangeRange: (value: number) => void;
+  isOpen: boolean;
+
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -33,21 +35,38 @@ const Modal: React.FC<ModalProps> = ({
   calculeDuration,
   duration,
   onChangeRange,
+  isOpen,
 }) => {
+
+  if (!isOpen) {
+    return null;
+  }
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
   const currentBeat = beats.find((beat) => beat.id === currentBeatId);
 
   if(!currentBeat) {
     return null;
   }
 
+  useEffect(() => {
+    setModalIsOpen(isOpen);
+  }, [isOpen]);
+
+  const handleSkipForward = () => {
+    if (isRandom) {
+      onToggleRandom(); // Desativa o modo aleatório antes de pular para a próxima música
+    }
+    onSkipForward(); // Pula para a próxima música
+  };
+
     return (
-      <div className="modal-overlay" onClick={closeModal}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+<div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
+      <div className={`modal-content ${modalIsOpen ? 'modal-open' : ''}`} onClick={(e) => e.stopPropagation()}>
         <Image className="rounded-xl w-[200px] h-[200px]" src={currentBeat.album_img} alt={currentBeat.name} width={200} height={200} />
         <h1 className="text-xl font-semibold">{currentBeat.name}</h1>
         <div className='buttons flex flex-nowrap text-4xl text-orange-400 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
-                        <button onClick={onToggleRandom} className='randomMusicsButton'>
+                        <button onClick={handleSkipForward} className='randomMusicsButton'>
             {isRandom ? <RandomMusicsTrue /> : <RandomMusicsFalse />}
           </button>
           <button onClick={onSkipForward}>

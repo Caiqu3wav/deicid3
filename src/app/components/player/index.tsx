@@ -1,20 +1,20 @@
 'use client';
 import { beats } from "@/pages/api/beats";
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, VolumeOff, VolumeOn } from '../../icons/index';
 import Link from "next/link";
 import "./styles.css"
 import Modal from "../modal/Modal";
+import React from "react";
 
-
-type Props = {
+interface PlayerProps {
     id: string;
     setId: (e: string) => void;
     className?: string; 
 }
 
 
-export const Player = ({ id, setId }: Props) => {
+const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
     const [isPlaying, setIsPlaying] = useState<boolean | null>(null);
     const [volume, setVolume] = useState<string | null>('1');
     const [duration, setDuration] = useState<number | null>(null);
@@ -22,6 +22,7 @@ export const Player = ({ id, setId }: Props) => {
     const [currentTime, setCurrentTime] = useState<number | null>(null);
     const [isMuted, setIsMuted] = useState<boolean | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -83,8 +84,20 @@ export const Player = ({ id, setId }: Props) => {
                         }
                     }
                 }
+        }
+        }, [id, isPlaying, volume, isMuted, duration]);
+        
+        const whilePlaying = () => {
+            if (audioTag.current && progressBar.current) {
+                progressBar.current.value = audioTag.current.currentTime.toString();
+                if (audioTag.current.currentTime < audioTag.current.duration) {
+                    animationRef.current = requestAnimationFrame(whilePlaying);
+                    changeCurrentTime();
+                } else {
+                    progressBar.current.value = '0';
+                }
             }
-     }, [id, isPlaying, volume, isMuted, duration]);
+        };
     
 
         const calculeDuration = (sec: number) => {
@@ -111,32 +124,29 @@ export const Player = ({ id, setId }: Props) => {
         }
 
         const skipRandom = () => {
-            const idNum = parseInt(id)
-            const randomNum = Math.floor(Math.random() * beats.length)
-            if (randomNum === 0 || randomNum === idNum){
-                const newNum = randomNum + 1
-                setId(newNum.toString())
-            } else {
-                setId(randomNum.toString())
-            }
-        }
+            const idNum = parseInt(id);
+            let randomNum;
+            do {
+                randomNum = Math.floor(Math.random() * beats.length);
+            } while (randomNum === 0 || randomNum === idNum);
+        
+            setId((randomNum + 1).toString());
+        };
 
         const skipBack = () => {
             if (id === ''){
                 alert('Escolha uma música!')
-            } else {
+            } else if(isRandom){
+                skipRandom();
+            }
+             else {
                 const idNum = parseInt(id);
                 const newId = idNum -1;
                 setId(newId.toString())
             }
         }
 
-        const whilePlaying = () => {
-            if(audioTag.current && progressBar.current)
-            progressBar.current.value = audioTag.current.currentTime.toString();
-            animationRef.current = requestAnimationFrame(whilePlaying)
-        changeCurrentTime();
-        }
+    
 
         const changeRange = () => {
             if (audioTag.current && progressBar.current) {
@@ -165,7 +175,7 @@ export const Player = ({ id, setId }: Props) => {
                             <div 
                              className='flex gap-3' key={beat.id}>
                                 <>
-                                   <button className="flex flex-nowrap gap-1" onClick={() => openModal()}><img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={beat.album_img} />
+                                   <button className="flex flex-nowrap gap-1" onClick={openModal}><img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={beat.album_img} />
                                     <div>
                                         <h1>{beat.name}</h1>
                                     </div>
@@ -173,18 +183,19 @@ export const Player = ({ id, setId }: Props) => {
                                 </> 
                                 {isModalOpen && (
                                         <Modal
-                                            closeModal={closeModal}
-                                            currentBeatId={id}
-                                            onToggleRandom={() => setIsRandom(!isRandom)}
-                                            onSkipBack={skipBack}
-                                            onTogglePlay={() => setIsPlaying(!isPlaying)}
-                                            onSkipForward={skipForward}
-                                            isRandom={isRandom}
-                                            isPlaying={isPlaying}
-                                            currentTime={currentTime !== null ? currentTime : 0}
-                                            duration={duration !== null ? duration : 0}
-                                            onChangeRange={changeCurrentTime}
-                                            calculeDuration={calculeDuration}
+                                       closeModal={closeModal}
+                                       currentBeatId={id}
+                                       onToggleRandom={() => setIsRandom(!isRandom)}
+                                       onSkipBack={skipBack}
+                                       onTogglePlay={() => setIsPlaying(!isPlaying)}
+                                       onSkipForward={skipForward}
+                                       isRandom={isRandom}
+                                       isPlaying={isPlaying}
+                                       currentTime={currentTime !== null ? currentTime : 0}
+                                       duration={duration !== null ? duration : 0}
+                                        onChangeRange={changeCurrentTime}
+                                       calculeDuration={calculeDuration} 
+                                       isOpen={isModalOpen}                                            
                                         />
                                         )}
                                 <audio src={beat.audio} ref={audioTag}/>
@@ -259,3 +270,8 @@ export const Player = ({ id, setId }: Props) => {
         )
 }
 
+function changeCurrentTime() {
+    throw new Error("Function not implemented.");
+}
+
+export { Player };
