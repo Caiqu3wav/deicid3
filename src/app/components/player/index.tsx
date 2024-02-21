@@ -217,7 +217,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
                             <input 
                                 type="range" 
                                 className='currentProgress'
-                                defaultValue='0' 
+                                value={currentTime !== null ? currentTime.toString() : '0'} 
                                 ref={progressBar} 
                                 onChange={changeRange}
                             />

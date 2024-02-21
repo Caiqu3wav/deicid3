@@ -3,7 +3,7 @@ import { beats } from "@/pages/api/beats";
 import "./Modal.css"
 import Image from "next/image";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse } from '../../icons/index';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 interface ModalProps  {
   closeModal: () => void;
@@ -45,6 +45,10 @@ const Modal: React.FC<ModalProps> = ({
   }
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
   const currentBeat = beats.find((beat) => beat.id === currentBeatId);
+  const audioTag = useRef<HTMLAudioElement | null>(null);
+        const progressBar = useRef<HTMLInputElement | null>(null);
+        const animationRef = useRef<number | null>(null);
+
 
   if(!currentBeat) {
     return null;
@@ -63,10 +67,14 @@ const Modal: React.FC<ModalProps> = ({
     }
   }
 
-  const handleChangeRange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setCurrentTime(value);
-};
+  const handleChangeRange = () => {
+    if (audioTag.current && progressBar.current) {
+      const value = parseFloat(progressBar.current.value);
+      audioTag.current.currentTime = value;
+      setCurrentTime(value);
+    }
+  };
+  
 
     return (
 <div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
