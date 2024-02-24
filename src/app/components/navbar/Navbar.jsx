@@ -17,8 +17,8 @@ export default function Navbar(){
           path: '#playlist',
         },
         {
-          title: 'Sobre',
-          path: '/about',
+          title: 'Informações/contato',
+          path: '/buybeat',
         },
       ];
 
@@ -53,7 +53,7 @@ export default function Navbar(){
             <ul className="flex font-bold text-2xl cursor-pointer midthree:text-lg">
                 <Link href="/"><li className="border-l-2 border-r-2 border-black px-3 py-8 hover:bg-slate-600">Home</li></Link>
                 <Link href="#playlist"><li className="border-r-2 border-black px-3 py-8 hover:bg-slate-600">Playlist</li></Link>
-                <li className=" border-r-2 border-black px-3 py-8 hover:bg-slate-600">Informações/Contato</li>
+                <Link href="/buybeat"><li className=" border-r-2 border-black px-3 py-8 hover:bg-slate-600">Informações/Contato</li></Link>
             </ul>
             <button aria-label="Open Menu" onClick={toggleMenu} className="hidden self-end ml-[47%]">
                 <GiHamburgerMenu size={60} className="" style={{ color: 'black' }} />

@@ -421,6 +421,10 @@ export const beats = [
   audio: '/assets/beats/swervin.mp3', genres: ['ambient', 'dark'],
   dataLnc: '2024/02/20',
 },
+{ id: '105', name: 'Frailty', album_img: '/assets/img-beats/frailty.jpg', 
+  audio: '/assets/beats/frailty.mp3', genres: ['pluggnb', 'plugg', 'chill', 'dark'],
+  dataLnc: '2024/02/24',
+},
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
