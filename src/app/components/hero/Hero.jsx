@@ -1,6 +1,6 @@
 import Link from "next/link";
 import "./Hero.css";
-import { TbSquareRoundedArrowDownFilled } from "react-icons/tb";
+import { TbSquareRoundedArrowDownFilled } from "react-icons/tb"; 
 
 export default function Hero() {
     return(
@@ -14,7 +14,8 @@ export default function Hero() {
                 de diversos estilos/vibes <br/>
                  contribuindo para a <br/>
                   evolução e modernidade da expressão <br/>
-                 artística e músical.
+                 artística e músical. <br />
+                 <span className="text-blue-700 font-bold">(Para obter versão wav ou download entre em contato)</span>
          </p>
         </div>
          <h1 className="hero-second-h1 self-center text-white">CATALOGO E PLAYLIST</h1>
