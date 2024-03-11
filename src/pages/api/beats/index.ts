@@ -11,7 +11,7 @@ export const beats = [
     dataLnc: '2023/01/24',
   },
   { id: '2', name: 'Bounce', album_img: '/assets/img-beats/bounce.png', 
-    audio: '/assets/beats/(westcoast)bounce.mp3', genre: 'westcoast',
+    audio: '/assets/beats/(westcoast)bounce.mp3', genres: ['westcoast'],
     dataLnc: '2023/02/27',
   },
   { id: '3', name: 'Ride', album_img: '/assets/img-beats/ride.png', 
@@ -428,6 +428,14 @@ export const beats = [
 { id: '106', name: 'Nasa', album_img: '/assets/img-beats/nasa.jpg', 
   audio: '/assets/beats/nasa.mp3', genres: ['spacial', 'ambient', 'chill'],
   dataLnc: '2024/02/27',
+},
+{ id: '107', name: 'Pluto', album_img: '/assets/img-beats/pluto.jpg', 
+  audio: '/assets/beats/pluto(154).mp3', genres: ['spacial', 'ambient', 'dark'],
+  dataLnc: '2024/03/01',
+},
+{ id: '108', name: 'Flyest', album_img: '/assets/img-beats/flyest.jpg', 
+  audio: '/assets/beats/flyest(138).mp3', genres: ['spacial', 'ambient', 'chill', 'motivational'],
+  dataLnc: '2024/03/02',
 },
 ];
 

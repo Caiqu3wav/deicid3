@@ -3,12 +3,10 @@ import { Player } from "./components/player";
 import Header from "./components/header/Header";
 import { BeatsCard } from "./components/musics";
 import Hero from "./components/hero/Hero";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./page.css";
 import { SkipBack } from "./icons";
 import { SkipForward } from "./icons";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import Modal from "./components/modal/Modal"
 
 interface Beat {
   id: string;
@@ -16,22 +14,19 @@ interface Beat {
   name: string;
   audio: string;
   dataLnc: string;
+  genres: [];
 }
 
-type SearchParamProps = {
-  searchParams: Record<string, string> | null | undefined;
-};
-
-export default function Home({ searchParams }: SearchParamProps) {
+export default function Home() {
   const [id, setId] = useState<string>('');
   const [ordenacao, setOrdenacao] = useState<string>("recentes"); 
   const [beats, setBeats] = useState<Beat[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalFilteredPages, setTotalFilteredPages] = useState<number>(1);
   const beatsPerPage = 8;
-  const [loading, setLoading] = useState<boolean>(true); 
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [modal, setModal] = useState(false);
-  const show = searchParams?.show;
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 
 
   useEffect(() => {
@@ -47,7 +42,16 @@ export default function Home({ searchParams }: SearchParamProps) {
           return ordenacao === 'recentes' ? dataB - dataA : dataA - dataB;
         });
 
-        setBeats(beatsOrdenados);
+        const initialFilteredBeats = beatsOrdenados.filter((beat: { genres: string | never[]; }) => {
+          if (selectedGenres.length === 0 || selectedGenres.includes('todos')) {
+            return true;
+          }
+          return selectedGenres.some((selectedGenre) => beat.genres.includes(selectedGenre as never));
+        });
+
+        setBeats(initialFilteredBeats);
+        const totalFilteredPages = Math.ceil(initialFilteredBeats.length / beatsPerPage);
+        setTotalFilteredPages(totalFilteredPages);
         setLoading(false);
       } catch (error) {
         console.error('Erro ao buscar beats', error);
@@ -56,17 +60,34 @@ export default function Home({ searchParams }: SearchParamProps) {
     }
 
     fetchBeats();
-  }, [ordenacao]);
+  }, [ordenacao, selectedGenres]);
 
   const indexOfLastBeat = currentPage * beatsPerPage;
   const indexOfFirstBeat = indexOfLastBeat - beatsPerPage;
   const currentBeats = beats.slice(indexOfFirstBeat, indexOfLastBeat);
   const totalPages = Math.ceil(beats.length / beatsPerPage);
 
-const handlePageChange = (page: number) => {
-  setCurrentPage(page);
-};
+  const filteredBeats = currentBeats.filter((beat) => {
+    if (selectedGenres.length === 0 || selectedGenres.includes('todos')) {
+      return true;
+    }
+    return selectedGenres.some((selectedGenre) => beat.genres.includes(selectedGenre as never));
+  });
 
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalFilteredPages) {
+      setCurrentPage(page);
+    }
+  };
+
+const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const selectedOptions = Array.from(e.target.selectedOptions).map((option) => option.value);
+  setSelectedGenres(selectedOptions);
+
+  if (selectedOptions) {
+    setCurrentPage(1)
+  }
+};
 
   return (
     <main>
@@ -81,7 +102,21 @@ const handlePageChange = (page: number) => {
             <option value="recentes">Recentes</option>
             <option value="antigos">Antigos</option>
           </select>
+          <div className="flex gap-3 ml-4">
+          <label className="text-white">Estilo:</label>
+          <div className="genre-selector-container">
+            
+              <select onChange={handleGenreChange} value={selectedGenres}>
+                {/* Opções de gêneros, incluindo "Todos" */}
+                {['todos', ...Array.from(new Set(beats.flatMap((beat) => beat.genres)))].map((genre) => (
+                  <option key={genre} value={genre}>
+                    {genre === 'todos' ? 'Todos' : genre}
+                  </option>
+                ))}
+              </select>
+            </div>
         </div>
+      </div>
         {loading && (
         <div className="flex flex-col items-center">
           <p className="text-white">Carregando...</p>
@@ -93,7 +128,7 @@ const handlePageChange = (page: number) => {
             <div className='grid grid-cols-4 gap-20 major1:gap-10 majortwo1:gap-4
            majortwo1-2:grid-cols-3 majortwo1-2:gap-16 majorthree:gap-[5%]
             majorthree2:grid-cols-2 lowtwo1:grid-cols-1'>
-            {currentBeats.map(beat => (
+            {filteredBeats.map(beat => (
               <BeatsCard 
                 key={beat.id}
                 album_img={beat.album_img}
@@ -114,7 +149,7 @@ const handlePageChange = (page: number) => {
           >
             <SkipBack/>
           </button>
-          <span className="text-xl">Página {currentPage} de {totalPages}</span>
+          <span className="text-xl">Página {currentPage} de {totalFilteredPages}</span>
           <button className="cursor-pointer bg-slate-400 rounded-2xl p-2"
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
