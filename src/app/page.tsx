@@ -96,14 +96,16 @@ const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       <div className="playlist-cont h-fit pb-20 flex items-center justify-center flex-col
        majortwo3:pb-24 ">
 
-      <div id="playlist" className="flex gap-3">
-          <label className="text-white">Ordenar por:</label>
+      <div id="playlist" className="flex gap-3 low:gap-0 lowone:flex-col lowone:gap-3 lowone:mt-2">
+          <div className="flex">
+          <label className="text-white low:text-[14px]">Ordenar por:</label>
           <select onChange={(e) => setOrdenacao(e.target.value)}>
             <option value="recentes">Recentes</option>
             <option value="antigos">Antigos</option>
           </select>
-          <div className="flex gap-3 ml-4">
-          <label className="text-white">Estilo:</label>
+          </div>
+          <div className="flex gap-3 ml-4 midfour:gap-0 low:ml-2">
+          <label className="text-white low:text-[14px]">Estilo:</label>
           <div className="genre-selector-container">
             
               <select onChange={handleGenreChange} value={selectedGenres}>
@@ -124,10 +126,10 @@ const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         </div>
       )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-          <div className='divSongs mt-5'>
+          <div className='divSongs mt-5 lowone:mt-2'>
             <div className='grid grid-cols-4 gap-20 major1:gap-10 majortwo1:gap-4
            majortwo1-2:grid-cols-3 majortwo1-2:gap-16 majorthree:gap-[5%]
-            majorthree2:grid-cols-2 lowtwo1:grid-cols-1'>
+            majorthree2:grid-cols-2 lowtwo:grid-cols-1'>
             {filteredBeats.map(beat => (
               <BeatsCard 
                 key={beat.id}

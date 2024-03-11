@@ -55,7 +55,7 @@ export default function Navbar(){
                 <Link href="#playlist"><li className="border-r-2 border-black px-3 py-8 hover:bg-slate-600">Playlist</li></Link>
                 <Link href="/buybeat"><li className=" border-r-2 border-black px-3 py-8 hover:bg-slate-600">Informações/Contato</li></Link>
             </ul>
-            <button aria-label="Open Menu" onClick={toggleMenu} className="hidden self-end ml-[47%]">
+            <button aria-label="Open Menu" onClick={toggleMenu} className="hidden ml-[47%]">
                 <GiHamburgerMenu size={60} className="" style={{ color: 'black' }} />
 </button>
 
