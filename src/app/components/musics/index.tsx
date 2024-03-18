@@ -23,7 +23,7 @@ export const BeatsCard = ({ album_img, name, audio, beatId, id, setId }: Props) 
                             <audio src={audio} />
                         </div> 
                         <Link href="/buybeat"><button className="self-center text-white bg-blue-500 w-fit px-2 mt-4 h-fit py-2 
-                        rounded-2xl ">$BUY/INFO</button></Link>
+                        rounded-2xl transition-all duration-700 hover:bg-black hover:text-blue-600">$BUY/INFO</button></Link>
                     </div>
     )
 
