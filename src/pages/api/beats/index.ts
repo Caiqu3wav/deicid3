@@ -449,6 +449,22 @@ export const beats = [
   audio: '/assets/beats/scored(170).mp3', genres: ['ambient', 'spacial', 'rage', 'supertrap', 'motivational'],
   dataLnc: '2024/03/16',
 },
+{ id: '112', name: 'Spaceship', album_img: '/assets/img-beats/spaceship.jpg', 
+  audio: '/assets/beats/spaceship(147)Fminor.mp3', genres: ['ambient', 'spacial', 'rage', 'supertrap', 'motivational'],
+  dataLnc: '2024/03/21',
+},
+{ id: '113', name: 'Cybercity', album_img: '/assets/img-beats/cybercity.jpg', 
+  audio: '/assets/beats/cybercity(133).mp3', genres: ['ambient', 'spacial', 'rage', 'supertrap', 'motivational'],
+  dataLnc: '2024/03/22',
+},
+{ id: '114', name: 'Vamply', album_img: '/assets/img-beats/roller.jpg', 
+  audio: '/assets/beats/roller(160)Eminor.mp3', genres: ['ambient', 'dark'],
+  dataLnc: '2024/03/28',
+},
+{ id: '115', name: 'Geeker', album_img: '/assets/img-beats/geeker.png', 
+  audio: '/assets/beats/geeker(140).mp3', genres: ['ambient', 'dark'],
+  dataLnc: '2024/03/29',
+},
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
