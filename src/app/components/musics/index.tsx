@@ -1,4 +1,3 @@
-import "./styles.css";
 import Link from "next/link";
 
 type Props = {
@@ -13,7 +12,8 @@ type Props = {
 export const BeatsCard = ({ album_img, name, audio, beatId, id, setId }: Props) => {
     return (
         <div className="flex flex-col items-center justify-center">
-        <div className='beat-card flex flex-col w-[250px] h-[250px] items-center justify-center
+        <div className='bg-black bg-opacity-75 transition-all duration-700
+         hover:bg-slate-300 hover:bg-opacity-95 flex flex-col w-[250px] h-[250px] items-center justify-center
         rounded-xl cursor-pointer midtwo2:w-[200px] midtwo2:h-[230px] midfour1:w-[168px] midfour1:h-[189px]
         lowtwo1:w-[230px] lowtwo1:h-[280px]' onClick={() => setId(beatId)}>
                             <img className="beats-img rounded-lg w-[200px] h-[200px] midtwo2:w-[160px] midtwo2:h-[160px]
