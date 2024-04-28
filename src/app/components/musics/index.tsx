@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
 
 type Props = {
     album_img: string; 
@@ -9,7 +12,11 @@ type Props = {
     setId: (e: string) => void;
 }
 
-export const BeatsCard = ({ album_img, name, audio, beatId, id, setId }: Props) => {
+export const BeatsCard = ({ album_img, name, audio, beatId, id, setId,  }: Props) => {
+
+
+  
+
     return (
         <div className="flex flex-col items-center justify-center">
         <div className='bg-black bg-opacity-75 transition-all duration-700

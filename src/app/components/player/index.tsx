@@ -68,7 +68,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
                                 clearInterval(interval)
 
                                 if (audioTag.current.currentTime === audioTag.current.duration){
-                                    isRandom ? skipRandom() : skipForward()
+                                    isRandom ? skipRandom() : skipBack()
                                 }
                             }
                             }
@@ -141,7 +141,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
             }
              else {
                 const idNum = parseInt(id);
-                const newId = idNum -1;
+                const newId = idNum - 1;
                 setId(newId.toString())
             }
         }

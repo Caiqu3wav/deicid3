@@ -7,6 +7,8 @@ import React, { useState, useEffect } from "react";
 import "./page.css";
 import { SkipBack } from "./icons";
 import { SkipForward } from "./icons";
+import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
 
 interface Beat {
   id: string;
@@ -27,7 +29,6 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-
 
   useEffect(() => {
     async function fetchBeats() {
@@ -89,6 +90,8 @@ const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
   }
 };
 
+      
+
   return (
     <main>
       <Header/>
@@ -108,7 +111,7 @@ const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
           <label className="text-white low:text-[14px]">Estilo:</label>
           <div className="genre-selector-container">
             
-              <select onChange={handleGenreChange} value={selectedGenres}>
+              <select onChange={handleGenreChange} value={selectedGenres.join(',')}>
                 {/* Opções de gêneros, incluindo "Todos" */}
                 {['todos', ...Array.from(new Set(beats.flatMap((beat) => beat.genres)))].map((genre) => (
                   <option key={genre} value={genre}>
@@ -152,7 +155,8 @@ const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
             <SkipBack/>
           </button>
           <span className="text-xl">Página {currentPage} de {totalFilteredPages}</span>
-          <button className="cursor-pointer bg-slate-400 rounded-2xl p-2"
+          <button className="cursor-pointer transition-colors duration-700 hover:bg-orange-600
+           hover:text-white bg-slate-400 rounded-2xl p-2"
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
           >

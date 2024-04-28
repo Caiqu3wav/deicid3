@@ -509,6 +509,14 @@ export const beats = [
   audio: '/assets/beats/gate(142).mp3', genres: ['ambient', 'agressive'],
   dataLnc: '2024/04/13',
 },
+{ id: '127', name: 'Orbit', album_img: '/assets/img-beats/orbit.jpg', 
+  audio: '/assets/beats/(ambient)orbit(126).mp3', genres: ['ambient', 'sad', 'emotional', 'spacial'],
+  dataLnc: '2024/04/14',
+},
+{ id: '128', name: 'Moon', album_img: '/assets/img-beats/moon.jpg', 
+  audio: '/assets/beats/moon(149).mp3', genres: ['ambient', 'emotional', 'spacial'],
+  dataLnc: '2024/04/25',
+},
 ];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
