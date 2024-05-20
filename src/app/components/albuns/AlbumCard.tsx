@@ -37,7 +37,6 @@ type AlbumCardProps = {
                         </div> 
                     </div>
     )
-
 }
 
 export default AlbumCard;

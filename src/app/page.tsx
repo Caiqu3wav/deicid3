@@ -27,7 +27,7 @@ export default function Home() {
       ${pageCategorySelected === 2 ? "border-solid border-b-2 border-white" : ""}`}>Albuns</button>
       </div>
         {pageCategorySelected === 1 && <Playlist setId={setId}/>}
-        {pageCategorySelected === 2 && <Albuns/>}
+        {pageCategorySelected === 2 && <Albuns setId={setId}/>}
     </div>
 <footer>    
    <Player 
