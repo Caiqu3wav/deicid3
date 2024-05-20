@@ -15,12 +15,12 @@ interface ModalProps  {
   isRandom: boolean;
   isPlaying: boolean | null;
   currentTime: number;
+  progressBar: React.MutableRefObject<HTMLInputElement | null>;
   setCurrentTime: (value: number) => void;
   calculeDuration: (sec: number) => string;
   duration: number | null;
   onChangeRange: React.ChangeEventHandler<HTMLInputElement>;
   isOpen: boolean;
-
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -34,6 +34,7 @@ const Modal: React.FC<ModalProps> = ({
   isPlaying,
   currentTime,
   setCurrentTime,
+  progressBar,
   calculeDuration,
   duration,
   onChangeRange,
@@ -45,9 +46,6 @@ const Modal: React.FC<ModalProps> = ({
   }
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
   const currentBeat = beats.find((beat) => beat.id === currentBeatId);
-  const audioTag = useRef<HTMLAudioElement | null>(null);
-        const progressBar = useRef<HTMLInputElement | null>(null);
-        const animationRef = useRef<number | null>(null);
 
 
   if(!currentBeat) {
@@ -67,14 +65,6 @@ const Modal: React.FC<ModalProps> = ({
     }
   }
 
-  const handleChangeRange = () => {
-    if (audioTag.current && progressBar.current) {
-      const value = parseFloat(progressBar.current.value);
-      audioTag.current.currentTime = value;
-      setCurrentTime(value);
-    }
-  };
-  
 
     return (
 <div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
@@ -103,9 +93,9 @@ const Modal: React.FC<ModalProps> = ({
                             <input 
                             type="range" 
                             className='currentProgress'
-                            value={currentTime}
-                            onChange={handleChangeRange}
-                            max={duration !== null ? duration.toString() : '0'}
+                            value={currentTime !== null ? currentTime.toString() : '0'} 
+                            ref={progressBar}
+                            onChange={onChangeRange}
                     />
                             
                             <p className='Pduration'>

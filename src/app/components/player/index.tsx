@@ -195,7 +195,8 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
                                        setCurrentTime={setCurrentTime}
                                        duration={duration !== null ? duration : 0}
                                         onChangeRange={changeRange}
-                                       calculeDuration={calculeDuration} 
+                                       calculeDuration={calculeDuration}
+                                       progressBar={progressBar} 
                                        isOpen={isModalOpen}                                            
                                         />
                                         )}
