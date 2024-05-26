@@ -15,11 +15,11 @@ interface ModalProps  {
   isRandom: boolean;
   isPlaying: boolean | null;
   currentTime: number;
-  progressBar: React.MutableRefObject<HTMLInputElement | null>;
+  progressBar: React.RefObject<HTMLInputElement>;
   setCurrentTime: (value: number) => void;
   calculeDuration: (sec: number) => string;
   duration: number | null;
-  onChangeRange: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeRange: () => void;
   isOpen: boolean;
 }
 
@@ -65,6 +65,11 @@ const Modal: React.FC<ModalProps> = ({
     }
   }
 
+  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setCurrentTime(value);
+    onChangeRange();
+};
 
     return (
 <div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
@@ -93,9 +98,9 @@ const Modal: React.FC<ModalProps> = ({
                             <input 
                             type="range" 
                             className='currentProgress'
-                            value={currentTime !== null ? currentTime.toString() : '0'} 
+                            value={currentTime !== null ? currentTime.toString() : '0'}
                             ref={progressBar}
-                            onChange={onChangeRange}
+                            onChange={handleRangeChange}
                     />
                             
                             <p className='Pduration'>

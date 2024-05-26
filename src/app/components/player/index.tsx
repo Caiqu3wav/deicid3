@@ -114,9 +114,13 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
                 alert('Escolha um beat!')
             } else if (isRandom) {
                 skipRandom()
-            } else if (id === '9') {
+            } else if (parseInt(id) === parseInt(beats[beats.length - 1].id)) {
                 setId('1')
-            } else {
+            }
+              else if (id === undefined){
+                setId('1')
+            }
+            else {
                 const idNum = parseInt(id);
                 const newId = idNum + 1;
                 setId(newId.toString())
@@ -124,18 +128,20 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
         }
 
         const skipRandom = () => {
-            const idNum = parseInt(id);
-            let randomNum;
-            do {
-                randomNum = Math.floor(Math.random() * beats.length);
-            } while (randomNum === 0 || randomNum === idNum);
-        
-            setId((randomNum + 1).toString());
+            
+            function getRandomBeat(){
+                const randomIndex = Math.floor(Math.random() * beats.length)
+                const randomBeat = beats[randomIndex];
+                return randomBeat.id
+            }
+            const randomBeatId = getRandomBeat();
+            setId(randomBeatId);
+            console.log(randomBeatId)
         };
 
         const skipBack = () => {
             if (id === ''){
-                alert('Escolha uma música!')
+                alert('Escolha uma música!');
             } else if(isRandom){
                 skipRandom();
             }
@@ -161,7 +167,12 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
             setCurrentTime(parseFloat(progressBar.current.value));
         }
 
-        
+        const updateCurrentTime = (time: number) => {
+            if (audioTag.current) {
+                audioTag.current.currentTime = time;
+                setCurrentTime(time)
+            }
+        }
 
         return(
             <div className="w-full flex justify-between bg-slate-200 rounded-md">
@@ -184,7 +195,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
                                 {isModalOpen && (
                                         <Modal
                                        closeModal={closeModal}
-                                       currentBeatId={id}
+                                       currentBeatId={isModalOpen ? id : 'null'}
                                        onToggleRandom={() => setIsRandom(!isRandom)}
                                        onSkipBack={skipBack}
                                        onTogglePlay={() => setIsPlaying(!isPlaying)}
@@ -192,7 +203,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
                                        isRandom={isRandom}
                                        isPlaying={isPlaying}
                                        currentTime={currentTime !== null ? currentTime : 0}
-                                       setCurrentTime={setCurrentTime}
+                                       setCurrentTime={updateCurrentTime}
                                        duration={duration !== null ? duration : 0}
                                         onChangeRange={changeRange}
                                        calculeDuration={calculeDuration}

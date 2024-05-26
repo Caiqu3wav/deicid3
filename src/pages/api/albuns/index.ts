@@ -6,7 +6,7 @@ export const albuns = [
         name: 'Interestelar',
         img: '/assets/albuns-img/interestelar.jpg',
         beats: ['124', '135', '123', '108', '122', '134', '112', '131', '129'],
-        dataLnc: '2024/05/24',
+        dataLnc: '2024/05/29',
     },
 ]
 
