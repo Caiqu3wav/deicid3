@@ -1,27 +1,10 @@
 'use client';
 import { beats } from "@/pages/api/beats";
-import "./Modal.css"
+import "../../styles/Modal.css"
 import Image from "next/image";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse } from '../../icons/index';
 import { useEffect, useState, useRef } from "react";
-
-interface ModalProps  {
-  closeModal: () => void;
-  currentBeatId: string;
-  onToggleRandom: () => void;
-  onSkipBack: () => void;
-  onTogglePlay: () => void;
-  onSkipForward: () => void;
-  isRandom: boolean;
-  isPlaying: boolean | null;
-  currentTime: number;
-  progressBar: React.RefObject<HTMLInputElement>;
-  setCurrentTime: (value: number) => void;
-  calculeDuration: (sec: number) => string;
-  duration: number | null;
-  onChangeRange: () => void;
-  isOpen: boolean;
-}
+import { ModalProps } from "@/interfaces";
 
 const Modal: React.FC<ModalProps> = ({
   closeModal,
@@ -65,11 +48,6 @@ const Modal: React.FC<ModalProps> = ({
     }
   }
 
-  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setCurrentTime(value);
-    onChangeRange();
-};
 
     return (
 <div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
@@ -91,23 +69,6 @@ const Modal: React.FC<ModalProps> = ({
             <SkipForward />
           </button>
         </div>
-        <div className='progressBar flex gap-2 text-xl majorfour:ml-4'>
-                            <p className='PcurrentTime'>
-                            {(currentTime !== null) && calculeDuration(currentTime)}
-                            </p>
-                            <input 
-                            type="range" 
-                            className='currentProgress'
-                            value={currentTime !== null ? currentTime.toString() : '0'}
-                            ref={progressBar}
-                            onChange={handleRangeChange}
-                    />
-                            
-                            <p className='Pduration'>
-                                {(duration && !isNaN(duration)) && 
-                                calculeDuration(duration)}
-                            </p>
-                        </div> 
         <button className="text-2xl text-blue-600 font-extrabold bg-slate-300 py-3 px-5 rounded-3xl" onClick={closeModal}>X</button>
       </div>
     </div>

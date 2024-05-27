@@ -3,15 +3,22 @@ import { useState, useEffect } from "react";
 import { Album, Beat } from "@/interfaces";
 import { FaPlay } from "react-icons/fa";
 import { TbPlaylist } from "react-icons/tb";
-
+import ModalAlbum from "@/app/modalalbum";
 
 type AlbumCardProps = {
     album: Album
     setId: (e: string) => void;
+    beats: Beat[];
 }
 
- const AlbumCard = ({album, setId}: AlbumCardProps) => {
-  
+ const AlbumCard = ({album, setId, beats}: AlbumCardProps) => {
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
 
     return (
         <div className="flex flex-col items-center justify-center">
@@ -29,12 +36,21 @@ type AlbumCardProps = {
                         <FaPlay/>
                         </button>
                         <button className="bg-orange-500 transition-colors hover:bg-gray-300 text-gray-800 font-bold py-2 px-4
-                        midtwo2:py-0 midtwo2:px-2 rounded ml-4">
+                        midtwo2:py-0 midtwo2:px-2 rounded ml-4" onClick={() => setIsModalOpen(!isModalOpen)}>
                         <TbPlaylist size={20}/>
                         </button>
                     </div>
                     <p className="text-white text-sm px-1">Lançamento: {album.dataLnc}</p>
                         </div> 
+                        {isModalOpen && (
+                                        <ModalAlbum
+                                       closeModal={closeModal}
+                                       isOpen={isModalOpen}
+                                       album={album}
+                                       beats={album.beats}  
+                                       setId={setId}                                    
+                                        />
+                                        )}
                     </div>
     )
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import AlbumCard from './AlbumCard'
+import AlbumCard from './AlbumCard';
 import { Album } from "@/interfaces";
+import { beats } from "@/pages/api/beats";
 
 
 interface Props {
@@ -31,6 +32,8 @@ export default function Albuns({setId}: Props) {
 fetchAlbuns();
 }, []);
 
+
+
 return (
   <div className="bg-black w-[77%] self-center min-h-[500px] rounded-xl">
     {loading ? (
@@ -42,7 +45,7 @@ return (
       <ul>
         {albuns.map((album) => (
           <li key={album.id}>
-            <AlbumCard album={album} setId={setId} />
+            <AlbumCard album={album} setId={setId} beats={album.beats} />
           </li>
         ))}
       </ul>
