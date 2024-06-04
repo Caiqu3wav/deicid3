@@ -33,6 +33,10 @@ export interface Beat {
     duration: number | null;
     onChangeRange: () => void;
     isOpen: boolean;
+    setIsMuted: ;
+    isMuted: ;
+    setVolume: ;
+    volume: ;
   }
 
   export interface ModalAlbumProps  {

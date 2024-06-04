@@ -10,11 +10,10 @@ import React from "react";
 export interface PlayerProps {
     id: string;
     setId: (e: string) => void;
-    className?: string; 
 }
 
 
-const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
+const Player: React.FC<PlayerProps> = ({ id, setId }) => {
     const [isPlaying, setIsPlaying] = useState<boolean | null>(null);
     const [volume, setVolume] = useState<string | null>('1');
     const [duration, setDuration] = useState<number | null>(null);
@@ -31,8 +30,6 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-
 
         const audioTag = useRef<HTMLAudioElement | null>(null);
         const progressBar = useRef<HTMLInputElement | null>(null);
@@ -208,7 +205,11 @@ const Player: React.FC<PlayerProps> = ({ id, setId, className }) => {
                                         onChangeRange={changeRange}
                                        calculeDuration={calculeDuration}
                                        progressBar={progressBar} 
-                                       isOpen={isModalOpen}                                            
+                                       isOpen={isModalOpen}    
+                                       setIsMuted={setIsMuted}
+                                       isMuted={isMuted}
+                                       volume={volume}
+                                       setVolume={setVolume}                                        
                                         />
                                         )}
                                 <audio src={beat.audio} ref={audioTag}/>
