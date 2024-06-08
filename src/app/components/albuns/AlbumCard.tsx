@@ -4,6 +4,7 @@ import { Album, Beat } from "@/interfaces";
 import { FaPlay } from "react-icons/fa";
 import { TbPlaylist } from "react-icons/tb";
 import ModalAlbum from "@/app/modalalbum";
+import usePlayerStore from "@/app/store/playerStore";
 
 type AlbumCardProps = {
     album: Album
@@ -14,11 +15,16 @@ type AlbumCardProps = {
  const AlbumCard = ({album, setId, beats}: AlbumCardProps) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+    const playerStore = usePlayerStore();
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-
+  const handlePlayAlbum = () => {
+      playerStore.playTrack(album.beats[0]);
+      playerStore.addTracksAndRemove(album.beats);
+  }
 
     return (
         <div className="flex flex-col items-center justify-center">
@@ -32,7 +38,7 @@ type AlbumCardProps = {
                             <h1 className='text-2xl self-center text-slate-500'>{album.name}</h1>
                             <div className="flex justify-center">
                         <button className="bg-orange-500 transition-colors hover:bg-gray-300 text-gray-800 font-bold py-1 px-3
-                         midtwo2:py-0 midtwo2:px-2 rounded-full">
+                         midtwo2:py-0 midtwo2:px-2 rounded-full" onClick={() => handlePlayAlbum()}>
                         <FaPlay/>
                         </button>
                         <button className="bg-orange-500 transition-colors hover:bg-gray-300 text-gray-800 font-bold py-2 px-4

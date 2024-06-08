@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BeatsCard } from "../musics";
 import { SkipBack, SkipForward } from "@/app/icons";
+import { beats as beatsData } from "@/app/api/beats";
+import { Beat } from "@/interfaces";
 
-interface Beat {
-    id: string;
-    album_img: string;
-    name: string;
-    audio: string;
-    dataLnc: string;
-    genres: [];
-  }
-
-  interface Props {
-    setId: any;
-  }
-
-const Playlist: React.FC<Props> = ({setId}) => {
+const Playlist: React.FC = () => {
     const [ordenacao, setOrdenacao] = useState<string>("recentes"); 
     const [beats, setBeats] = useState<Beat[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -28,8 +17,7 @@ const Playlist: React.FC<Props> = ({setId}) => {
     useEffect(() => {
       async function fetchBeats() {
         try {
-          const response = await fetch("/api/beats");
-          const data = await response.json();
+          const data = beatsData;
   
           const beatsOrdenados = data.sort((a: { dataLnc: string | number | Date; }, b: { dataLnc: string | number | Date; }) => {
             const dataA = new Date(a.dataLnc).getTime();
@@ -38,12 +26,12 @@ const Playlist: React.FC<Props> = ({setId}) => {
             return ordenacao === 'recentes' ? dataB - dataA : dataA - dataB;
           });
   
-          const initialFilteredBeats = beatsOrdenados.filter((beat: { genres: string | never[]; }) => {
+          const initialFilteredBeats = beatsOrdenados.filter(beat => {
             if (selectedGenres.length === 0 || selectedGenres.includes('todos')) {
-              return true;
+                return true;
             }
-            return selectedGenres.some((selectedGenre) => beat.genres.includes(selectedGenre as never));
-          });
+            return selectedGenres.some(selectedGenre => beat.genres.includes(selectedGenre));
+        });
   
           setBeats(initialFilteredBeats);
           const totalFilteredPages = Math.ceil(initialFilteredBeats.length / beatsPerPage);
@@ -127,12 +115,7 @@ const Playlist: React.FC<Props> = ({setId}) => {
             {filteredBeats.map(beat => (
               <BeatsCard 
                 key={beat.id}
-                album_img={beat.album_img}
-                name={beat.name}
-                audio={beat.audio}
-                setId={setId}
-                beatId={beat.id}
-                id={beat.id}
+                beat={beat}
               />
               ))
             }

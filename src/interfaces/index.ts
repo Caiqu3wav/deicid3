@@ -19,24 +19,8 @@ export interface Beat {
 
  export interface ModalProps  {
     closeModal: () => void;
-    currentBeatId: string;
-    onToggleRandom: () => void;
-    onSkipBack: () => void;
-    onTogglePlay: () => void;
-    onSkipForward: () => void;
-    isRandom: boolean;
-    isPlaying: boolean | null;
-    currentTime: number;
-    progressBar: React.RefObject<HTMLInputElement>;
-    setCurrentTime: (value: number) => void;
-    calculeDuration: (sec: number) => string;
-    duration: number | null;
-    onChangeRange: () => void;
     isOpen: boolean;
-    setIsMuted: ;
-    isMuted: ;
-    setVolume: ;
-    volume: ;
+    audioRef: any
   }
 
   export interface ModalAlbumProps  {

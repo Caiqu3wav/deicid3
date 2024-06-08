@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import AlbumCard from './AlbumCard';
 import { Album } from "@/interfaces";
-import { beats } from "@/pages/api/beats";
+import { albuns as albunsData } from "@/app/api/albuns";
 
 
 interface Props {
@@ -18,18 +18,16 @@ export default function Albuns({setId}: Props) {
   useEffect(() => {
     async function fetchAlbuns() {
       try {
-        const response = await fetch("/api/albuns");
-        const data = await response.json();
-
-        setAlbuns (data)
+        const data = albunsData;
+        setAlbuns(data);
         setLoading(false);
       } catch (error) {
           setError('Erro ao buscar albuns');
         console.error('Erro ao buscar albuns', error);
         setLoading(false);
       }
-}
-fetchAlbuns();
+    }
+    fetchAlbuns();
 }, []);
 
 

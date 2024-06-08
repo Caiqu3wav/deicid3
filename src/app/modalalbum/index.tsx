@@ -4,9 +4,11 @@ import { ModalAlbumProps } from "@/interfaces";
 import Image from "next/image";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse } from '@/app/icons/index';
 import "../styles/Modal.css";
+import usePlayerStore from "../store/playerStore";
 
 export default function ModalAlbum({isOpen, closeModal, album, beats, setId}: ModalAlbumProps) {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
+    const playerStore = usePlayerStore();
 
     if (!isOpen) {
         return null;
@@ -29,7 +31,7 @@ export default function ModalAlbum({isOpen, closeModal, album, beats, setId}: Mo
         </div>
         <div>
         <h1 className="text-lg font-semibold text-blue-600">Álbum</h1>
-        <p className="text-[40px] font-bold">{album.name}</p>
+        <p className="text-[40px] font-bold majorfour1:text-[31px] midtwo:text-[23px]">{album.name}</p>
         <div className="flex gap-3">
         <p className="font-bold underline underline-offset-1">{album.dataLnc}</p>
         <p className="font-semibold">{album.beats.length} beats</p>
@@ -42,7 +44,7 @@ export default function ModalAlbum({isOpen, closeModal, album, beats, setId}: Mo
         <ol type="1" className="w-full h-fit gap-1 mt-2">
                     {beats.map((beat, index) => (
                     <li key={beat.id} className="mb-2 border-solid border-gray-600 border-b-2 bg-black bg-opacity-45 rounded-xl
-                    cursor-pointer hover-relative" onClick={() => setId(beat.id)}>
+                    cursor-pointer hover-relative" onClick={() => playerStore.playTrack(beat)}>
                     <div className="flex w-full gap-2">
                         <p className="text-blue-700 font-bold pl-1">{index + 1}</p>
                         <img src={album.img} className="w-[30px] h-auto" alt="" />

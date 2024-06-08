@@ -1,36 +1,54 @@
 'use client';
-import { beats } from "@/pages/api/beats";
 import "../../styles/Modal.css"
 import Image from "next/image";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, 
   VolumeOff, VolumeOn } from '../../icons/index';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { ModalProps } from "@/interfaces";
+import usePlayerStore from "@/app/store/playerStore";
 
 const Modal: React.FC<ModalProps> = ({
   closeModal,
-  currentBeatId,
-  onToggleRandom,
-  onSkipBack,
-  onTogglePlay,
-  onSkipForward,
-  isRandom,
-  isPlaying,
   isOpen,
-  setIsMuted,
-  isMuted,
-  setVolume,
-  volume,
+  audioRef
 }) => {
+  const {
+    currentTrack,
+        isPlaying,
+        isMuted,
+        isRandom,
+        volume,
+        toggleMute,
+        togglePlay,
+        toggleRandom,
+        playPrevTrack,
+        setVolume,
+        progress,
+        setProgress,
+        duration
+    } = usePlayerStore((state) => ({
+        currentTrack: state.currentTrack,
+        isPlaying: state.isPlaying,
+        isMuted: state.isMuted,
+        isRandom: state.isRandom,
+        volume: state.volume,
+        toggleMute: state.toggleMute,
+        togglePlay: state.togglePlay,
+        toggleRandom: state.toggleRandom,
+        playPrevTrack: state.playPrevTrack,
+        setVolume: state.setVolume,
+        progress: state.progress,
+        duration: state.duration,
+        setProgress: state.setProgress
+    }));
 
   if (!isOpen) {
     return null;
   }
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
-  const currentBeat = beats.find((beat) => beat.id === currentBeatId);
 
 
-  if(!currentBeat) {
+  if(!currentTrack) {
     return null;
   }
 
@@ -38,48 +56,73 @@ const Modal: React.FC<ModalProps> = ({
     setModalIsOpen(isOpen);
   }, [isOpen]);
 
+  
+  const calculeDuration = (sec: number) => {
+    const minutes = Math.floor(sec / 60)
+    const newMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
+    const seconds = Math.floor(sec % 60)
+    const newSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`
 
-  const handleRandom = () =>{
-    if(!isRandom){
-      onToggleRandom();
-    } else if(isRandom){
-      onToggleRandom();
-    }
-  }
-
+    return `${newMinutes}:${newSeconds}`
+}
 
     return (
 <div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
       <div className={`modal-content ${modalIsOpen ? 'modal-open' : ''}`} onClick={(e) => e.stopPropagation()}>
-        <Image className="rounded-xl w-[200px] h-[200px]" src={currentBeat.album_img} alt={currentBeat.name} width={200} height={200} />
-        <h1 className="text-xl font-semibold">{currentBeat.name}</h1>
+        <Image className="rounded-xl w-[200px] h-[200px]" width={200} height={200} src={currentTrack?.album_img ?? ''}
+         alt={currentTrack?.name ?? ''} />
+        <h1 className="text-xl font-semibold">{currentTrack.name}</h1>
         <div className='buttons flex flex-nowrap text-4xl text-orange-400 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
-                        <button onClick={handleRandom} className='randomMusicsButton'>
+                        <button onClick={toggleRandom} className='randomMusicsButton'>
             {isRandom ? <RandomMusicsTrue /> : <RandomMusicsFalse />}
           </button>
-          <button onClick={onSkipForward}>
+          <button onClick={playPrevTrack}>
             <SkipBack />
           </button>
-          <button className='playPause' onClick={onTogglePlay}>
+          <button className='playPause' onClick={togglePlay}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
-          <button onClick={onSkipBack}>
+          <button onClick={playPrevTrack}>
             <SkipForward />
           </button>
         </div>
+        <div className='progressBar flex gap-2 majorfour:ml-4'>
+                            <p className='PcurrentTime'>
+                            {(progress !== null) && calculeDuration(progress)}
+                            </p>
+                            <input 
+                                type="range" 
+                                className='currentProgress'
+                                value={progress} 
+                                max={duration}
+                                onChange={(e) => {
+                                    const newProgress = parseFloat(e.target.value);
+                                    if (audioRef.current) {
+                                        audioRef.current.currentTime = newProgress;
+                                        setProgress(newProgress);
+                                      } 
+                                }}
+                            />
+                            
+                            <p className='Pduration'>
+                                {(duration && !isNaN(duration)) && 
+                                calculeDuration(duration)}
+                            </p>
+                        </div> 
+
         <div className='test mr-5 flex gap-1 items-center majorfour:mr-2'>
                 <button 
                     className='volumeButton' 
-                    onClick={() => setIsMuted(!isMuted)}>
+                    onClick={toggleMute}>
                     {isMuted ? <VolumeOff/> : <VolumeOn />}
                 </button>
                 <input
                 className="rounded-md"
                     type="range" 
                     step="0.01"
-                    onChange={(e) => setVolume(e.target.value)} 
-                    value={volume !== null ? volume.toString() : ''}
+                    onChange={(e) => setVolume(parseFloat(e.target.value))} 
+                    value={volume}
                     max='1'
                     min='0'
                 />

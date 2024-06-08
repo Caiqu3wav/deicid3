@@ -1,11 +1,10 @@
 'use client';
-import { beats } from "@/pages/api/beats";
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, VolumeOff, VolumeOn } from '../../icons/index';
-import Link from "next/link";
 import "./styles.css"
 import Modal from "../modal/Modal";
 import React from "react";
+import usePlayerStore from "@/app/store/playerStore";
 
 export interface PlayerProps {
     id: string;
@@ -14,12 +13,39 @@ export interface PlayerProps {
 
 
 const Player: React.FC<PlayerProps> = ({ id, setId }) => {
-    const [isPlaying, setIsPlaying] = useState<boolean | null>(null);
-    const [volume, setVolume] = useState<string | null>('1');
-    const [duration, setDuration] = useState<number | null>(null);
-    const [isRandom, setIsRandom] = useState<boolean>(false)
-    const [currentTime, setCurrentTime] = useState<number | null>(null);
-    const [isMuted, setIsMuted] = useState<boolean | null>(null);
+    const {
+        currentTrack,
+        isPlaying,
+        isMuted,
+        isRandom,
+        volume,
+        progress,
+        duration,
+        toggleMute,
+        togglePlay,
+        toggleRandom,
+        playNextTrack,
+        playPrevTrack,
+        setVolume,
+        setProgress,
+        setDuration,
+    } = usePlayerStore((state) => ({
+        currentTrack: state.currentTrack,
+        isPlaying: state.isPlaying,
+        isMuted: state.isMuted,
+        isRandom: state.isRandom,
+        volume: state.volume,
+        progress: state.progress,
+        duration: state.duration,
+        toggleMute: state.toggleMute,
+        togglePlay: state.togglePlay,
+        toggleRandom: state.toggleRandom,
+        playNextTrack: state.playNextTrack,
+        playPrevTrack: state.playPrevTrack,
+        setVolume: state.setVolume,
+        setProgress: state.setProgress,
+        setDuration: state.setDuration,
+    }));
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
 
@@ -31,71 +57,23 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
     setIsModalOpen(false);
   };
 
-        const audioTag = useRef<HTMLAudioElement | null>(null);
-        const progressBar = useRef<HTMLInputElement | null>(null);
-        const animationRef = useRef<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
         useEffect(() => {
-            if (id !== '') {
-                if (audioTag.current) {
-                    if (isPlaying) {
-                        audioTag.current.play();
-                        animationRef.current = requestAnimationFrame(whilePlaying);               
-                        audioTag.current.volume = volume !== null ? parseFloat(volume) : 1;
-        
-                        if (isMuted) {
-                            audioTag.current.muted = true;
-                        } else {
-                            audioTag.current.muted = false;
-                        }
-
-                        const interval = setInterval(() => {
-                            if (audioTag.current && progressBar.current) {
-                                const seconds = Math.floor(audioTag.current.duration)
-                                setDuration(seconds)
-                                if (progressBar.current) {
-                                    progressBar.current.max = seconds.toString();
-                                }
-                            }
-                        }, 1000);
-
-                        setInterval(() => {
-                            if (audioTag.current && duration){
-                            if (duration > 0 || duration !== undefined){
-                                clearInterval(interval)
-
-                                if (audioTag.current.currentTime === audioTag.current.duration){
-                                    isRandom ? skipRandom() : skipBack()
-                                }
-                            }
-                            }
-                        }, 1100)
-                    } else{
-                        if (audioTag.current && volume !== null) {
-
-                        audioTag.current.pause()
-                        audioTag.current.volume = parseFloat(volume);
-                    }
-                        if (animationRef.current !== null){
-                        cancelAnimationFrame(animationRef.current);
-                        }
-                    }
-                }
-        }
-        }, [id, isPlaying, volume, isMuted, duration]);
-        
-        const whilePlaying = () => {
-            if (audioTag.current && progressBar.current) {
-                progressBar.current.value = audioTag.current.currentTime.toString();
-                if (audioTag.current.currentTime < audioTag.current.duration) {
-                    animationRef.current = requestAnimationFrame(whilePlaying);
-                    changeCurrentTime();
+            if (audioRef.current) {
+                if (isPlaying) {
+                    audioRef.current.play();
                 } else {
-                    progressBar.current.value = '0';
+                    audioRef.current.pause();
                 }
             }
-        };
-    
+        }, [isPlaying, currentTrack]);
+        
+        useEffect(() => {
+            if (audioRef.current) {
+                audioRef.current.volume = isMuted ? 0 : volume;
+            }
+        }, [volume, isMuted]);
 
         const calculeDuration = (sec: number) => {
             const minutes = Math.floor(sec / 60)
@@ -105,119 +83,50 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
 
             return `${newMinutes}:${newSeconds}`
         }
-
-        const skipForward = () => {
-            if (id === '') {
-                alert('Escolha um beat!')
-            } else if (isRandom) {
-                skipRandom()
-            } else if (parseInt(id) === parseInt(beats[beats.length - 1].id)) {
-                setId('1')
-            }
-              else if (id === undefined){
-                setId('1')
-            }
-            else {
-                const idNum = parseInt(id);
-                const newId = idNum + 1;
-                setId(newId.toString())
-            }
-        }
-
-        const skipRandom = () => {
-            
-            function getRandomBeat(){
-                const randomIndex = Math.floor(Math.random() * beats.length)
-                const randomBeat = beats[randomIndex];
-                return randomBeat.id
-            }
-            const randomBeatId = getRandomBeat();
-            setId(randomBeatId);
-            console.log(randomBeatId)
-        };
-
-        const skipBack = () => {
-            if (id === ''){
-                alert('Escolha uma música!');
-            } else if(isRandom){
-                skipRandom();
-            }
-             else {
-                const idNum = parseInt(id);
-                const newId = idNum - 1;
-                setId(newId.toString())
-            }
-        }
-
-    
-
-        const changeRange = () => {
-            if (audioTag.current && progressBar.current) {
-              const value = parseFloat(progressBar.current.value);
-              audioTag.current.currentTime = value;
-              setCurrentTime(value);
-            }
-          };
         
-        const changeCurrentTime = () => {
-            if(audioTag.current && progressBar.current)
-            setCurrentTime(parseFloat(progressBar.current.value));
-        }
-
-        const updateCurrentTime = (time: number) => {
-            if (audioTag.current) {
-                audioTag.current.currentTime = time;
-                setCurrentTime(time)
+        const handleTimeUpdate = () => {
+            if (audioRef.current) {
+                setProgress(audioRef.current.currentTime);
             }
-        }
+        };
+        
+        const handleLoadedMetadata = () => {
+            if (audioRef.current) {
+                setDuration(audioRef.current.duration);
+            }
+        };
 
         return(
             <div className="w-full flex justify-between bg-slate-200 rounded-md">
             
             <div className='musicDiv'>
                 
-                   {beats.map(beat => (
-                        
-                        id === beat.id ?
-                        
-                            <div 
-                             className='flex gap-3' key={beat.id}>
+            <div 
+                             className='flex gap-3' key={currentTrack?.id}>
                                 <>
-                                   <button className="flex flex-nowrap gap-1" onClick={openModal}><img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={beat.album_img} />
+                                {currentTrack && (
+                                   <button className="flex flex-nowrap gap-1" onClick={openModal}><img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={currentTrack.album_img} />
                                     <div>
-                                        <h1>{beat.name}</h1>
+                                        <h1>{currentTrack.name}</h1>
                                     </div>
                                     </button>
+                                          )}
+
                                 </> 
                                 {isModalOpen && (
                                         <Modal
                                        closeModal={closeModal}
-                                       currentBeatId={isModalOpen ? id : 'null'}
-                                       onToggleRandom={() => setIsRandom(!isRandom)}
-                                       onSkipBack={skipBack}
-                                       onTogglePlay={() => setIsPlaying(!isPlaying)}
-                                       onSkipForward={skipForward}
-                                       isRandom={isRandom}
-                                       isPlaying={isPlaying}
-                                       currentTime={currentTime !== null ? currentTime : 0}
-                                       setCurrentTime={updateCurrentTime}
-                                       duration={duration !== null ? duration : 0}
-                                        onChangeRange={changeRange}
-                                       calculeDuration={calculeDuration}
-                                       progressBar={progressBar} 
-                                       isOpen={isModalOpen}    
-                                       setIsMuted={setIsMuted}
-                                       isMuted={isMuted}
-                                       volume={volume}
-                                       setVolume={setVolume}                                        
+                                       isOpen={isModalOpen}      
+                                       audioRef={audioRef}                                 
                                         />
                                         )}
-                                <audio src={beat.audio} ref={audioTag}/>
+                               <audio 
+                                src={currentTrack?.audio} 
+                                ref={audioRef}
+                                onTimeUpdate={handleTimeUpdate}
+                                onLoadedMetadata={handleLoadedMetadata}
+                                onEnded={playNextTrack}/>
                             </div>    
-                                                 
-                    : ''
-                    ))
-                }
             </div>
             <div className='flex items-center'>
                 <div className='flex gap-32 mr-[290px] majortwo2:gap-20 majortwo3:gap-10 majortwo3:mr-[190px]
@@ -225,14 +134,20 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                  midtwo3:mr-10 midfour:mr-6 low:mr-3 lowtwo:mr-0 lowtwo2-1:text-[10px]'>
                         <div className='progressBar flex gap-2 majorfour:ml-4'>
                             <p className='PcurrentTime'>
-                            {(currentTime !== null) && calculeDuration(currentTime)}
+                            {(progress !== null) && calculeDuration(progress)}
                             </p>
                             <input 
                                 type="range" 
                                 className='currentProgress'
-                                value={currentTime !== null ? currentTime.toString() : '0'} 
-                                ref={progressBar} 
-                                onChange={changeRange}
+                                value={progress} 
+                                max={duration}
+                                onChange={(e) => {
+                                    const newProgress = parseFloat(e.target.value);
+                                    if (audioRef.current) {
+                                        audioRef.current.currentTime = newProgress;
+                                        setProgress(newProgress);
+                                      } 
+                                }}
                             />
                             
                             <p className='Pduration'>
@@ -244,19 +159,19 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                     <div className='buttons flex flex-nowrap text-3xl text-orange-400 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
                         <button 
-                            onClick={() => setIsRandom(!isRandom)} className='randomMusicsButton'>
+                            onClick={toggleRandom} className='randomMusicsButton'>
                             {isRandom ? <RandomMusicsTrue /> : <RandomMusicsFalse />}
                         </button> 
           
-                        <button onClick={skipForward}>
+                        <button onClick={playPrevTrack}>
                             <SkipBack />
                         </button>
                         <button 
                             className='playPause' 
-                            onClick={() => setIsPlaying(!isPlaying)}>
+                            onClick={togglePlay}>
                                 {isPlaying ?  <Pause /> : <Play />}
                         </button>
-                        <button onClick={skipBack}>
+                        <button onClick={playNextTrack}>
                             <SkipForward />
                         </button>
                         
@@ -264,18 +179,18 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                 </div>
             </div>
 
-                <div className='test mr-5 flex items-center majorfour:mr-2'>
+                <div className='test mr-5 gap-1 flex items-center majorfour:mr-2'>
                 <button 
                     className='volumeButton midfour:hidden ' 
-                    onClick={() => setIsMuted(!isMuted)}>
+                    onClick={toggleMute}>
                     {isMuted ? <VolumeOff/> : <VolumeOn />}
                 </button>
                 <input
                 className="volume-input"
                     type="range" 
                     step="0.01"
-                    onChange={(e) => setVolume(e.target.value)} 
-                    value={volume !== null ? volume.toString() : ''}
+                    onChange={(e) => setVolume(parseFloat(e.target.value))} 
+                    value={volume}
                     max='1'
                     min='0' 
                 />

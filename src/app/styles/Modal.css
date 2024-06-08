@@ -77,12 +77,16 @@
     }
   }
 
+  @media screen and (max-width: 549px) {
+    .modal-album-content{
+      width: 80%;
+    }
+  }
+
+
   @media screen and (max-width: 471px) {
     .modal-content{
       width: 80%;
     }
 
-    .modal-album-content{
-      width: 80%;
-    }
   }

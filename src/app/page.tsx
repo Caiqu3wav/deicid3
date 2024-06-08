@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import "./page.css";
 import Playlist from "./components/playlist";
 import Albuns from "./components/albuns/Index";
+import PlaylistBtn from "./components/PlaylistBtn";
 
 export default function Home() {
   const [id, setId] = useState<string>('');
@@ -26,9 +27,10 @@ export default function Home() {
       <button onClick={() => handlePageCategorySelected(2)} className={`text-white text-xl font-semibold 
       ${pageCategorySelected === 2 ? "border-solid border-b-2 border-white" : ""}`}>Albuns</button>
       </div>
-        {pageCategorySelected === 1 && <Playlist setId={setId}/>}
+        {pageCategorySelected === 1 && <Playlist />}
         {pageCategorySelected === 2 && <Albuns setId={setId}/>}
     </div>
+    <PlaylistBtn/>
 <footer>    
    <Player 
      id={id}
