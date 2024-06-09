@@ -1,7 +1,8 @@
 import usePlayerStore from "../store/playerStore";
 import { Pause, Play } from "../icons";
 import { CgPlayListRemove } from "react-icons/cg";
-import "../styles/Modal.css"
+import "../styles/Modal.css";
+import { FaTrashCan } from "react-icons/fa6";
 
 interface PlaylistProps {
     isVisible: boolean;
@@ -36,9 +37,9 @@ return (
         <h2 className="font-bold">Playlist</h2>
         <p className="font-bold text-black">{playlist.length} Músicas</p>
         </div>
-        <div>
+        <div className="flex flex-col items-center justify-center gap-2">
         <button onClick={onClose} className="text-xl font-bold px-2  bg-black text-white rounded-full">X</button>
-        <button></button>
+        <button onClick={playlistRemoveAll}><FaTrashCan /></button>
         </div>
       </div>
       <hr className="border-2 border-blue-500 w-full" />
