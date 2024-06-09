@@ -1,6 +1,7 @@
 import usePlayerStore from "../store/playerStore";
 import { Pause, Play } from "../icons";
 import { CgPlayListRemove } from "react-icons/cg";
+import "../styles/Modal.css"
 
 interface PlaylistProps {
     isVisible: boolean;

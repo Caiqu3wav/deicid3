@@ -49,7 +49,7 @@ export default function ModalAlbum({isOpen, closeModal, album, beats, setId}: Mo
                         <p className="text-blue-700 font-bold pl-1">{index + 1}</p>
                         <img src={album.img} className="w-[30px] h-auto" alt="" />
                         <div className="absolute top-50% left-50% transform translate-x-[85%] translate-y-[10%] w-8 h-8 bg-transparent
-                         text-white rounded-full cursor-pointer playPause hidden" title="Play">
+                         text-white rounded-full cursor-pointer playPause hidden" title="Play" onClick={() => playerStore.playTrack(beat)}>
                       <button>
                         <Play /> 
                       </button>
