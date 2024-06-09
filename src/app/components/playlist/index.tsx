@@ -3,6 +3,7 @@ import { BeatsCard } from "../musics";
 import { SkipBack, SkipForward } from "@/app/icons";
 import { beats as beatsData } from "@/app/api/beats";
 import { Beat } from "@/interfaces";
+import usePlayerStore from "@/app/store/playerStore";
 
 const Playlist: React.FC = () => {
     const [ordenacao, setOrdenacao] = useState<string>("recentes"); 
@@ -13,6 +14,7 @@ const Playlist: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+
   
     useEffect(() => {
       async function fetchBeats() {

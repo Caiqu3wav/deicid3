@@ -6,7 +6,7 @@ import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse
 import "../styles/Modal.css";
 import usePlayerStore from "../store/playerStore";
 
-export default function ModalAlbum({isOpen, closeModal, album, beats, setId}: ModalAlbumProps) {
+export default function ModalAlbum({isOpen, closeModal, album, beats, playAlbum}: ModalAlbumProps) {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
     const playerStore = usePlayerStore();
 
@@ -24,7 +24,7 @@ export default function ModalAlbum({isOpen, closeModal, album, beats, setId}: Mo
         <div className='buttons flex flex-nowrap text-4xl text-orange-400 transition-colors duration-700
          hover:text-blue-700 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
-          <button className='playPause' >
+          <button className='playPause' onClick={playAlbum} >
             <Play /> 
           </button>
           </div>

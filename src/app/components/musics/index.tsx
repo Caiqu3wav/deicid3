@@ -43,7 +43,7 @@ export const BeatsCard = ({ beat }: Props) => {
         <div className="flex flex-col items-center justify-center">
         <div className='bg-black bg-opacity-40 transition-all duration-700
          hover:bg-slate-300 hover:bg-opacity-95 flex flex-col w-[240px] h-[240px] items-center justify-center
-        rounded-xl midtwo2:w-[200px] midtwo2:h-[200px] midfour1:w-[168px] midfour1:h-[169px]
+        rounded-xl midtwo2:w-[200px] midtwo2:h-[225px] midfour1:w-[168px] midfour1:h-[189px]
         lowtwo1:w-[230px] lowtwo1:h-[270px]'>
                             <img className="beats-img rounded-lg w-[170px] h-[170px] midtwo2:w-[140px] midtwo2:h-[140px]
                             midfour1:w-[120px] midfour1:h-[120px] lowtwo:h-[120px] lowtwo1:w-[180px] lowtwo1:h-[180px]"
@@ -52,13 +52,13 @@ export const BeatsCard = ({ beat }: Props) => {
                             <audio src={beat.audio} />
                             <div className="flex gap-2">
                             <button
-                            className='playPause cursor-pointer hover:text-orange-500 text-2xl'
+                            className='playPause cursor-pointer text-slate-800 hover:text-orange-500 text-2xl'
                             onClick={() => isCurrentTrackPlaying ? togglePlay() : handlePlayTrack(beat)}
                               >
                                 {isCurrentTrackPlaying ? <Pause /> : <Play />}
                         </button>
                         <button
-                            className='playPause cursor-pointer hover:text-orange-500 text-2xl' 
+                            className='playPause cursor-pointer text-slate-800 hover:text-orange-500 text-2xl' 
                             onClick={() => togglePlaylist(beat)}
                               >
                                 {isTrackInPlaylist ? <CgPlayListRemove  /> : <MdPlaylistAddCircle />}

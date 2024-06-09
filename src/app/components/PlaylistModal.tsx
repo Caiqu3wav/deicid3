@@ -9,13 +9,16 @@ interface PlaylistProps {
 }
 
 export default function Playlist({ isVisible, onClose }: PlaylistProps) {
-  const { playlist, playTrack, togglePlaylist, togglePlay, currentTrack, isPlaying } = usePlayerStore(state => ({
+  const { playlist, playTrack, togglePlaylist, togglePlay, currentTrack, isPlaying,
+    playlistRemoveAll
+   } = usePlayerStore(state => ({
       playlist: state.playlist,
       playTrack: state.playTrack,
       togglePlaylist: state.togglePlaylist,
       togglePlay: state.togglePlay,
       currentTrack: state.currentTrack,
-      isPlaying: state.isPlaying 
+      isPlaying: state.isPlaying,
+      playlistRemoveAll: state.playlistRemoveAll
   }));
 
   if (!isVisible) return null;
@@ -33,7 +36,10 @@ return (
         <h2 className="font-bold">Playlist</h2>
         <p className="font-bold text-black">{playlist.length} Músicas</p>
         </div>
+        <div>
         <button onClick={onClose} className="text-xl font-bold px-2  bg-black text-white rounded-full">X</button>
+        <button></button>
+        </div>
       </div>
       <hr className="border-2 border-blue-500 w-full" />
       <ul className="flex flex-col gap-1 mt-2">

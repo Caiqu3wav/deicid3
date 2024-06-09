@@ -28,5 +28,5 @@ export interface Beat {
     isOpen: boolean;
     album: Album;
     beats: Beat[];
-    setId: any;
+    playAlbum: () => void;
   }

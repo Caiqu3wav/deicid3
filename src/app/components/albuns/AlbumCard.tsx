@@ -54,7 +54,7 @@ type AlbumCardProps = {
                                        isOpen={isModalOpen}
                                        album={album}
                                        beats={album.beats}  
-                                       setId={setId}                                    
+                                       playAlbum={handlePlayAlbum}                                    
                                         />
                                         )}
                     </div>
