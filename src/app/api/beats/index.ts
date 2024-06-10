@@ -535,7 +535,7 @@ export const beats = [
   dataLnc: '2024/06/04',
 },
 { id: '162', name: 'SpacialDash', album_img: '/assets/img-beats/spacialdash.jpg', 
-  audio: '/assets/beats/spacialdash(147bpm).mp3', genres: ['supertrap', 'ambient', 'new wave'],
+  audio: '/assets/beats/spacialdash(147).mp3', genres: ['supertrap', 'ambient', 'new wave'],
   dataLnc: '2024/06/08',
 },
 ].sort((a, b) => parseInt(a.id) - parseInt(b.id));

@@ -25,7 +25,8 @@ const Modal: React.FC<ModalProps> = ({
         setVolume,
         progress,
         setProgress,
-        duration
+        duration,
+        playNextTrack
     } = usePlayerStore((state) => ({
         currentTrack: state.currentTrack,
         isPlaying: state.isPlaying,
@@ -39,7 +40,8 @@ const Modal: React.FC<ModalProps> = ({
         setVolume: state.setVolume,
         progress: state.progress,
         duration: state.duration,
-        setProgress: state.setProgress
+        setProgress: state.setProgress,
+        playNextTrack: state.playNextTrack
     }));
 
   if (!isOpen) {
@@ -83,7 +85,7 @@ const Modal: React.FC<ModalProps> = ({
           <button className='playPause' onClick={togglePlay}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
-          <button onClick={playPrevTrack}>
+          <button onClick={playNextTrack}>
             <SkipForward />
           </button>
         </div>
