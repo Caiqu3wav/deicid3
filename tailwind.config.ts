@@ -23,6 +23,7 @@ const config: Config = {
       'majorfour': {'max': '761px'},
       'majorfour1': {'max': '700px'},
       'midtw': {'max': '648px'},
+      'midtwup': {'min': '648px'},
       'midtwo': {'max': '553px'},
       'midtwo2': {'max': '538px'},
       'midtwo3': {'max': '516px'},

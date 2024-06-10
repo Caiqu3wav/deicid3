@@ -13,9 +13,12 @@ export default function Header() {
     }
 
     return(
-        <header className="w-full flex items-center">
-            <Image onClick={handleRouterLogo} className="w-[70px] h-[90px] ml-6 self-start" src={DeicideLogo}/>
+        <header className="w-full flex items-center midtwup:justify-between">
+            <Image onClick={handleRouterLogo} className="w-[70px] h-[90px]
+             ml-6 self-start" src={DeicideLogo}/>
             <Navbar/>
+            <div className="midtw:hidden">
+            </div>
         </header>
     )
 }

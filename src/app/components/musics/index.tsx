@@ -21,6 +21,7 @@ export const BeatsCard = ({ beat }: Props) => {
         togglePlaylist, 
         playlist,
         addTracks,
+        addTracksAndRemove
     } = usePlayerStore((state) => ({
         playTrack: state.playTrack,
         togglePlay: state.togglePlay,
@@ -29,6 +30,7 @@ export const BeatsCard = ({ beat }: Props) => {
         playlist: state.playlist,
         togglePlaylist: state.togglePlaylist,
         addTracks: state.addTracks,
+        addTracksAndRemove: state.addTracksAndRemove
     }));
 
     const isCurrentTrackPlaying = currentTrack?.id === beat.id && isPlaying;
@@ -36,7 +38,7 @@ export const BeatsCard = ({ beat }: Props) => {
 
     const handlePlayTrack = (beat: Beat) => {
         playTrack(beat);
-        addTracks(beats);
+        addTracksAndRemove(beats);
     }
 
     return (

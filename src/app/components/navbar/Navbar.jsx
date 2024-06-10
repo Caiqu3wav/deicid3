@@ -47,9 +47,7 @@ export default function Navbar(){
     }, [isActive]);
     
     return(
-        <nav className="flex items-center justify-center self-center ml-[20%] majortwomin:ml-[25%] majorthree:ml-[16%]
-  majorfour1:ml-[10%] midtwo4:ml-[5%] ">
-
+        <nav className="flex items-center justify-center self-center midtwup:mr-8">
             <ul className="flex font-bold text-2xl cursor-pointer midthree:text-lg">
                 <Link href="/"><li className="border-l-2 border-r-2 border-black px-3 py-8 hover:bg-slate-600">Home</li></Link>
                 <Link href="#playlist"><li className="border-r-2 border-black px-3 py-8 hover:bg-slate-600">Playlist</li></Link>

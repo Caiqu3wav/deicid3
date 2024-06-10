@@ -17,7 +17,6 @@ export default function Home() {
   }
   return (
     <main>
-      <Header/>
       <Hero/>
       <div className="playlist-cont h-fit pb-20 flex items-center justify-center flex-col
        majortwo3:pb-24 gap-2">

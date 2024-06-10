@@ -48,15 +48,14 @@
 
 
 .hero-container{
-    background-image: url(../../../../public/assets/img/hero-bg.jpg);
+    background-image: url(../../../../public/assets/img/deicid3bg.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    height: 540px;
+    height: 570px;
 background-position: center center;
 display: flex;
 align-items: center;
-justify-content: center;
 flex-direction: column;
 }
 
@@ -66,7 +65,7 @@ flex-direction: column;
    flex-direction: column;
     width: 380px;
     height: 280px;
-    background-image: linear-gradient(rgba(230, 157, 20, 0.5), rgb(5, 5, 5, 0.5)); /* 0.5 define a opacidade (ajuste conforme necessário) */
+    background-image: linear-gradient(rgba(230, 157, 20, 0.5), rgba(5, 5, 5, 0.774)); /* 0.5 define a opacidade (ajuste conforme necessário) */
     border-radius: 20px; /* Bordas arredondadas */
     align-items: center;
     justify-content: center;

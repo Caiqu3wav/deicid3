@@ -89,9 +89,8 @@ const Playlist: React.FC = () => {
           </select>
           </div>
           <div className="flex gap-3 ml-4 midfour:gap-0 low:ml-2">
-          <label className="text-white low:text-[14px]">Estilo:</label>
+          <label className="text-white low:text-[14px] lowtwo:mr-2">Estilo:</label>
           <div className="genre-selector-container">
-            
               <select onChange={handleGenreChange} value={selectedGenres.join(',')}>
                 {/* Opções de gêneros, incluindo "Todos" */}
                 {['todos', ...Array.from(new Set(beats.flatMap((beat) => beat.genres)))].map((genre) => (
