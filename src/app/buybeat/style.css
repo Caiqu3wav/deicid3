@@ -6,7 +6,7 @@
   }
 
 .bb-container{
-    background-image: linear-gradient(black, rgb(121, 85, 20));
+    background-image: linear-gradient(black, rgb(87, 22, 129));
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -28,7 +28,7 @@
     font-family: "Protest Revolution", sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: rgb(223, 156, 31);
+  color: rgb(200, 202, 209);
 }
 
 .texts-cont{

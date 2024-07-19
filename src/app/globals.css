@@ -25,7 +25,7 @@ input[type="range"] {
   /******** Chrome, Safari, Opera and Edge Chromium styles ********/
   /* slider track */
   input[type="range"]::-webkit-slider-runnable-track {
-    background-color: #e2a635;
+    background-color: #721cd3;
     border-radius: 6px;
     height: 0.5rem;
   }
@@ -48,7 +48,7 @@ input[type="range"] {
   /*********** Firefox styles ***********/
   /* slider track */
   input[type="range"]::-moz-range-track {
-    background-color: #e2a635;
+    background-color: #8423d3;
     border-radius: 6px;
     height: 0.5rem;
   }

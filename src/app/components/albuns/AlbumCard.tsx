@@ -37,11 +37,11 @@ type AlbumCardProps = {
                             " src={album.img} alt={album.name} />
                             <h1 className='text-2xl self-center text-slate-500'>{album.name}</h1>
                             <div className="flex justify-center">
-                        <button className="bg-orange-500 transition-colors hover:bg-gray-300 text-gray-800 font-bold py-1 px-3
+                        <button className="bg-purple-700 transition-colors hover:bg-gray-300 text-gray-800 font-bold py-1 px-3
                          midtwo2:py-0 midtwo2:px-2 rounded-full" onClick={() => handlePlayAlbum()}>
                         <FaPlay/>
                         </button>
-                        <button className="bg-orange-500 transition-colors hover:bg-gray-300 text-gray-800 font-bold py-2 px-4
+                        <button className="bg-purple-700 transition-colors hover:bg-gray-300 text-gray-800 font-bold py-2 px-4
                         midtwo2:py-0 midtwo2:px-2 rounded ml-4" onClick={() => setIsModalOpen(!isModalOpen)}>
                         <TbPlaylist size={20}/>
                         </button>

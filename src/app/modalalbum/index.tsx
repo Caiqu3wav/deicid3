@@ -21,8 +21,8 @@ export default function ModalAlbum({isOpen, closeModal, album, beats, playAlbum}
         <div className="flex w-full gap-4">
             <div className="flex flex-col gap-2">
         <Image className="rounded-xl w-[70px] h-[70px]" src={album.img} alt={album.name} width={200} height={200} />
-        <div className='buttons flex flex-nowrap text-4xl text-orange-400 transition-colors duration-700
-         hover:text-blue-700 space-x-3 majorfour:text-[28px]
+        <div className='buttons flex flex-nowrap text-4xl text-purple-600 transition-colors duration-700
+         hover:text-blue-800 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
           <button className='playPause' onClick={playAlbum} >
             <Play /> 
@@ -30,8 +30,8 @@ export default function ModalAlbum({isOpen, closeModal, album, beats, playAlbum}
           </div>
         </div>
         <div>
-        <h1 className="text-lg font-semibold text-blue-600">Álbum</h1>
-        <p className="text-[40px] font-bold majorfour1:text-[31px] midtwo:text-[23px]">{album.name}</p>
+        <h1 className="text-lg font-semibold text-gray-300">Álbum</h1>
+        <p className="text-[40px] font-bold majorfour1:text-[31px] text-gray-300 midtwo:text-[23px]">{album.name}</p>
         <div className="flex gap-3">
         <p className="font-bold underline underline-offset-1">{album.dataLnc}</p>
         <p className="font-semibold">{album.beats.length} beats</p>
@@ -54,7 +54,7 @@ export default function ModalAlbum({isOpen, closeModal, album, beats, playAlbum}
                         <Play /> 
                       </button>
                       </div> 
-                        <p className=" text-blue-700 font-semibold">{beat.name}</p>
+                        <p className="text-blue-600 font-semibold">{beat.name}</p>
                     </div>
                     </li>              
                     ))}                   

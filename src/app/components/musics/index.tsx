@@ -50,17 +50,17 @@ export const BeatsCard = ({ beat }: Props) => {
                             <img className="beats-img rounded-lg w-[170px] h-[170px] midtwo2:w-[140px] midtwo2:h-[140px]
                             midfour1:w-[120px] midfour1:h-[120px] lowtwo:h-[120px] lowtwo1:w-[180px] lowtwo1:h-[180px]"
                             src={beat.album_img} alt={beat.name} />
-                            <h1 className='text-2xl self-center text-orange-500'>{beat.name}</h1>
+                            <h1 className='text-2xl self-center text-gray-300'>{beat.name}</h1>
                             <audio src={beat.audio} />
                             <div className="flex gap-2">
                             <button
-                            className='playPause cursor-pointer text-slate-800 hover:text-orange-500 text-2xl'
+                            className='playPause cursor-pointer text-blue-800 hover:text-gray-300 text-2xl'
                             onClick={() => isCurrentTrackPlaying ? togglePlay() : handlePlayTrack(beat)}
                               >
                                 {isCurrentTrackPlaying ? <Pause /> : <Play />}
                         </button>
                         <button
-                            className='playPause cursor-pointer text-slate-800 hover:text-orange-500 text-2xl' 
+                            className='playPause cursor-pointer text-blue-800 hover:text-gray-300 text-2xl' 
                             onClick={() => togglePlaylist(beat)}
                               >
                                 {isTrackInPlaylist ? <CgPlayListRemove  /> : <MdPlaylistAddCircle />}

@@ -74,7 +74,7 @@ const Modal: React.FC<ModalProps> = ({
         <Image className="rounded-xl w-[200px] h-[200px]" width={200} height={200} src={currentTrack?.album_img ?? ''}
          alt={currentTrack?.name ?? ''} />
         <h1 className="text-xl font-semibold">{currentTrack.name}</h1>
-        <div className='buttons flex flex-nowrap text-4xl text-orange-400 space-x-3 majorfour:text-[28px]
+        <div className='buttons flex flex-nowrap text-4xl text-gray-300 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
                         <button onClick={toggleRandom} className='randomMusicsButton'>
             {isRandom ? <RandomMusicsTrue /> : <RandomMusicsFalse />}

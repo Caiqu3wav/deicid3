@@ -3,8 +3,8 @@ import "./style.css"
 import Image from "next/image";
 import deicid3Logo from "../../../public/assets/img/deicide-logo.png";
 import beatSingle from "../../../public/assets/img/beatsingle.png";
-import combo3Beats from "../../../public/assets/img/combo2beats.png";
-import BeatExclusive from "../../../public/assets/img/combo3beats.png";
+import combo3Beats from "../../../public/assets/img/combo3beats.png";
+import BeatExclusive from "../../../public/assets/img/beatsexclusive.png";
 import Link from "next/link";
 import { FaTelegram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
@@ -93,8 +93,8 @@ export default function BuyBeat() {
                         </p>
                         <br />
                         <p className="flex gap-2">
-                            <FaTelegram size={30} className="bg-gray-500 rounded-xl" />
-                            <span className="text-gray-500 text-lg">
+                            <FaTelegram size={30} className="bg-gray-400 rounded-xl" />
+                            <span className="text-gray-400 text-lg">
                                 <Link href="https://t.me/Dvrkss" target="_blank">
                                     Dvrkss/12 99736-4432
                                 </Link>

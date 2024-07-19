@@ -1,5 +1,5 @@
 'use client'
-import DeicideLogo from "../../../../public/assets/img/deicide-logo.png"
+import DeicideLogo from "../../../../public/assets/img/deicide-logo-blue.png"
 import Image from "next/image";
 import "./Header.css";
 import Navbar from "../navbar/Navbar";

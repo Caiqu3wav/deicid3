@@ -97,7 +97,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
         };
 
         return(
-            <div className="w-full flex justify-between bg-slate-200 rounded-md">
+            <div className="w-full flex justify-between bg-black rounded-md">
             
             <div className='musicDiv'>
                 
@@ -107,7 +107,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                                 {currentTrack && (
                                    <button className="flex flex-nowrap gap-1" onClick={openModal}><img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={currentTrack.album_img} />
                                     <div>
-                                        <h1>{currentTrack.name}</h1>
+                                        <h1 className="text-gray-300">{currentTrack.name}</h1>
                                     </div>
                                     </button>
                                           )}
@@ -156,7 +156,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                             </p>
                         </div> 
 
-                    <div className='buttons flex flex-nowrap text-3xl text-orange-400 space-x-3 majorfour:text-[28px]
+                    <div className='buttons flex flex-nowrap text-3xl text-purple-900 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
                         <button 
                             onClick={toggleRandom} className='randomMusicsButton'>

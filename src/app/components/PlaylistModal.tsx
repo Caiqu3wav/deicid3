@@ -31,7 +31,7 @@ export default function Playlist({ isVisible, onClose }: PlaylistProps) {
 
 return (
   <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-    <div className="bg-gradient-to-br from-slate-800 to-orange-400 bg-opacity-75 rounded-lg p-4 w-1/2 h-3/4 midfour:w-[65%] overflow-y-auto">
+    <div className="bg-gradient-to-br from-slate-800 to-purple-800 bg-opacity-75 rounded-lg p-4 w-1/2 h-3/4 midfour:w-[65%] overflow-y-auto">
       <div className="flex justify-between items-center mb-4">
         <div className="text-white text-xl midfour:text-sm">
         <h2 className="font-bold">Playlist</h2>

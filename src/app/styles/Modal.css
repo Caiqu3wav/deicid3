@@ -9,8 +9,8 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-  visibility: hidden;
-  transition: opacity 1.3s ease-in-out;
+    visibility: hidden;
+    transition: opacity 1.3s ease-in-out;
   }
   
   .modal-content {
@@ -31,7 +31,7 @@
   }
 
   .modal-album-content {
-    background: linear-gradient(rgba(255, 166, 0, 0.836), black);
+    background: linear-gradient(rgba(130, 6, 179, 0.836), black);
     padding: 20px;
     border-radius: 10px;
     width: 40%;
