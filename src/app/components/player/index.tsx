@@ -133,7 +133,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                  majortwo4:mr-0 majorfour:flex-col-reverse majorfour:gap-0 majorfour:items-center majorfour:text-[14px]
                  midtwo3:mr-10 midfour:mr-6 low:mr-3 lowtwo:mr-0 lowtwo2-1:text-[10px]'>
                         <div className='progressBar flex gap-2 majorfour:ml-4'>
-                            <p className='PcurrentTime'>
+                            <p className='PcurrentTime text-gray-300'>
                             {(progress !== null) && calculeDuration(progress)}
                             </p>
                             <input 
@@ -181,12 +181,12 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
 
                 <div className='test mr-5 gap-1 flex items-center majorfour:mr-2'>
                 <button 
-                    className='volumeButton midfour:hidden ' 
+                    className='volumeButton text-gray-300 midfour:hidden ' 
                     onClick={toggleMute}>
                     {isMuted ? <VolumeOff/> : <VolumeOn />}
                 </button>
                 <input
-                className="volume-input"
+                className="volume-input text-gray-300"
                     type="range" 
                     step="0.01"
                     onChange={(e) => setVolume(parseFloat(e.target.value))} 
