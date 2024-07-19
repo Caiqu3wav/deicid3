@@ -48,7 +48,7 @@
 
 
 .hero-container{
-    background-image: url(../../../../public/assets/img/deicid3bg.jpg);
+    background-image: url(../../../../public/assets/img/purplespace.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -65,7 +65,7 @@ flex-direction: column;
    flex-direction: column;
     width: 380px;
     height: 280px;
-    background-image: linear-gradient(rgba(230, 157, 20, 0.5), rgba(5, 5, 5, 0.774)); /* 0.5 define a opacidade (ajuste conforme necessário) */
+    background-image: linear-gradient(rgba(141, 13, 226, 0.5), rgba(201, 199, 199, 0.774)); /* 0.5 define a opacidade (ajuste conforme necessário) */
     border-radius: 20px; /* Bordas arredondadas */
     align-items: center;
     justify-content: center;

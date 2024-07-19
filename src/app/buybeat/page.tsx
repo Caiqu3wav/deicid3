@@ -3,8 +3,8 @@ import "./style.css"
 import Image from "next/image";
 import deicid3Logo from "../../../public/assets/img/deicide-logo.png";
 import beatSingle from "../../../public/assets/img/beatsingle.png";
-import combo2Beats from "../../../public/assets/img/combo2beats.png";
-import combo3Beats from "../../../public/assets/img/combo3beats.png";
+import combo3Beats from "../../../public/assets/img/combo2beats.png";
+import BeatExclusive from "../../../public/assets/img/combo3beats.png";
 import Link from "next/link";
 import { FaTelegram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
@@ -36,13 +36,14 @@ export default function BuyBeat() {
                                 <a href="https://buy.stripe.com/3cs3fifDg6eyaHe3cf" className="paylink midtwo4:hidden midtw:text-sm midtwo3:text-xs" target="_blank">
                                 https://buy.stripe.com/3cs3fifDg6eyaHe3cf
                                 </a>
-                                <a className="text-lg font-bold text-blue-400 hidden midtwo4:block" href="https://buy.stripe.com/3cs3fifDg6eyaHe3cf">Clique para pagar</a>
+                                <a className="text-lg font-bold text-blue-400 hidden midtwo4:block" 
+                                href="https://buy.stripe.com/3cs3fifDg6eyaHe3cf">Clique para pagar</a>
                             </div>
                         </div>
                         <div className=" flex-col">
-                            <p className="font-bold text-white text-lg">Pacote 2 beats:</p>
+                            <p className="font-bold text-white text-lg">Pacote 3 beats:</p>
                             <Link href="https://buy.stripe.com/3cs6rugHk0Ue8z6004" target="_blank">
-                                <Image src={combo2Beats} alt="beat image" className="rounded-xl" />
+                                <Image src={combo3Beats} alt="beat image" className="rounded-xl" />
                             </Link>
                             <div className="flex gap-2">
                                 <p className="text-lg majorthree1:hidden">Link de pagamento:</p>
@@ -54,8 +55,8 @@ export default function BuyBeat() {
                         </div>
                         <div className="flex flex-col">
                             <p className="font-bold text-white text-lg">Beat Exclusivo:</p>
-                            <Link href="https://buy.stripe.com/00gdTW3UyfP87v2005" target="_blank">
-                                <Image src={combo3Beats} alt="beat image" className="rounded-xl" />
+                            <Link href="https://buy.stripe.com/7sI5nqfDg7iCg1y9AL" target="_blank">
+                                <Image src={BeatExclusive} alt="beat image" className="rounded-xl" />
                             </Link>
                             <div className="flex gap-2">
                                 <p className="text-lg majorthree1:hidden">Link de pagamento:</p>
