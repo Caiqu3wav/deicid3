@@ -28,29 +28,29 @@ export default function BuyBeat() {
                         <h2>Descubra o som que vai transformar seus projetos. Ofereço opções de pacotes:</h2>
                         <div className="flex flex-col">
                             <p className="font-bold text-white text-lg">Beat mp3 Lease:</p>
-                            <Link href="https://buy.stripe.com/3cs3fifDg6eyaHe3cf" target="_blank">
+                            <Link href="https://buy.stripe.com/cN26ru2Qu6ey16E144" target="_blank">
                                 <Image src={beatSingle} alt="beat image" className="rounded-xl" />
                             </Link>
                             <div className="flex gap-2">
                                 <p className="text-lg majorthree1:hidden">Link de pagamento:</p> 
-                                <a href="https://buy.stripe.com/3cs3fifDg6eyaHe3cf" className="paylink midtwo4:hidden midtw:text-sm midtwo3:text-xs" target="_blank">
-                                https://buy.stripe.com/3cs3fifDg6eyaHe3cf
+                                <a href="https://buy.stripe.com/cN26ru2Qu6ey16E144" className="paylink midtwo4:hidden midtw:text-sm midtwo3:text-xs" target="_blank">
+                                https://buy.stripe.com/cN26ru2Qu6ey16E144
                                 </a>
                                 <a className="text-lg font-bold text-blue-400 hidden midtwo4:block" 
-                                href="https://buy.stripe.com/3cs3fifDg6eyaHe3cf">Clique para pagar</a>
+                                href="https://buy.stripe.com/cN26ru2Qu6ey16E144">Clique para pagar</a>
                             </div>
                         </div>
                         <div className=" flex-col">
                             <p className="font-bold text-white text-lg">Pacote 3 beats:</p>
-                            <Link href="https://buy.stripe.com/3cs6rugHk0Ue8z6004" target="_blank">
+                            <Link href="https://buy.stripe.com/28o8zCezc0Ue2aI4gi" target="_blank">
                                 <Image src={combo3Beats} alt="beat image" className="rounded-xl" />
                             </Link>
                             <div className="flex gap-2">
                                 <p className="text-lg majorthree1:hidden">Link de pagamento:</p>
-                                <a href="https://buy.stripe.com/3cs6rugHk0Ue8z6004" className="paylink midtw:text-sm midtwo3:text-xs midtwo4:hidden" target="_blank">
-                                https://buy.stripe.com/3cs6rugHk0Ue8z6004
+                                <a href="https://buy.stripe.com/28o8zCezc0Ue2aI4gi" className="paylink midtw:text-sm midtwo3:text-xs midtwo4:hidden" target="_blank">
+                                https://buy.stripe.com/28o8zCezc0Ue2aI4gi
                                 </a>
-                                <a className="text-lg font-bold text-blue-400 hidden midtwo4:block" href="https://buy.stripe.com/00g7vy76KcCW5mUbIJ">Clique para pagar</a>
+                                <a className="text-lg font-bold text-blue-400 hidden midtwo4:block" href="https://buy.stripe.com/28o8zCezc0Ue2aI4gi">Clique para pagar</a>
                             </div>
                         </div>
                         <div className="flex flex-col">
@@ -60,10 +60,10 @@ export default function BuyBeat() {
                             </Link>
                             <div className="flex gap-2">
                                 <p className="text-lg majorthree1:hidden">Link de pagamento:</p>
-                                <a href="https://buy.stripe.com/00gdTW3UyfP87v2005" className="paylink midtwo4:hidden midtw:text-sm midtwo3:text-xs" target="_blank">
-                                https://buy.stripe.com/00gdTW3UyfP87v2005
+                                <a href="https://buy.stripe.com/7sI5nqfDg7iCg1y9AL" className="paylink midtwo4:hidden midtw:text-sm midtwo3:text-xs" target="_blank">
+                                https://buy.stripe.com/7sI5nqfDg7iCg1y9AL
                                 </a>
-                                <a className="text-lg font-bold text-blue-400 hidden midtwo4:block" href="https://buy.stripe.com/00gdTW3UyfP87v2005">Clique para pagar</a>
+                                <a className="text-lg font-bold text-blue-400 hidden midtwo4:block" href="https://buy.stripe.com/7sI5nqfDg7iCg1y9AL">Clique para pagar</a>
                             </div>
                         </div>
                         <h1>Como Comprar:</h1>
@@ -77,8 +77,8 @@ export default function BuyBeat() {
                         <p className="flex gap-2">
                             <FaWhatsapp size={30} className="bg-green-600 rounded-full" />
                             <span className="text-green-600 font-bold text-lg">
-                                <Link href="https://wa.me/12997364432" target="_blank">
-                                    12 99736-4432
+                                <Link href="https://wa.me/12996246050" target="_blank">
+                                    12 99624-6050
                                 </Link>
                             </span>
                         </p>
