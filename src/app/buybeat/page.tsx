@@ -54,7 +54,7 @@ export default function BuyBeat() {
                             </div>
                         </div>
                         <div className="flex flex-col">
-                            <p className="font-bold text-white text-lg">Beat Exclusivo:</p>
+                            <p className="font-bold text-white text-lg">Beat Exclusivo (uso exclusivo do artista):</p>
                             <Link href="https://buy.stripe.com/7sI5nqfDg7iCg1y9AL" target="_blank">
                                 <Image src={BeatExclusive} alt="beat image" className="rounded-xl" />
                             </Link>
