@@ -1,0 +1,5 @@
+.beats-c {
+    border-radius: 60% 30% 30% 20%
+      /* setting the radius in percentages for random corners */;
+    place-items: center;
+  }

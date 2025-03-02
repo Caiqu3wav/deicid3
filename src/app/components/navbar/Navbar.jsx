@@ -17,6 +17,10 @@ export default function Navbar(){
           path: '#playlist',
         },
         {
+          title: 'Serviços',
+          path: '/servicos',
+        },
+        {
           title: 'Informações/contato',
           path: '/buybeat',
         },
@@ -51,6 +55,7 @@ export default function Navbar(){
             <ul className="flex font-bold  text-2xl cursor-pointer midthree:text-lg">
                 <Link href="/"><li className="border-l-2 text-gray-300 border-r-2 border-black px-3 py-8 hover:bg-slate-600">Home</li></Link>
                 <Link href="#playlist"><li className="border-r-2 text-gray-300 border-black px-3 py-8 hover:bg-slate-600">Playlist</li></Link>
+                <Link href="/servicos"><li className="border-r-2 text-gray-300 border-black px-3 py-8 hover:bg-slate-600">Serviços</li></Link>
                 <a target="_blank" href="/buybeat"><li className=" border-r-2 text-gray-300 border-black px-3 py-8 hover:bg-slate-600">Informações/Contato</li></a>
             </ul>
             <button aria-label="Open Menu" onClick={toggleMenu} className="hidden ml-[47%]">

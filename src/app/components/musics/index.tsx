@@ -1,12 +1,11 @@
 import { Beat } from "@/interfaces";
 import Link from "next/link";
-import { CiHeart } from "react-icons/ci";
-import { FaHeart } from "react-icons/fa";
 import usePlayerStore from "@/app/store/playerStore";
 import { Pause, Play } from "@/app/icons";
 import { MdPlaylistAddCircle } from "react-icons/md";
 import { CgPlayListRemove } from "react-icons/cg";
 import { beats } from "@/app/api/beats";
+import "./musics.css"
 
 type Props = {
     beat: Beat
@@ -43,14 +42,13 @@ export const BeatsCard = ({ beat }: Props) => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-        <div className='bg-black bg-opacity-40 transition-all duration-700
+        <div className='bg-black beats-c bg-opacity-40 transition-all duration-700
          hover:bg-slate-300 hover:bg-opacity-95 flex flex-col w-[240px] h-[240px] items-center justify-center
-        rounded-xl midtwo2:w-[200px] midtwo2:h-[225px] midfour1:w-[168px] midfour1:h-[189px]
+        midtwo2:w-[200px] midtwo2:h-[225px] midfour1:w-[168px] midfour1:h-[189px]
         lowtwo1:w-[230px] lowtwo1:h-[270px]'>
-                            <img className="beats-img rounded-lg w-[170px] h-[170px] midtwo2:w-[140px] midtwo2:h-[140px]
-                            midfour1:w-[120px] midfour1:h-[120px] lowtwo:h-[120px] lowtwo1:w-[180px] lowtwo1:h-[180px]"
+                            <img className="beats-img mt-4 rounded-lg w-[50%]"
                             src={beat.album_img} alt={beat.name} />
-                            <h1 className='text-2xl self-center text-gray-300'>{beat.name}</h1>
+                            <h1 className='text-lg self-center text-gray-300'>{beat.name}</h1>
                             <audio src={beat.audio} />
                             <div className="flex gap-2">
                             <button

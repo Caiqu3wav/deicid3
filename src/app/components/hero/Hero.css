@@ -52,7 +52,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    height: 570px;
+    height: 645px;
 background-position: center center;
 display: flex;
 align-items: center;
@@ -64,9 +64,9 @@ flex-direction: column;
    display: flex;
    flex-direction: column;
     width: 380px;
-    height: 280px;
+    height: 360px;
     background-image: linear-gradient(rgba(141, 13, 226, 0.5), rgba(201, 199, 199, 0.774)); /* 0.5 define a opacidade (ajuste conforme necessário) */
-    border-radius: 20px; /* Bordas arredondadas */
+    border-radius: 20px;
     align-items: center;
     justify-content: center;
     text-align: center;
