@@ -1,5 +1,5 @@
 .beats-c {
-    border-radius: 60% 30% 30% 20%
-      /* setting the radius in percentages for random corners */;
+    border-radius: 60% 30% 30% 20%;
+    background: linear-gradient(to bottom right,rgba(255, 255, 255, 0.34), rgba(0, 0, 0, 0.553));
     place-items: center;
   }

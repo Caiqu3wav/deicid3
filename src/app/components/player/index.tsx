@@ -156,7 +156,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                             </p>
                         </div> 
 
-                    <div className='buttons flex flex-nowrap text-3xl text-purple-900 space-x-3 majorfour:text-[28px]
+                    <div className='buttons flex flex-nowrap text-3xl text-red-900 space-x-3 majorfour:text-[28px]
                     lowtwo2-1:text-[24px]'>
                         <button 
                             onClick={toggleRandom} className='randomMusicsButton'>

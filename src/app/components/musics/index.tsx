@@ -42,7 +42,7 @@ export const BeatsCard = ({ beat }: Props) => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-        <div className='bg-black beats-c bg-opacity-40 transition-all duration-700
+        <div className='bg-black beats-c transition-all duration-700 bg-opacity-40
          hover:bg-slate-300 hover:bg-opacity-95 flex flex-col w-[240px] h-[240px] items-center justify-center
         midtwo2:w-[200px] midtwo2:h-[225px] midfour1:w-[168px] midfour1:h-[189px]
         lowtwo1:w-[230px] lowtwo1:h-[270px]'>

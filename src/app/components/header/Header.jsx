@@ -1,7 +1,6 @@
 'use client'
-import DeicideLogo from "../../../../public/assets/img/deicide-logo-blue.png"
+import DeicideLogo from "../../../../public/assets/img/deicide-logo.png"
 import Image from "next/image";
-import "./Header.css";
 import Navbar from "../navbar/Navbar";
 import { useRouter } from "next/navigation";
 
@@ -13,9 +12,9 @@ export default function Header() {
     }
 
     return(
-        <header className="w-full flex items-center midtwup:justify-between">
-            <Image onClick={handleRouterLogo} className="w-[70px] h-[90px]
-             ml-6 self-start" src={DeicideLogo}/>
+        <header className="w-full flex bg-primary h-[100px] items-center midtwup:justify-between">
+            <Image onClick={handleRouterLogo} className="w-[90px]
+             ml-6" src={DeicideLogo}/>
             <Navbar/>
             <div className="midtw:hidden">
             </div>

@@ -14,7 +14,6 @@
   font-family: "Rubik Maps", system-ui;
   font-weight: 400;
   font-style: normal;
-  color: rgb(25, 25, 235);
   font-size: 43px;
 }
 
@@ -48,7 +47,7 @@
 
 
 .hero-container{
-    background-image: url(../../../../public/assets/img/Spacepp.jpg);
+    background-image: url(../../../../public/assets/img/deicid3bg.webp);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -65,7 +64,7 @@ flex-direction: column;
    flex-direction: column;
     width: 380px;
     height: 360px;
-    background-image: linear-gradient(rgba(141, 13, 226, 0.5), rgba(201, 199, 199, 0.774)); /* 0.5 define a opacidade (ajuste conforme necessário) */
+    background-image: linear-gradient(rgba(102, 101, 103, 0.742), rgba(0, 0, 0, 0.774)); /* 0.5 define a opacidade (ajuste conforme necessário) */
     border-radius: 20px;
     align-items: center;
     justify-content: center;

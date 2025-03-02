@@ -2,14 +2,14 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: linear-gradient(rgba(255, 255, 255, 0.74), rgba(87, 17, 167, 0.781)); /* Cor de fundo do footer, ajuste conforme necessário */
+    background: linear-gradient(rgba(255, 255, 255, 0.74), rgba(0, 0, 0, 0.781)); /* Cor de fundo do footer, ajuste conforme necessário */
     padding: 10px; /* Adicione o padding desejado ao footer */
     z-index: 1000; /* Ajuste conforme necessário para garantir que fique acima de outros elementos */
     border-radius: 20px;
   }
 
   .playlist-cont{
-    background: linear-gradient(170deg, rgba(0,0,0,1) 18%, rgb(221, 182, 255) 52%, rgb(55, 10, 85) 100%);
+    background: linear-gradient(170deg, rgba(0,0,0,1) 18%, rgb(166, 166, 166) 52%, rgb(85, 10, 10) 100%);
     background-repeat: repeat;
   }
 
@@ -59,7 +59,7 @@ footer {
   }
   /* Transition */
   .select:hover::after {
-    color: #7b12f3;
+    color: #f31212;
   }
 
   .lds-ring {
