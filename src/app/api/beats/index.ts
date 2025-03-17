@@ -11,8 +11,8 @@ export const beats = [
   {
     "id": "2",
     "name": "astral",
-    "album_img": "/assets/img-beats/purple.png",
-    "audio": "/assets/newbeats/astral(158bpm)prod.deicide.mp3", 
+    "album_img": "/assets/newbeats/img/astral.png",
+    "audio": "/assets/newbeats/astral(158bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
   {
@@ -32,7 +32,7 @@ export const beats = [
   {
     "id": "5",
     "name": "constelation",
-    "album_img": "/assets/img-beats/purple.png",
+    "album_img": "/assets/newbeats/img/constelation.webp",
     "audio": "/assets/newbeats/constelation(161bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
@@ -47,14 +47,14 @@ export const beats = [
     "id": "7",
     "name": "darkna",
     "album_img": "/assets/newbeats/img/darkna.webp",
-    "audio": "/assets/newbeats/darkna(147bpm)prod.deicide x mabbienne.mp3",        
+    "audio": "/assets/newbeats/darkna(147bpm)prod.deicide x mabbienne.mp3",
     "dataLnc": "2025-03-16"
   },
   {
     "id": "8",
     "name": "drugs and the universe",
-    "album_img": "/assets/img-beats/purple.png",
-    "audio": "/assets/newbeats/drugs and the universe(158bpm)prod.deicide.mp3",    
+    "album_img": "/assets/newbeats/img/drugsandtheuniverse.webp",
+    "audio": "/assets/newbeats/drugs and the universe(158bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
   {
@@ -74,7 +74,7 @@ export const beats = [
   {
     "id": "12",
     "name": "golden",
-    "album_img": "/assets/img-beats/purple.png",
+    "album_img": "/assets/newbeats/img/golden.jpg",
     "audio": "/assets/newbeats/golden(144bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
@@ -109,21 +109,21 @@ export const beats = [
   {
     "id": "17",
     "name": "monument",
-    "album_img": "/assets/img-beats/purple.png",
+    "album_img": "/assets/newbeats/img/monument.jpg",
     "audio": "/assets/newbeats/monument(146bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
   {
     "id": "18",
     "name": "netune",
-    "album_img": "/assets/img-beats/purple.png",
+    "album_img": "/assets/newbeats/img/netune.jpg",
     "audio": "/assets/newbeats/netune(150bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
   {
     "id": "19",
     "name": "omnitrix",
-    "album_img": "/assets/img-beats/purple.png",
+    "album_img": "/assets/newbeats/img/omnitrix.png",
     "audio": "/assets/newbeats/omnitrix(142bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
@@ -165,21 +165,21 @@ export const beats = [
   {
     "id": "26",
     "name": "syberia",
-    "album_img": "/assets/img-beats/purple.png",
+    "album_img": "/assets/newbeats/img/syberia.jpg",
     "audio": "/assets/newbeats/syberia(160bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
   {
     "id": "27",
     "name": "synthetica",
-    "album_img": "/assets/img-beats/purple.png",
+    "album_img": "/assets/newbeats/img/synthetica.jpg",
     "audio": "/assets/newbeats/synthetica(148bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
   {
     "id": "28",
     "name": "trance",
-    "album_img": "/assets/img-beats/purple.png",
+    "album_img": "/assets/newbeats/img/trance.png",
     "audio": "/assets/newbeats/trance(146bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },
@@ -193,7 +193,7 @@ export const beats = [
   {
     "id": "30",
     "name": "venus",
-    "album_img": "/assets/img-beats/purple.png",
+    "album_img": "/assets/newbeats/img/venus.webp",
     "audio": "/assets/newbeats/venus(145bpm)prod.deicide.mp3",
     "dataLnc": "2025-03-16"
   },

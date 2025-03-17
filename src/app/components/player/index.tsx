@@ -59,8 +59,10 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
+
         useEffect(() => {
-            if (audioRef.current) {
+            if (audioRef.current && currentTrack) {
+                audioRef.current.volume = volume;
                 if (isPlaying) {
                     audioRef.current.play();
                 } else {
@@ -68,6 +70,12 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                 }
             }
         }, [isPlaying, currentTrack]);
+
+        useEffect(() => {
+            if (audioRef.current) {
+              audioRef.current.volume = volume; // 🟢 Atualiza o volume ao modificar o slider
+            }
+          }, [volume]);
         
         useEffect(() => {
             if (audioRef.current) {

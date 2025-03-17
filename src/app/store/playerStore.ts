@@ -31,7 +31,7 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
     currentTrack: null,
     isPlaying: false,
     isMuted: false,
-    volume: 1.0,
+    volume: 0.5,
     progress: 0,
     duration: 0,
     isRandom: false,
@@ -46,15 +46,18 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
 }),
   playTrack: (track) => {
     set((state) => {
+      const prevVolume = state.volume;
+
       if (!state.playlist.some((t) => t.id === track.id)) {
-        return { playlist: [...state.playlist, track], currentTrack: track, isPlaying: true };
+        return { playlist: [...state.playlist, track], currentTrack: track, isPlaying: true, volume: prevVolume };
       }
-      return { currentTrack: track, isPlaying: true };
+      return { currentTrack: track, isPlaying: true, volume: prevVolume };
     });
 },
   playNextTrack: () => {
     const { playlist, currentTrack, isRandom } = get();
     if (!playlist.length) return;
+    const prevVolume = get().volume;
 
     let nextTrack;
     if (isRandom) {
@@ -63,13 +66,17 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
       const currentIndex = playlist.findIndex((track) => track.id === currentTrack?.id);
       nextTrack = playlist[(currentIndex + 1) % playlist.length];
     }
-    set({ currentTrack: nextTrack });
+    set({ currentTrack: nextTrack, volume: prevVolume });
   },
-  playPrevTrack: () => set((state) => {
-    const currentIndex = state.playlist.findIndex((t) => t.id === state.currentTrack?.id);
-    const nextTrack = state.playlist[currentIndex -1] || state.playlist[0];
-    return { currentTrack: nextTrack, isPlaying: true };
-  }),
+  playPrevTrack: () => {
+    const { playlist, currentTrack, volume } = get();
+      if (!playlist.length) return;
+      
+    const currentIndex = playlist.findIndex((t) => t.id === currentTrack?.id);
+    const prevTrack = playlist[currentIndex -1] || playlist[0];
+    
+    set({ currentTrack: prevTrack, isPlaying: true, volume });
+  },
   setVolume: (volume) => set({ volume }),
   setProgress: (progress) => set({ progress }),
   setDuration: (duration) => set({ duration }),
