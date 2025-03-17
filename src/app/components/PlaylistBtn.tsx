@@ -18,7 +18,7 @@ export default function PlaylistBtn() {
   return (
     <>
     <button className={`fixed bottom-20 right-3 
-     text-purple-800 text-6xl cursor-pointer z-[51] transition-all duration-700
+     text-white text-6xl cursor-pointer z-[51] transition-all duration-700
      ${playlist.length < 1 ? 'hidden opacity-0' : 'block opacity-100'}`} onClick={isModalVisible ? handleCloseModal : handleOpenModal}>
       <PiPlaylistFill/>
     </button>

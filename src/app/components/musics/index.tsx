@@ -6,6 +6,13 @@ import { MdPlaylistAddCircle } from "react-icons/md";
 import { CgPlayListRemove } from "react-icons/cg";
 import { beats } from "@/app/api/beats";
 import "./musics.css"
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardActions from '@mui/material/CardActions';
 
 type Props = {
     beat: Beat
@@ -42,32 +49,33 @@ export const BeatsCard = ({ beat }: Props) => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-        <div className='bg-black beats-c transition-all duration-700 bg-opacity-40
-         hover:bg-slate-300 hover:bg-opacity-95 flex flex-col w-[240px] h-[240px] items-center justify-center
-        midtwo2:w-[200px] midtwo2:h-[225px] midfour1:w-[168px] midfour1:h-[189px]
-        lowtwo1:w-[230px] lowtwo1:h-[270px]'>
-                            <img className="beats-img mt-4 rounded-lg w-[50%]"
-                            src={beat.album_img} alt={beat.name} />
-                            <h1 className='text-lg self-center text-gray-300'>{beat.name}</h1>
-                            <audio src={beat.audio} />
-                            <div className="flex gap-2">
-                            <button
-                            className='playPause cursor-pointer text-blue-800 hover:text-gray-300 text-2xl'
-                            onClick={() => isCurrentTrackPlaying ? togglePlay() : handlePlayTrack(beat)}
-                              >
-                                {isCurrentTrackPlaying ? <Pause /> : <Play />}
-                        </button>
-                        <button
-                            className='playPause cursor-pointer text-blue-800 hover:text-gray-300 text-2xl' 
-                            onClick={() => togglePlaylist(beat)}
-                              >
-                                {isTrackInPlaylist ? <CgPlayListRemove  /> : <MdPlaylistAddCircle />}
-                        </button>
-                        </div>
-                        </div> 
-                        <Link href="/buybeat"><button className="self-center text-white bg-blue-500 w-fit px-2 mt-4 h-fit py-2 
+                    <Card sx={{ maxWidth: 345, backgroundColor: "#1e1e1e", color: "#fff" }}>
+                <CardActionArea onClick={() => handlePlayTrack(beat)}>
+                    <CardMedia
+                    component="img"
+                    image={beat.album_img}
+                    alt={beat.name}
+                    sx={{ width: 250, height: 250, margin: "auto", objectFit: "cover" }}
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h6" component="div" sx={{ color: "#ddd", textAlign: "center" }}>
+                        {beat.name.charAt(0).toUpperCase() + beat.name.slice(1)}
+                    </Typography>
+                    <audio src={beat.audio} />
+                    </CardContent>
+                </CardActionArea>
+                <CardActions sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
+                    <Button onClick={() => (isCurrentTrackPlaying ? togglePlay() : handlePlayTrack(beat))} color="primary">
+                    {isCurrentTrackPlaying ? <Pause size={40} /> : <Play size={40} />}
+                    </Button>
+                    <Button onClick={() => togglePlaylist(beat)} color="secondary">
+                    {isTrackInPlaylist ? <CgPlayListRemove size={40} /> : <MdPlaylistAddCircle size={40} />}
+                    </Button>
+                </CardActions>
+                </Card>
+            <Link href="/buybeat"><button className="self-center text-white bg-blue-500 w-fit px-2 mt-4 h-fit py-2 
                         rounded-2xl transition-all duration-700 hover:bg-black hover:text-blue-600">$BUY/INFO</button></Link>
-                    </div>
+        </div>
     )
 
 }

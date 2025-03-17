@@ -120,7 +120,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                                     </button>
                                           )}
 
-                                </> 
+                                </>
                                 {isModalOpen && (
                                         <Modal
                                        closeModal={closeModal}

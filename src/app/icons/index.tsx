@@ -10,61 +10,13 @@ import { FaHome } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 
 
-export const Play = () => {
-    return (
-        <FaPlayCircle/>
-    )
-}
-export const Pause = () => {
-    return (
-        <FaPauseCircle/>
-    )
-}
-export const SkipForward = () => {
-    return (
-        <IoPlaySkipForward/>
-    )
-}
-export const SkipBack = () => {
-    return (
-        <IoIosSkipBackward/>
-
-    )
-}
-export const RandomMusicsFalse = () => {
-    return (
-        <PiShuffleAngularDuotone/>
-    )
-}
-export const RandomMusicsTrue = () => {
-    return (
-        <FaShuffle/>
-    )
-}
-export const VolumeOff = () => {
-    return (
-        <FaVolumeMute/>
-
-    )
-}
-export const VolumeOn = () => {
-    return (
-        <FaVolumeHigh/>
-
-    )
-}
-export const Home = () => {
-    return (
-        <FaHome/>
-
-    )
-}
-
-
-
-export const Menu = () => {
-    return (
-        <IoMenu/>
-
-    )
-}
+export const Play = ({ size = 24 }) => <FaPlayCircle size={size} />;
+export const Pause = ({ size = 24 }) => <FaPauseCircle size={size} />;
+export const SkipForward = ({ size = 24 }) => <IoPlaySkipForward size={size} />;
+export const SkipBack = ({ size = 24 }) => <IoIosSkipBackward size={size} />;
+export const RandomMusicsFalse = ({ size = 24 }) => <PiShuffleAngularDuotone size={size} />;
+export const RandomMusicsTrue = ({ size = 24 }) => <FaShuffle size={size} />;
+export const VolumeOff = ({ size = 24 }) => <FaVolumeMute size={size} />;
+export const VolumeOn = ({ size = 24 }) => <FaVolumeHigh size={size} />;
+export const Home = ({ size = 24 }) => <FaHome size={size} />;
+export const Menu = ({ size = 24 }) => <IoMenu size={size} />;

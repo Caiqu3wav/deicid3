@@ -30,7 +30,7 @@ function getBeats() {
 
   return {
     id: (index + 1).toString(),
-      name,
+      name: name.charAt(0).toUpperCase() + name.slice(1),
       album_img: albumImg,
       audio,
       dataLnc: new Date().toISOString().split('T')[0],
