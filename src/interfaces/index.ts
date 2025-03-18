@@ -13,7 +13,7 @@ export interface Beat {
     name: string;
     album_img: string;
     audio: string;
-    genres: string[] | null;
+    genres?: string[] | null;
     dataLnc: string;
   }
 

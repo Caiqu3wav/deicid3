@@ -28,15 +28,8 @@ const Playlist: React.FC = () => {
             return ordenacao === 'recentes' ? dataB - dataA : dataA - dataB;
           });
   
-          const initialFilteredBeats = beatsOrdenados.filter(beat => {
-            if (selectedGenres.length === 0 || selectedGenres.includes('todos')) {
-                return true;
-            }
-            return selectedGenres.some(selectedGenre => beat.genres.includes(selectedGenre));
-        });
-  
-          setBeats(initialFilteredBeats);
-          const totalFilteredPages = Math.ceil(initialFilteredBeats.length / beatsPerPage);
+          setBeats(beatsOrdenados);
+          const totalFilteredPages = Math.ceil(beatsOrdenados.length / beatsPerPage);
           setTotalFilteredPages(totalFilteredPages);
           setLoading(false);
         } catch (error) {
@@ -54,12 +47,6 @@ const Playlist: React.FC = () => {
     const currentBeats = beats.slice(indexOfFirstBeat, indexOfLastBeat);
     const totalPages = Math.ceil(beats.length / beatsPerPage);
   
-    const filteredBeats = currentBeats.filter((beat) => {
-      if (selectedGenres.length === 0 || selectedGenres.includes('todos')) {
-        return true;
-      }
-      return selectedGenres.some((selectedGenre) => beat.genres.includes(selectedGenre as never));
-    });
   
     const handlePageChange = (page: number) => {
       if (page >= 1 && page <= totalFilteredPages) {
@@ -88,19 +75,6 @@ const Playlist: React.FC = () => {
             <option value="antigos">Antigos</option>
           </select>
           </div>
-          <div className="flex gap-3 ml-4 midfour:gap-0 low:ml-2">
-          <label className="text-white low:text-[14px] lowtwo:mr-2">Estilo:</label>
-          <div className="genre-selector-container">
-              <select onChange={handleGenreChange} value={selectedGenres.join(',')}>
-                {/* Opções de gêneros, incluindo "Todos" */}
-                {['todos', ...Array.from(new Set(beats.flatMap((beat) => beat.genres)))].map((genre) => (
-                  <option key={genre} value={genre}>
-                    {genre === 'todos' ? 'Todos' : genre}
-                  </option>
-                ))}
-              </select>
-            </div>
-        </div>
       </div>
         {loading && (
         <div className="flex flex-col items-center">
@@ -113,7 +87,7 @@ const Playlist: React.FC = () => {
             <div className='grid grid-cols-4 gap-20 major1:gap-10 majortwo1:gap-4
            majortwo1-2:grid-cols-3 majortwo1-2:gap-16 majorthree:gap-[5%]
             majorthree2:grid-cols-2 lowtwo:grid-cols-1'>
-            {filteredBeats.map(beat => (
+            {beats.map(beat => (
               <BeatsCard 
                 key={beat.id}
                 beat={beat}

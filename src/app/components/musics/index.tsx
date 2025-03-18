@@ -4,7 +4,7 @@ import usePlayerStore from "@/app/store/playerStore";
 import { Pause, Play } from "@/app/icons";
 import { MdPlaylistAddCircle } from "react-icons/md";
 import { CgPlayListRemove } from "react-icons/cg";
-import { beats } from "@/app/api/beats";
+import { beats } from "@/app/api/beats/";
 import "./musics.css"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
+
 
 type Props = {
     beat: Beat
@@ -49,13 +50,13 @@ export const BeatsCard = ({ beat }: Props) => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-                    <Card sx={{ maxWidth: 345, backgroundColor: "#1e1e1e", color: "#fff" }}>
+                    <Card className=" midtwo:w-[160px]" sx={{ maxWidth: 345, backgroundColor: "#1e1e1e", color: "#fff" }}>
                 <CardActionArea onClick={() => handlePlayTrack(beat)}>
                     <CardMedia
                     component="img"
                     image={beat.album_img}
-                    alt={beat.name}
-                    sx={{ width: 250, height: 250, margin: "auto", objectFit: "cover" }}
+                    alt={beat.name} className="midtwo:w-[100%] h-[250px] midtwo:h-[160px]"
+                    sx={{ width: 250, maxHeight: 250, margin: "auto", objectFit: "cover" }}
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h6" component="div" sx={{ color: "#ddd", textAlign: "center" }}>
@@ -71,10 +72,13 @@ export const BeatsCard = ({ beat }: Props) => {
                     <Button onClick={() => togglePlaylist(beat)} color="secondary">
                     {isTrackInPlaylist ? <CgPlayListRemove size={40} /> : <MdPlaylistAddCircle size={40} />}
                     </Button>
+                    
                 </CardActions>
+                <CardActionArea href="/buybeat">
+                    <Link href="/buybeat"><button className="self-center w-full text-white h-full px-2 mt-4 py-2 
+                        transition-all duration-700 hover:bg-black hover:text-red-600">$BUY/INFO</button></Link>
+                </CardActionArea>
                 </Card>
-            <Link href="/buybeat"><button className="self-center text-white bg-blue-500 w-fit px-2 mt-4 h-fit py-2 
-                        rounded-2xl transition-all duration-700 hover:bg-black hover:text-blue-600">$BUY/INFO</button></Link>
         </div>
     )
 

@@ -51,14 +51,14 @@ export default function Navbar(){
     }, [isActive]);
     
     return(
-        <nav className="flex items-center justify-center self-center midtwup:mr-8">
-            <ul className="flex font-bold  text-2xl cursor-pointer midthree:text-lg">
+        <nav className="flex items-center justify-center self-center majorfour1:mr-8">
+            <ul className="flex font-bold text-2xl majorfour:text-lg cursor-pointer midthree:text-lg majorfour1:hidden">
                 <Link href="/"><li className="border-l-2 text-gray-300 border-r-2 border-black px-3 py-8 hover:bg-slate-600">Home</li></Link>
                 <Link href="#playlist"><li className="border-r-2 text-gray-300 border-black px-3 py-8 hover:bg-slate-600">Playlist</li></Link>
                 <Link href="/servicos"><li className="border-r-2 text-gray-300 border-black px-3 py-8 hover:bg-slate-600">Serviços</li></Link>
                 <a target="_blank" href="/buybeat"><li className=" border-r-2 text-gray-300 border-black px-3 py-8 hover:bg-slate-600">Informações/Contato</li></a>
             </ul>
-            <button aria-label="Open Menu" onClick={toggleMenu} className="hidden ml-[47%]">
+            <button aria-label="Open Menu" onClick={toggleMenu} className="hidden majorfour1:block mr-12">
                 <GiHamburgerMenu size={60} className="" style={{ color: 'black' }} />
 </button>
 
@@ -73,14 +73,14 @@ export default function Navbar(){
       )}
 
       <aside
-        className={`transform top-0 left-0 w-64 lowtwo2:w-44 lowthreetwo:w-36 text-white font-extrabold fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${
+        className={`transform top-0 bg-gradient-to-br from-primary via-secondary  to-tertiary left-0 w-64 lowtwo2:w-44 lowthreetwo:w-36 text-white font-extrabold fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${
           isActive ? "translate-x-0" : "-translate-x-full"
         }`}
       >
          
          {sideList.map(({ title, path }, index) => (
     <Link href={path} key={index}>
-        <span className="flex items-center p-4 hover:bg-blue-600 hover:text-orange-400">
+        <span className="flex items-center p-4 hover:bg-tertiary hover:text-secondary">
           <span className="border-b-4">{title}</span>
         </span>
     </Link>
