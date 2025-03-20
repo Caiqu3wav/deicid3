@@ -112,7 +112,8 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                              className='flex gap-3' key={currentTrack?.id}>
                                 <>
                                 {currentTrack && (
-                                   <button className="flex flex-nowrap gap-1" onClick={openModal}><img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={currentTrack.album_img} />
+                                   <button className="flex flex-nowrap gap-1" onClick={openModal}>
+                                    <img className="w-[50px] h-[50px] majorfour:h-[60px] majorfour:w-[60px] lowtwo2:w-[50px]" src={currentTrack.album_img} />
                                     <div>
                                         <h1 className="text-gray-300">{currentTrack.name}</h1>
                                     </div>
@@ -188,8 +189,13 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
 
                 <div className='test mr-5 gap-1 flex items-center majorfour:mr-2'>
                 <button 
-                    className='volumeButton text-gray-300 midfour:hidden ' 
+                    className='volumeButton text-gray-300 midfour:hidden' 
                     onClick={toggleMute}>
+                    {isMuted ? <VolumeOff/> : <VolumeOn />}
+                </button>
+                <button 
+                    className='volumeButton text-gray-300 hidden midfour:block' 
+                    onClick={openModal}>
                     {isMuted ? <VolumeOff/> : <VolumeOn />}
                 </button>
                 <input

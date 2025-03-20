@@ -44,6 +44,10 @@ export const BeatsCard = ({ beat }: Props) => {
     const isTrackInPlaylist = playlist.some((t) => t.id === beat.id);
 
     const handlePlayTrack = (beat: Beat) => {
+        if (currentTrack?.id === beat.id) {
+            togglePlay();
+            return;
+        }
         playTrack(beat);
         addTracksAndRemove(beats);
     }
@@ -54,7 +58,7 @@ export const BeatsCard = ({ beat }: Props) => {
   borderRadius: "12px",
   background: "linear-gradient(#1e1e1e, #1e1e1e) padding-box, linear-gradient(45deg, #020202, #ff0000) border-box",
   boxShadow: "0px 0px 10px rgba(225, 225, 225, 0.5), 0px 0px 10px rgba(0, 255, 255, 0.5)" }}>
-                <CardActionArea onClick={() => togglePlay()}>
+                <CardActionArea onClick={() => handlePlayTrack(beat)}>
                     <CardMedia
                     component="img"
                     image={beat.album_img}

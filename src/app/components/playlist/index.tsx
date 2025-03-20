@@ -21,12 +21,8 @@ const Playlist: React.FC = () => {
         try {
           const data = beatsData;
   
-          const beatsOrdenados = data.sort((a: { dataLnc: string | number | Date; }, b: { dataLnc: string | number | Date; }) => {
-            const dataA = new Date(a.dataLnc).getTime();
-            const dataB = new Date(b.dataLnc).getTime();
-  
-            return ordenacao === 'recentes' ? dataB - dataA : dataA - dataB;
-          });
+          const beatsOrdenados = ordenacao === 'recentes' ? data : data.reverse();
+
   
           setBeats(beatsOrdenados);
           const totalFilteredPages = Math.ceil(beatsOrdenados.length / beatsPerPage);
@@ -70,7 +66,7 @@ const Playlist: React.FC = () => {
       <div id="playlist" className="flex gap-3 low:gap-0 lowone:flex-col lowone:gap-3 lowone:mt-2">
           <div className="flex gap-2">
           <label className="text-white low:text-[14px]">Ordenar por:</label>
-          <select onChange={(e) => setOrdenacao(e.target.value)}>
+          <select className=" bg-slate-900 text-white low:text-[14px]" onChange={(e) => setOrdenacao(e.target.value)}>
             <option value="recentes">Recentes</option>
             <option value="antigos">Antigos</option>
           </select>
