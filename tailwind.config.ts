@@ -20,7 +20,7 @@ const config: Config = {
         'majortwo4': {'max': '940px'},
         'majorthree': {'max': '890px'},
         'majorthree1': {'max': '800px'},
-        'majorthree2': {'max': '772px'},
+        '': {'max': '772px'},
         'majorfour': {'max': '761px'},
         'majorfour1': {'max': '700px'},
         'midtw': {'max': '648px'},

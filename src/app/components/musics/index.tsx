@@ -50,7 +50,7 @@ export const BeatsCard = ({ beat }: Props) => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-                    <Card className=" midtwo:w-[160px]" sx={{ maxWidth: 345, color: "#fff", border: "2px solid transparent",
+                    <Card className=" majorfour:w-[180px] majorfour1:w-[240px] midtwo:w-[190px] midfour:w-[150px]" sx={{ maxWidth: 345, color: "#fff", border: "2px solid transparent",
   borderRadius: "12px",
   background: "linear-gradient(#1e1e1e, #1e1e1e) padding-box, linear-gradient(45deg, #020202, #ff0000) border-box",
   boxShadow: "0px 0px 10px rgba(225, 225, 225, 0.5), 0px 0px 10px rgba(0, 255, 255, 0.5)" }}>
@@ -58,7 +58,7 @@ export const BeatsCard = ({ beat }: Props) => {
                     <CardMedia
                     component="img"
                     image={beat.album_img}
-                    alt={beat.name} className="midtwo:w-[100%] h-[250px] midtwo:h-[160px]"
+                    alt={beat.name} className="midtwo:w-[100%] h-[250px] majorfour:h-[180px] majorfour1:h-[240px] midtwo:h-[190px] midfour:h-[150px]"
                     sx={{ width: 250, maxHeight: 250, margin: "auto", objectFit: "cover" }}
                     />
                     <CardContent>

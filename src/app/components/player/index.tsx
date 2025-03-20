@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, VolumeOff, VolumeOn } from '../../icons/index';
-import "./styles.css"
 import Modal from "../modal/Modal";
 import React from "react";
 import usePlayerStore from "@/app/store/playerStore";
@@ -194,7 +193,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                     {isMuted ? <VolumeOff/> : <VolumeOn />}
                 </button>
                 <input
-                className="volume-input text-gray-300"
+                className="midtwo3:hidden text-gray-300"
                     type="range" 
                     step="0.01"
                     onChange={(e) => setVolume(parseFloat(e.target.value))} 

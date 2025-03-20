@@ -19,7 +19,7 @@ export default function Home() {
     <main>
       <Hero/>
       <div className="playlist-cont h-fit pb-20 flex items-center justify-center flex-col
-       majortwo3:pb-24 gap-2">
+       majortwo3:pb-24  gap-2">
         <div className="flex gap-6">
         <button onClick={() => handlePageCategorySelected(1)} className={`text-white text-xl font-semibold 
       ${pageCategorySelected === 1 ? "border-solid border-b-2 border-white" : ""}`}>Beats</button>

@@ -66,7 +66,7 @@ const Playlist: React.FC = () => {
 
   
   return (
-    <>
+    <div className="h-fit flex flex-col items-center justify-center">
       <div id="playlist" className="flex gap-3 low:gap-0 lowone:flex-col lowone:gap-3 lowone:mt-2">
           <div className="flex gap-2">
           <label className="text-white low:text-[14px]">Ordenar por:</label>
@@ -85,8 +85,8 @@ const Playlist: React.FC = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className='divSongs mt-5 lowone:mt-2'>
             <div className='grid grid-cols-4 gap-20 major1:gap-10 majortwo1:gap-4
-           majortwo1-2:grid-cols-3 majortwo1-2:gap-16 majorthree:gap-[5%]
-            majorthree2:grid-cols-2 lowtwo:grid-cols-1'>
+           majortwo1-2:grid-cols-3 majortwo1-2:gap-16
+            majorfour1:grid-cols-2 lowone:gap-8'>
             {currentBeats.map(beat => (
               <BeatsCard 
                 key={beat.id}
@@ -96,7 +96,7 @@ const Playlist: React.FC = () => {
             }
             </div>
           </div>
-          <div className="pagination mt-4 flex gap-4 majorthree:mt-28 majorthree2:mt-48">
+          <div className="pagination mt-8   flex gap-4 ">
           <button className="cursor-pointer transition-colors duration-700 hover:bg-orange-600
            hover:text-white bg-slate-400 rounded-2xl p-2"
             onClick={() => handlePageChange(currentPage - 1)}
@@ -113,7 +113,7 @@ const Playlist: React.FC = () => {
             <SkipForward/>
           </button>
         </div>
-    </>
+    </div>
   )
 }
 

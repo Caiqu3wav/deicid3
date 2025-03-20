@@ -31,7 +31,7 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
     currentTrack: null,
     isPlaying: false,
     isMuted: false,
-    volume: 0.5,
+    volume: 1.0,
     progress: 0,
     duration: 0,
     isRandom: false,
