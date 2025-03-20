@@ -50,7 +50,10 @@ export const BeatsCard = ({ beat }: Props) => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-                    <Card className=" midtwo:w-[160px]" sx={{ maxWidth: 345, backgroundColor: "#1e1e1e", color: "#fff" }}>
+                    <Card className=" midtwo:w-[160px]" sx={{ maxWidth: 345, color: "#fff", border: "2px solid transparent",
+  borderRadius: "12px",
+  background: "linear-gradient(#1e1e1e, #1e1e1e) padding-box, linear-gradient(45deg, #020202, #ff0000) border-box",
+  boxShadow: "0px 0px 10px rgba(225, 225, 225, 0.5), 0px 0px 10px rgba(0, 255, 255, 0.5)" }}>
                 <CardActionArea onClick={() => handlePlayTrack(beat)}>
                     <CardMedia
                     component="img"
@@ -66,13 +69,12 @@ export const BeatsCard = ({ beat }: Props) => {
                     </CardContent>
                 </CardActionArea>
                 <CardActions sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
-                    <Button onClick={() => (isCurrentTrackPlaying ? togglePlay() : handlePlayTrack(beat))} color="primary">
+                    <Button onClick={() => (isCurrentTrackPlaying ? togglePlay() : handlePlayTrack(beat))} color="error">
                     {isCurrentTrackPlaying ? <Pause size={40} /> : <Play size={40} />}
                     </Button>
-                    <Button onClick={() => togglePlaylist(beat)} color="secondary">
+                    <Button onClick={() => togglePlaylist(beat)} color="inherit">
                     {isTrackInPlaylist ? <CgPlayListRemove size={40} /> : <MdPlaylistAddCircle size={40} />}
                     </Button>
-                    
                 </CardActions>
                 <CardActionArea href="/buybeat">
                     <Link href="/buybeat"><button className="self-center w-full text-white h-full px-2 mt-4 py-2 

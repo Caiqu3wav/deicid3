@@ -87,7 +87,7 @@ const Playlist: React.FC = () => {
             <div className='grid grid-cols-4 gap-20 major1:gap-10 majortwo1:gap-4
            majortwo1-2:grid-cols-3 majortwo1-2:gap-16 majorthree:gap-[5%]
             majorthree2:grid-cols-2 lowtwo:grid-cols-1'>
-            {beats.map(beat => (
+            {currentBeats.map(beat => (
               <BeatsCard 
                 key={beat.id}
                 beat={beat}
