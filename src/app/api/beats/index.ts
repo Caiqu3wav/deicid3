@@ -51,6 +51,13 @@ export const beats = [
     "dataLnc": "17/03/2025, 22:25"
   },
   {
+    "id": "36",
+    "name": "Reborn",
+    "album_img": "/assets/newbeats/img/reborn.png",
+    "audio": "/assets/newbeats/reborn(144bpm)prod.deicide.mp3",
+    "dataLnc": "20/03/2025, 23:33"
+  },
+  {
     "id": "34",
     "name": "Waves of Clarity",
     "album_img": "/assets/newbeats/img/wavesofclarity.webp",
@@ -252,6 +259,7 @@ export const beats = [
     "audio": "/assets/newbeats/world(160bpm)prod.deicide.mp3",
     "dataLnc": "17/03/2025, 22:25"
   }
+  
 ];
 
 

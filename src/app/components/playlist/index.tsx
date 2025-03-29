@@ -21,11 +21,8 @@ const Playlist: React.FC = () => {
         try {
           const data = beatsData;
   
-          const beatsOrdenados = ordenacao === 'recentes' ? data : data.reverse();
-
-  
-          setBeats(beatsOrdenados);
-          const totalFilteredPages = Math.ceil(beatsOrdenados.length / beatsPerPage);
+          setBeats(data);
+          const totalFilteredPages = Math.ceil(beats.length / beatsPerPage);
           setTotalFilteredPages(totalFilteredPages);
           setLoading(false);
         } catch (error) {
@@ -38,11 +35,7 @@ const Playlist: React.FC = () => {
       fetchBeats();
     }, [ordenacao, selectedGenres]);
   
-    const indexOfLastBeat = currentPage * beatsPerPage;
-    const indexOfFirstBeat = indexOfLastBeat - beatsPerPage;
-    const currentBeats = beats.slice(indexOfFirstBeat, indexOfLastBeat);
     const totalPages = Math.ceil(beats.length / beatsPerPage);
-  
   
     const handlePageChange = (page: number) => {
       if (page >= 1 && page <= totalFilteredPages) {
