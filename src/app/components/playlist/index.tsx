@@ -13,8 +13,6 @@ const Playlist: React.FC = () => {
     const beatsPerPage = 8;
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-
   
     useEffect(() => {
       async function fetchBeats() {
@@ -33,25 +31,17 @@ const Playlist: React.FC = () => {
       }
   
       fetchBeats();
-    }, [ordenacao, selectedGenres]);
+    }, [ordenacao]);
   
     const totalPages = Math.ceil(beats.length / beatsPerPage);
+    const beatsSlicePage = ordenacao == "recentes" ? beats.slice((currentPage - 1) * beatsPerPage, currentPage * beatsPerPage)
+    : beats.toReversed().slice((currentPage - 1) * beatsPerPage, currentPage * beatsPerPage)
   
     const handlePageChange = (page: number) => {
       if (page >= 1 && page <= totalFilteredPages) {
         setCurrentPage(page);
       }
     };
-  
-  const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map((option) => option.value);
-    setSelectedGenres(selectedOptions);
-  
-    if (selectedOptions) {
-      setCurrentPage(1)
-    }
-  };
-
 
   
   return (
@@ -76,7 +66,7 @@ const Playlist: React.FC = () => {
             <div className='grid grid-cols-4 gap-20 major1:gap-10 majortwo1:gap-4
            majortwo1-2:grid-cols-3 majortwo1-2:gap-16
             majorfour1:grid-cols-2 lowone:gap-8'>
-            {currentBeats.map(beat => (
+            {beatsSlicePage.map(beat => (
               <BeatsCard 
                 key={beat.id}
                 beat={beat}
