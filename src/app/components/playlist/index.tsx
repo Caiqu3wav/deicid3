@@ -20,7 +20,7 @@ const Playlist: React.FC = () => {
           const data = beatsData;
   
           setBeats(data);
-          const totalFilteredPages = Math.ceil(beats.length / beatsPerPage);
+          const totalFilteredPages = Math.ceil(data.length / beatsPerPage);
           setTotalFilteredPages(totalFilteredPages);
           setLoading(false);
         } catch (error) {
