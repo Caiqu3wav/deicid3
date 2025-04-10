@@ -4,6 +4,8 @@ import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse
 import Modal from "../modal/Modal";
 import React from "react";
 import usePlayerStore from "@/app/store/playerStore";
+import { PiEqualizer } from "react-icons/pi";
+import ModalFx from  "../modal/Modal";
 
 export interface PlayerProps {
     id: string;
@@ -46,6 +48,8 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
         setDuration: state.setDuration,
     }));
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [isModalOpenFx, setIsModalOpenFx] = useState<boolean>(false);
+
 
 
   const openModal = () => {
@@ -186,6 +190,10 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                     </div>
                 </div>
             </div>
+
+            <button onClick={() => setIsModalOpenFx(!isModalOpenFx)}>
+                <PiEqualizer className="text-gray-300 text-3xl midtwo3:hidden" />
+            </button>
 
                 <div className='test mr-5 gap-1 flex items-center majorfour:mr-2'>
                 <button 
