@@ -107,7 +107,7 @@ const Modal: React.FC<ModalProps> = ({
                                 }}
                             />
                             
-                            <p className='Pduration'>
+                            <p className='Pduration text-white'>
                                 {(duration && !isNaN(duration)) && 
                                 calculeDuration(duration)}
                             </p>

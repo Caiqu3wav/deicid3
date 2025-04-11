@@ -5,7 +5,7 @@ import Modal from "../modal/Modal";
 import React from "react";
 import usePlayerStore from "@/app/store/playerStore";
 import { PiEqualizer } from "react-icons/pi";
-import ModalFx from  "../modal/Modal";
+import ModalFx from  "../modalFx/ModalFx";
 
 export interface PlayerProps {
     id: string;
@@ -49,8 +49,6 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
     }));
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [isModalOpenFx, setIsModalOpenFx] = useState<boolean>(false);
-
-
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -107,6 +105,11 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
             }
         };
 
+        const handleModalFxOpen = () => {
+            setIsModalOpenFx(true);
+            console.log('modal fx open');
+        }
+
         return(
             <div className="w-full flex justify-between bg-black rounded-md">
             
@@ -132,7 +135,13 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                                        audioRef={audioRef}                                 
                                         />
                                         )}
-                               <audio 
+                                {isModalOpenFx && (
+                                        <ModalFx
+                                       closeModal={() => setIsModalOpenFx(false)}
+                                       isOpen={isModalOpenFx}      
+                                        />
+                                        )}
+                               <audio
                                 src={currentTrack?.audio} 
                                 ref={audioRef}
                                 onTimeUpdate={handleTimeUpdate}
@@ -191,7 +200,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                 </div>
             </div>
 
-            <button onClick={() => setIsModalOpenFx(!isModalOpenFx)}>
+            <button onClick={handleModalFxOpen}>
                 <PiEqualizer className="text-gray-300 text-3xl midtwo3:hidden" />
             </button>
 

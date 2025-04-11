@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,28 +11,31 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/material": "^6.4.7",
     "deicid3": "file:",
     "fs": "^0.0.1-security",
-    "next": "14.1.0",
-    "next-auth": "^4.24.7",
+    "next": "15.3.0",
+    "next-auth": "^4.24.11",
     "path": "^0.12.7",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-icons": "^5.0.1",
     "styled-components": "^6.1.8",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.2",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.1.0",
+    "eslint-config-next": "15.3.0",
     "postcss": "^8",
     "postcss-nested": "^6.0.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.2"
   }
 }
