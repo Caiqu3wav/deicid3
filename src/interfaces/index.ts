@@ -7,6 +7,7 @@ export interface Album {
    beats: Beat[];
   }
   
+ 
 
 export interface Beat {
     id: string;

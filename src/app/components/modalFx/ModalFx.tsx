@@ -7,25 +7,26 @@ import { PiEqualizer } from "react-icons/pi";
 import CircularSlider from '@fseehawer/react-circular-slider';
 import { Canvas } from '@react-three/fiber';
 import Equalizer from 'r3f-equalizer';
+import { useWebAudioReverb } from '@/app/Audio/Reverb'
 
 const ModalFx: React.FC<ModalProps> = ({
   closeModal,
   isOpen,
   audioRef
 }) => {
+  const reverbWet = usePlayerStore((s) => s.reverbWet);
+  const setReverbWet = usePlayerStore((s) => s.setReverbWet);
+  /*const fxEqualizerEnabled = usePlayerStore((s) => s.fxEqualizerEnabled);
+  const toggleFxEqualizer = usePlayerStore((s) => s.toggleFxEqualizer);
+  */
+  useWebAudioReverb(audioRef);
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
   
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
+  useEffect(() => setModalIsOpen(isOpen), [isOpen]);
 
-  useEffect(() => {
-    setModalIsOpen(isOpen);
-  }, [isOpen]);
-
-
-    return (
+      return (
 <div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
       <div className={`modal-content ${modalIsOpen ? 'modal-open' : ''}`} onClick={(e) => e.stopPropagation()}>
       <PiEqualizer size={40} color="blue"/>
@@ -35,7 +36,7 @@ const ModalFx: React.FC<ModalProps> = ({
           <Canvas>
             <Equalizer
               amplitude={3}
-              audio={audioRef.current}
+              audio={audioRef?.current || undefined}
               backgroundColor="#000000"
               cubeSideLength={0.03}
               cubeSpacing={4.5}
@@ -58,7 +59,7 @@ const ModalFx: React.FC<ModalProps> = ({
               progressColorFrom="#9333ea"
               progressColorTo="#3b82f6"
               dataIndex={reverbWet * 100}
-              onChange={(value) => setReverbWet(value / 100)}
+              onChange={(value) => setReverbWet(Number(value) / 100)}
               
             />
           </div>

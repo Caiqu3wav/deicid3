@@ -8,6 +8,10 @@ interface PlayerState {
     isMuted: boolean;
     isRandom: boolean;
     volume: number;
+    reverbWet: number;
+    setReverbWet: (wet: number) => void;
+    fxEqualizerEnabled: boolean;
+    toggleFxEqualizer: () => void;
   progress: number;
   duration: number;
   addTrack: (track: Beat) => void;
@@ -35,6 +39,10 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
     progress: 0,
     duration: 0,
     isRandom: false,
+    reverbWet: 0.0,
+    setReverbWet: (wet: number) => set({ reverbWet: wet }),
+    fxEqualizerEnabled: false,
+    toggleFxEqualizer: () => set((state) => ({ fxEqualizerEnabled: !state.fxEqualizerEnabled })),
     
   addTrack: (track) => set((state) => {
     if (state.playlist.some((t) => t.id === track.id)) return state;
