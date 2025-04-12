@@ -17,12 +17,9 @@ export interface Beat {
     dataLnc: string;
   }
 
- export interface ModalFxProps  {
+ export interface ModalProps  {
     closeModal: () => void;
     isOpen: boolean;
-  }
-
-  export interface ModalProps extends ModalFxProps  {
     audioRef: any;
   }
 

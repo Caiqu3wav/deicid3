@@ -138,7 +138,8 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                                 {isModalOpenFx && (
                                         <ModalFx
                                        closeModal={() => setIsModalOpenFx(false)}
-                                       isOpen={isModalOpenFx}      
+                                       isOpen={isModalOpenFx}
+                                        audioRef={audioRef}
                                         />
                                         )}
                                <audio
@@ -171,7 +172,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                                 }}
                             />
                             
-                            <p className='Pduration'>
+                            <p className='Pduration text-white'>
                                 {(duration && !isNaN(duration)) && 
                                 calculeDuration(duration)}
                             </p>

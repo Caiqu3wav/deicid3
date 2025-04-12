@@ -1,14 +1,17 @@
 'use client';
 import "../../styles/Modal.css"
 import { useEffect, useState } from "react";
-import { ModalFxProps } from "@/interfaces";
+import { ModalProps } from "@/interfaces";
 import usePlayerStore from "@/app/store/playerStore";
 import { PiEqualizer } from "react-icons/pi";
 import CircularSlider from '@fseehawer/react-circular-slider';
+import { Canvas } from '@react-three/fiber';
+import Equalizer from 'r3f-equalizer';
 
-const ModalFx: React.FC<ModalFxProps> = ({
+const ModalFx: React.FC<ModalProps> = ({
   closeModal,
-  isOpen
+  isOpen,
+  audioRef
 }) => {
 
   if (!isOpen) {
@@ -16,7 +19,6 @@ const ModalFx: React.FC<ModalFxProps> = ({
   }
   
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
-  const d
 
   useEffect(() => {
     setModalIsOpen(isOpen);
@@ -31,11 +33,11 @@ const ModalFx: React.FC<ModalFxProps> = ({
       <div className="w-full flex gap-3">
         <div className="w-full h-[300px] rounded-xl overflow-hidden border border-slate-700">
           <Canvas>
-            <Equalizer>
+            <Equalizer
               amplitude={3}
-              audio={audioRef}
+              audio={audioRef.current}
               backgroundColor="#000000"
-              cubSideLength={0.03}
+              cubeSideLength={0.03}
               cubeSpacing={4.5}
               cameraFov={60}
               cameraPosition={[0, 5, 12]}
@@ -47,12 +49,11 @@ const ModalFx: React.FC<ModalFxProps> = ({
         <div className="reverb-controls flex flex-col">
           <h2 className="text-lg font-semibold">Reverb</h2>
           <div className="flex gap-4">
-            <CircularSlider>
+            <CircularSlider
               width={120}
               label="Reverb"
               min={0}
               max={1}
-              step={0.1}
               knobColor="#3b82f6"
               progressColorFrom="#9333ea"
               progressColorTo="#3b82f6"
