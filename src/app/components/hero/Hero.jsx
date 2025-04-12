@@ -21,7 +21,7 @@ export default function Hero() {
         <br />
         <span className=" text-gray-600 flex items-center justify-center gap-2 font-bold text-sm px-2">(Para consultar serviços, kits de som ou obter versões
              em formato WAV, entre em contato conosco.) <Link href={"https://wa.me/12996246050"} target="_blank"><FaWhatsapp color="green" size={20}/></Link>
-              <Link href={"https://www.instagram.com/deicid3_/"} target="_blank" className="w-[74px] flex items-center"><Image className="w-full" src={IgLogo}/></Link> </span>
+              <Link href={"https://www.instagram.com/deicid3_/"} target="_blank" className="w-[74px] flex items-center"><Image className="w-full" src={IgLogo} alt="instagram logo"/></Link> </span>
          </p>
         </div>
          <h1 className="hero-second-h1 self-center text-gray-300 bg-black bg-opacity-70 px-2 rounded-xl">PLAYLIST</h1>

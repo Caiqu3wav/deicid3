@@ -81,8 +81,8 @@ export const BeatsCard = ({ beat }: Props) => {
                     </Button>
                 </CardActions>
                 <CardActionArea href="/buybeat">
-                    <Link href="/buybeat"><button className="self-center w-full text-white h-full px-2 mt-4 py-2 
-                        transition-all duration-700 hover:bg-black hover:text-red-600">$BUY/INFO</button></Link>
+                    <button className="self-center w-full text-white h-full px-2 mt-4 py-2 
+                        transition-all duration-700 hover:bg-black hover:text-red-600">$BUY/INFO</button>
                 </CardActionArea>
                 </Card>
         </div>

@@ -1,57 +1,43 @@
-import { useEffect, useRef } from "react";
-import usePlayerStore from "@/app/store/playerStore";
+// src/app/audio/AudioManager.ts
+let audioContext: AudioContext | null = null;
+let convolver: ConvolverNode | null = null;
+let dryGain: GainNode | null = null;
+let wetGain: GainNode | null = null;
+let sourceNode: MediaElementAudioSourceNode | null = null;
+let currentAudioEl: HTMLAudioElement | null = null;
 
-export const useWebAudioReverb = (audioRef: React.RefObject<HTMLAudioElement>) => {
-  const reverbWet = usePlayerStore((s) => s.reverbWet);
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const convolverRef = useRef<ConvolverNode | null>(null);
-  const dryGainRef = useRef<GainNode | null>(null);
-  const wetGainRef = useRef<GainNode | null>(null);
-  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+export const AudioManager = {
+  init(audioEl: HTMLAudioElement) {
+    if (audioContext) return; // evita recriar
 
-  useEffect(() => {
-    if (!audioRef.current) return;
+    audioContext = new AudioContext();
+    currentAudioEl = audioEl;
+    sourceNode = audioContext.createMediaElementSource(audioEl);
 
-    const context = new AudioContext();
-    const source = context.createMediaElementSource(audioRef.current);
-    const convolver = context.createConvolver();
-    const dryGain = context.createGain();
-    const wetGain = context.createGain();
+    dryGain = audioContext.createGain();
+    wetGain = audioContext.createGain();
+    convolver = audioContext.createConvolver();
 
-    // Carrega o IR (Impulse Response) — você pode usar um IR de reverb de igreja, sala, plate, etc.
+    // carregar IR
     fetch("/impulse-responses/ir-hall.wav")
       .then(res => res.arrayBuffer())
-      .then(data => context.decodeAudioData(data))
+      .then(data => audioContext!.decodeAudioData(data))
       .then(buffer => {
-        convolver.buffer = buffer;
+        if (convolver) convolver.buffer = buffer;
       });
 
-    // Liga os nodes
-    source.connect(dryGain);
-    source.connect(convolver);
+    // conexões
+    sourceNode.connect(dryGain!);
+    sourceNode.connect(convolver!);
+    convolver!.connect(wetGain!);
+    dryGain!.connect(audioContext.destination);
+    wetGain!.connect(audioContext.destination);
+  },
 
-    convolver.connect(wetGain);
-
-    dryGain.connect(context.destination);
-    wetGain.connect(context.destination);
-
-    // Salva refs
-    audioContextRef.current = context;
-    convolverRef.current = convolver;
-    dryGainRef.current = dryGain;
-    wetGainRef.current = wetGain;
-    sourceRef.current = source;
-
-    return () => {
-      context.close();
-    };
-  }, [audioRef]);
-
-  // Atualiza o mix dry/wet quando o estado muda
-  useEffect(() => {
-    if (dryGainRef.current && wetGainRef.current) {
-      dryGainRef.current.gain.value = 1 - reverbWet;
-      wetGainRef.current.gain.value = reverbWet;
+  setReverbWet(wet: number) {
+    if (dryGain && wetGain) {
+      dryGain.gain.value = 1 - wet;
+      wetGain.gain.value = wet;
     }
-  }, [reverbWet]);
+  }
 };

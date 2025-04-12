@@ -7,7 +7,6 @@ import { PiEqualizer } from "react-icons/pi";
 import CircularSlider from '@fseehawer/react-circular-slider';
 import { Canvas } from '@react-three/fiber';
 import Equalizer from 'r3f-equalizer';
-import { useWebAudioReverb } from '@/app/Audio/Reverb'
 
 const ModalFx: React.FC<ModalProps> = ({
   closeModal,
@@ -19,7 +18,6 @@ const ModalFx: React.FC<ModalProps> = ({
   /*const fxEqualizerEnabled = usePlayerStore((s) => s.fxEqualizerEnabled);
   const toggleFxEqualizer = usePlayerStore((s) => s.toggleFxEqualizer);
   */
-  useWebAudioReverb(audioRef);
 
   if (!isOpen) return null;
   
@@ -33,7 +31,6 @@ const ModalFx: React.FC<ModalProps> = ({
         <h1 className="text-xl font-semibold">MIXER</h1>
       <div className="w-full flex gap-3">
         <div className="w-full h-[300px] rounded-xl overflow-hidden border border-slate-700">
-          <Canvas>
             <Equalizer
               amplitude={3}
               audio={audioRef?.current || undefined}
@@ -45,7 +42,6 @@ const ModalFx: React.FC<ModalProps> = ({
               gridCols={60}
               gridRows={10}
             />
-          </Canvas>
         </div>
         <div className="reverb-controls flex flex-col">
           <h2 className="text-lg font-semibold">Reverb</h2>
@@ -54,7 +50,7 @@ const ModalFx: React.FC<ModalProps> = ({
               width={120}
               label="Reverb"
               min={0}
-              max={1}
+              max={100}
               knobColor="#3b82f6"
               progressColorFrom="#9333ea"
               progressColorTo="#3b82f6"

@@ -12,7 +12,6 @@ export interface PlayerProps {
     setId: (e: string) => void;
 }
 
-
 const Player: React.FC<PlayerProps> = ({ id, setId }) => {
     const {
         currentTrack,
@@ -50,6 +49,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [isModalOpenFx, setIsModalOpenFx] = useState<boolean>(false);
 
+    
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -217,7 +217,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                     {isMuted ? <VolumeOff/> : <VolumeOn />}
                 </button>
                 <input
-                className="midtwo3:hidden text-gray-300"
+                className="midtwo3:hidden text-gray-300 midtwup:w-[76px]"
                     type="range" 
                     step="0.01"
                     onChange={(e) => setVolume(parseFloat(e.target.value))} 

@@ -14,7 +14,7 @@ export default function Header() {
     return(
         <header className="w-full flex bg-primary h-[100px] items-center justify-between">
             <Image onClick={handleRouterLogo} className="w-[90px]
-             ml-6" src={DeicideLogo}/>
+             ml-6" src={DeicideLogo} alt="deicide logo"/>
             <Navbar/>
             <div className="">
             </div>

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { Beat } from '@/interfaces';
+import { AudioManager } from '../Audio/Reverb';
 
 interface PlayerState {
     playlist: Beat[];
@@ -40,7 +41,10 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
     duration: 0,
     isRandom: false,
     reverbWet: 0.0,
-    setReverbWet: (wet: number) => set({ reverbWet: wet }),
+    setReverbWet: (wet: number) => { 
+      AudioManager.setReverbWet(wet);
+      set({ reverbWet: wet });
+  },
     fxEqualizerEnabled: false,
     toggleFxEqualizer: () => set((state) => ({ fxEqualizerEnabled: !state.fxEqualizerEnabled })),
     
