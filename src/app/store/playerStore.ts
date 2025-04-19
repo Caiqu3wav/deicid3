@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { Beat } from '@/interfaces';
-import { AudioManager } from '../Audio/Reverb';
 
 interface PlayerState {
     playlist: Beat[];
@@ -9,10 +8,6 @@ interface PlayerState {
     isMuted: boolean;
     isRandom: boolean;
     volume: number;
-    reverbWet: number;
-    setReverbWet: (wet: number) => void;
-    fxEqualizerEnabled: boolean;
-    toggleFxEqualizer: () => void;
   progress: number;
   duration: number;
   addTrack: (track: Beat) => void;
@@ -40,13 +35,6 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
     progress: 0,
     duration: 0,
     isRandom: false,
-    reverbWet: 0.0,
-    setReverbWet: (wet: number) => { 
-      AudioManager.setReverbWet(wet);
-      set({ reverbWet: wet });
-  },
-    fxEqualizerEnabled: false,
-    toggleFxEqualizer: () => set((state) => ({ fxEqualizerEnabled: !state.fxEqualizerEnabled })),
     
   addTrack: (track) => set((state) => {
     if (state.playlist.some((t) => t.id === track.id)) return state;
@@ -59,12 +47,10 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
   playTrack: (track) => {
     set((state) => {
       const prevVolume = state.volume;
-
-      if (!state.playlist.some((t) => t.id === track.id)) {
-        return { playlist: [...state.playlist, track], currentTrack: track, isPlaying: true, volume: prevVolume };
-      }
-      return { currentTrack: track, isPlaying: true, volume: prevVolume };
-    });
+      const newState = { currentTrack: track, isPlaying: true, volume: prevVolume };
+      
+    return newState;
+  });
 },
   playNextTrack: () => {
     const { playlist, currentTrack, isRandom } = get();

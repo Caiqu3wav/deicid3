@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, VolumeOff, VolumeOn } from '../../icons/index';
 import Modal from "../modal/Modal";
 import React from "react";
-import usePlayerStore from "@/app/store/playerStore";
-import { PiEqualizer } from "react-icons/pi";
-import ModalFx from  "../modalFx/ModalFx";
+import usePlayerStore from "@/app/store/playerStore"
+import { PiEqualizer } from "react-icons/pi"
+import ModalFx from  "../modalFx/ModalFx"
+import useAudioFx from '@/app/Audio/index'
 
 export interface PlayerProps {
     id: string;
@@ -46,10 +47,11 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
         setProgress: state.setProgress,
         setDuration: state.setDuration,
     }));
+    const audioRef = useRef<HTMLAudioElement>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [isModalOpenFx, setIsModalOpenFx] = useState<boolean>(false);
+    const [isModalOpenFx, setIsModalOpenFx] = useState(false);
+    const { isFxEnabled, toggleFx, wetLevel, setWetLevel } = useAudioFx(audioRef);
 
-    
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -57,9 +59,6 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  const audioRef = useRef<HTMLAudioElement>(null);
-
 
         useEffect(() => {
             if (audioRef.current && currentTrack) {
@@ -70,19 +69,13 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                     audioRef.current.pause();
                 }
             }
-        }, [isPlaying, currentTrack]);
 
-        useEffect(() => {
             if (audioRef.current) {
-              audioRef.current.volume = volume; // 🟢 Atualiza o volume ao modificar o slider
-            }
-          }, [volume]);
-        
-        useEffect(() => {
-            if (audioRef.current) {
+                audioRef.current.volume = volume;
                 audioRef.current.volume = isMuted ? 0 : volume;
-            }
-        }, [volume, isMuted]);
+                // 🟢 Atualiza o volume ao modificar o slider
+              }
+        }, [isPlaying, currentTrack, volume, isMuted]);
 
         const calculeDuration = (sec: number) => {
             const minutes = Math.floor(sec / 60)
@@ -115,8 +108,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
             
             <div className='musicDiv'>
                 
-            <div 
-                             className='flex gap-3' key={currentTrack?.id}>
+            <div className='flex gap-3' key={currentTrack?.id}>
                                 <>
                                 {currentTrack && (
                                    <button className="flex flex-nowrap gap-1" onClick={openModal}>
@@ -139,7 +131,10 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                                         <ModalFx
                                        closeModal={() => setIsModalOpenFx(false)}
                                        isOpen={isModalOpenFx}
-                                        audioRef={audioRef}
+                                       toggleFx={toggleFx}
+                                       isFxEnabled={isFxEnabled}
+                                       wetLevel={wetLevel}
+                                       setWetLevel={setWetLevel}
                                         />
                                         )}
                                <audio
@@ -147,7 +142,8 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                                 ref={audioRef}
                                 onTimeUpdate={handleTimeUpdate}
                                 onLoadedMetadata={handleLoadedMetadata}
-                                onEnded={playNextTrack}/>
+                                onEnded={playNextTrack}
+                                />
                             </div>    
             </div>
             <div className='flex items-center'>
@@ -217,7 +213,7 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                     {isMuted ? <VolumeOff/> : <VolumeOn />}
                 </button>
                 <input
-                className="midtwo3:hidden text-gray-300 midtwup:w-[76px]"
+                className="midtwo3:hidden text-gray-300 midtw:w-[76px]"
                     type="range" 
                     step="0.01"
                     onChange={(e) => setVolume(parseFloat(e.target.value))} 

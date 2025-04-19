@@ -1,71 +1,71 @@
 'use client';
+import useAudioFx from "@/app/Audio";
 import "../../styles/Modal.css"
-import { useEffect, useState } from "react";
-import { ModalProps } from "@/interfaces";
-import usePlayerStore from "@/app/store/playerStore";
-import { PiEqualizer } from "react-icons/pi";
-import CircularSlider from '@fseehawer/react-circular-slider';
-import { Canvas } from '@react-three/fiber';
-import Equalizer from 'r3f-equalizer';
 
-const ModalFx: React.FC<ModalProps> = ({
-  closeModal,
-  isOpen,
-  audioRef
-}) => {
-  const reverbWet = usePlayerStore((s) => s.reverbWet);
-  const setReverbWet = usePlayerStore((s) => s.setReverbWet);
-  /*const fxEqualizerEnabled = usePlayerStore((s) => s.fxEqualizerEnabled);
-  const toggleFxEqualizer = usePlayerStore((s) => s.toggleFxEqualizer);
-  */
+interface ModalFxProps {
+  closeModal: () => void;
+  isOpen: boolean;
+  toggleFx: () => void; 
+  audioFx: ReturnType<typeof useAudioFx>;
+}
 
+const ModalFx: React.FC<ModalFxProps> = ({ closeModal, isOpen, toggleFx, audioFx }) => {
   if (!isOpen) return null;
-  
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
-  useEffect(() => setModalIsOpen(isOpen), [isOpen]);
 
-      return (
-<div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
-      <div className={`modal-content ${modalIsOpen ? 'modal-open' : ''}`} onClick={(e) => e.stopPropagation()}>
-      <PiEqualizer size={40} color="blue"/>
-        <h1 className="text-xl font-semibold">MIXER</h1>
-      <div className="w-full flex gap-3">
-        <div className="w-full h-[300px] rounded-xl overflow-hidden border border-slate-700">
-            <Equalizer
-              amplitude={3}
-              audio={audioRef?.current || undefined}
-              backgroundColor="#000000"
-              cubeSideLength={0.03}
-              cubeSpacing={4.5}
-              cameraFov={60}
-              cameraPosition={[0, 5, 12]}
-              gridCols={60}
-              gridRows={10}
-            />
-        </div>
-        <div className="reverb-controls flex flex-col">
-          <h2 className="text-lg font-semibold">Reverb</h2>
-          <div className="flex gap-4">
-            <CircularSlider
-              width={120}
-              label="Reverb"
-              min={0}
-              max={100}
-              knobColor="#3b82f6"
-              progressColorFrom="#9333ea"
-              progressColorTo="#3b82f6"
-              dataIndex={reverbWet * 100}
-              onChange={(value) => setReverbWet(Number(value) / 100)}
-              
-            />
-          </div>
+  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={closeModal}
+    >
+      <div
+        className="bg-zinc-900 p-6 rounded-lg shadow-lg w-11/12 max-w-md"
+        onClick={handleModalClick}
+      >
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-white">Audio Effects</h2>
+          <button
+            className="text-gray-400 hover:text-white"
+            onClick={closeModal}
+          >
+            ✕
+          </button>
         </div>
 
-      </div>
-        <button className="text-2xl text-blue-600 font-extrabold bg-slate-300 py-3 px-5 rounded-3xl" onClick={closeModal}>X</button>
-      </div>
-    </div>
-    );
-  }
+        <button
+        onClick={toggleFx}
+        className={`p-2 px-4 rounded ${
+          audioFx.isFxEnabled ? "bg-green-600" : "bg-gray-600"
+        } text-white`}
+      ></button>
 
-  export default ModalFx;
+          {/* Reverb Controls */}
+          <div className="mt-4 text-white">
+            <label htmlFor="wet">Intensidade:</label>
+              <input
+                id="wet"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={audioFx.wetLevel}
+                onChange={(e) => audioFx.setWetLevel(parseFloat(e.target.value))}
+              />
+            <p>{Math.round(audioFx.wetLevel * 100)}%</p>
+        </div>
+
+          {/* You can add more effect controls here */}
+          
+          {/* Info text */}
+          <p className="text-gray-400 text-sm mt-4">
+            Adjust audio effects to enhance your listening experience. Changes will apply to the current and future tracks.
+          </p>
+        </div>
+      </div>
+  );
+};
+
+export default ModalFx;
