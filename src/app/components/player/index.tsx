@@ -3,54 +3,24 @@ import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, RandomMusicsTrue, RandomMusicsFalse, VolumeOff, VolumeOn } from '../../icons/index';
 import Modal from "../modal/Modal";
 import React from "react";
-import usePlayerStore from "@/app/store/playerStore"
 import { PiEqualizer } from "react-icons/pi"
 import ModalFx from  "../modalFx/ModalFx"
 import useAudioFx from '@/app/Audio/index'
+import {usePlayerState} from '../../utils/index'
 
-export interface PlayerProps {
-    id: string;
-    setId: (e: string) => void;
-}
-
-const Player: React.FC<PlayerProps> = ({ id, setId }) => {
+const Player: React.FC = () => {
     const {
-        currentTrack,
-        isPlaying,
-        isMuted,
-        isRandom,
-        volume,
-        progress,
-        duration,
-        toggleMute,
-        togglePlay,
-        toggleRandom,
-        playNextTrack,
-        playPrevTrack,
-        setVolume,
-        setProgress,
+        currentTrack, isPlaying, isMuted,
+        isRandom, volume, progress,
+        duration, toggleMute, togglePlay, toggleRandom,
+        playNextTrack, playPrevTrack, setVolume, setProgress,
         setDuration,
-    } = usePlayerStore((state) => ({
-        currentTrack: state.currentTrack,
-        isPlaying: state.isPlaying,
-        isMuted: state.isMuted,
-        isRandom: state.isRandom,
-        volume: state.volume,
-        progress: state.progress,
-        duration: state.duration,
-        toggleMute: state.toggleMute,
-        togglePlay: state.togglePlay,
-        toggleRandom: state.toggleRandom,
-        playNextTrack: state.playNextTrack,
-        playPrevTrack: state.playPrevTrack,
-        setVolume: state.setVolume,
-        setProgress: state.setProgress,
-        setDuration: state.setDuration,
-    }));
+      } = usePlayerState();
+
     const audioRef = useRef<HTMLAudioElement>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [isModalOpenFx, setIsModalOpenFx] = useState(false);
-    const { isFxEnabled, toggleFx, wetLevel, setWetLevel } = useAudioFx(audioRef);
+    const audioFx = useAudioFx(audioRef);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -73,7 +43,6 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
             if (audioRef.current) {
                 audioRef.current.volume = volume;
                 audioRef.current.volume = isMuted ? 0 : volume;
-                // 🟢 Atualiza o volume ao modificar o slider
               }
         }, [isPlaying, currentTrack, volume, isMuted]);
 
@@ -131,10 +100,8 @@ const Player: React.FC<PlayerProps> = ({ id, setId }) => {
                                         <ModalFx
                                        closeModal={() => setIsModalOpenFx(false)}
                                        isOpen={isModalOpenFx}
-                                       toggleFx={toggleFx}
-                                       isFxEnabled={isFxEnabled}
-                                       wetLevel={wetLevel}
-                                       setWetLevel={setWetLevel}
+                                       toggleFx={audioFx.toggleFx}
+                                       audioFx={audioFx}
                                         />
                                         )}
                                <audio
