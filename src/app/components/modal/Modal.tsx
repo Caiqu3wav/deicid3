@@ -8,7 +8,7 @@ import { ModalProps } from "@/interfaces";
 import usePlayerStore from "@/app/store/playerStore";
 
 const Modal: React.FC<ModalProps> = ({
-  closeModal,
+  setIsOpen,
   isOpen,
   audioRef
 }) => {
@@ -47,16 +47,10 @@ const Modal: React.FC<ModalProps> = ({
   if (!isOpen) {
     return null;
   }
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(isOpen);
-
 
   if(!currentTrack) {
     return null;
   }
-
-  useEffect(() => {
-    setModalIsOpen(isOpen);
-  }, [isOpen]);
 
   
   const calculeDuration = (sec: number) => {
@@ -69,8 +63,8 @@ const Modal: React.FC<ModalProps> = ({
 }
 
     return (
-<div className={`modal-overlay ${modalIsOpen ? 'modal-open' : ''}`} onClick={closeModal}>
-      <div className={`modal-content ${modalIsOpen ? 'modal-open' : ''}`} onClick={(e) => e.stopPropagation()}>
+<div className={`modal-overlay ${isOpen ? 'modal-open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+      <div className={`modal-content ${isOpen ? 'modal-open' : ''}`} onClick={(e) => e.stopPropagation()}>
         <Image className="rounded-xl w-[200px] h-[200px]" width={200} height={200} src={currentTrack?.album_img ?? ''}
          alt={currentTrack?.name ?? ''} />
         <h1 className="text-xl font-semibold">{currentTrack.name}</h1>
@@ -129,7 +123,7 @@ const Modal: React.FC<ModalProps> = ({
                     min='0'
                 />
                 </div>
-        <button className="text-2xl text-blue-600 font-extrabold bg-slate-300 py-3 px-5 rounded-3xl" onClick={closeModal}>X</button>
+        <button className="text-2xl text-blue-600 font-extrabold bg-slate-300 py-3 px-5 rounded-3xl" onClick={() => setIsOpen(false)}>X</button>
       </div>
     </div>
     );

@@ -8,8 +8,8 @@ interface PlayerState {
     isMuted: boolean;
     isRandom: boolean;
     volume: number;
-  progress: number;
-  duration: number;
+    progress: number;
+    duration: number;
   addTrack: (track: Beat) => void;
   addTracks: (tracks: Beat[]) => void;
   addTracksAndRemove: (tracks: Beat[]) => void;
@@ -96,7 +96,7 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
       set((state) => ({ isRandom: !state.isRandom }))
   },
   addTracksAndRemove: (tracks) => set((state) => ({ playlist: [...tracks] })),
-  playlistRemoveAll: () => set((state) => ({playlist: []}))
+  playlistRemoveAll: () => set((state) => ({playlist: []})),
 }));
 
 export default usePlayerStore;

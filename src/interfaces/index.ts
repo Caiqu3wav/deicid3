@@ -19,7 +19,7 @@ export interface Beat {
   }
 
  export interface ModalProps  {
-    closeModal: () => void;
+    setIsOpen: (isOpen: boolean) => void;
     isOpen: boolean;
     audioRef: any;
   }

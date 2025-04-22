@@ -36,7 +36,7 @@
     "src/app/components/player/index.tsx",
     "src/app/hooks/index.js",
     "src/app/api/beats/index.ts"
-, "src/app/Audio/index.ts"  ],
+, "src/app/Audio/index.js"  ],
   "exclude": [
     "node_modules"
   ]
