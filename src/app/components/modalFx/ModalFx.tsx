@@ -4,11 +4,11 @@ import "../../styles/Modal.css"
 interface ModalFxProps {
   setIsOpen: (isOpen: boolean) => void;
   isOpen: boolean;
-  toggleReverb: () => void;
-  isReverbEnabled: boolean;
+  reverbAmount: number;
+  setReverbAmount: (amount: number) => void;
 }
 
-const ModalFx: React.FC<ModalFxProps> = ({ isOpen, setIsOpen, toggleReverb, isReverbEnabled }) => { 
+const ModalFx: React.FC<ModalFxProps> = ({ isOpen, setIsOpen, reverbAmount, setReverbAmount }) => { 
   if (!isOpen) return null;
 
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -32,13 +32,23 @@ const ModalFx: React.FC<ModalFxProps> = ({ isOpen, setIsOpen, toggleReverb, isRe
           >
             ✕
           </button>
-        </div>
-/*    <button onClick={toggleReverb}>
-        {isReverbEnabled ? 'Disable Reverb' : 'Enable Reverb'}
-      </button>
+        </div> 
           <p className="text-gray-400 text-sm mt-4">
             Adjust audio effects to enhance your listening experience. Changes will apply to the current and future tracks.
           </p>
+
+          <div className="flex flex-col gap-2 text-white">
+          <label htmlFor="reverb">Reverb</label>
+            <input
+              id="reverb"
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={reverbAmount}
+              onChange={(e) => setReverbAmount(parseFloat(e.target.value))}
+            />
+          </div>'
         </div>
       </div>
   );

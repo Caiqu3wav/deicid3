@@ -6,7 +6,6 @@ import React from "react";
 import { PiEqualizer } from "react-icons/pi"
 import ModalFx from  "../modalFx/ModalFx"
 import {usePlayerState} from '../../utils/index'
-import Pizzicato from 'pizzicato'
 
 const Player: React.FC = () => {
     const {
@@ -17,58 +16,74 @@ const Player: React.FC = () => {
         setDuration,
       } = usePlayerState();
 
-    const pizziSoundRef = useRef<Pizzicato.Sound | null | any>(null);
-    const reverbEffectRef = useRef<Pizzicato.Effects.Reverb | null>(null);
-    const [isReverbEnabled, setIsReverbEnabled] = useState(false);
-
     const audioRef = useRef<HTMLAudioElement>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [isModalOpenFx, setIsModalOpenFx] = useState(false);
-    
+    const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
+    const [reverbAmount, setReverbAmount] = useState<number>(0.0);
+    const wetGainRef = useRef<GainNode | null>(null);
+    const dryGainRef = useRef<GainNode | null>(null);
+
     useEffect(() => {
-        if (currentTrack?.audio) {
-          initializePizzicatoSound(currentTrack.audio);
-        }
-      }, [currentTrack]);
-
-      useEffect(() => {
-        if (!pizziSoundRef.current) return;
-      
-        if (isPlaying) {
-          Pizzicato.context.resume().then(() => {
-            pizziSoundRef.current?.play();
-          });
-        } else {
-          pizziSoundRef.current.pause();
-        }
-      
-        pizziSoundRef.current.volume = isMuted ? 0 : volume;
-
-        let animationFrameId: number;
-      
-        const updateProgress = () => {
-            if (pizziSoundRef.current && isPlaying) {
-              const contextTime = pizziSoundRef.current?.currentTime;
-              if (typeof contextTime === 'number') {
-                setProgress(contextTime);
-              }
+            if (audioRef.current && currentTrack) {
+                audioRef.current.volume = volume;
+                if (isPlaying) {
+                    audioRef.current.play();
+                } else {
+                    audioRef.current.pause();
+                }
             }
-            animationFrameId = requestAnimationFrame(updateProgress);
-          };
 
-          const loop = () => {
-            updateProgress();
-            animationFrameId = requestAnimationFrame(loop);
-          };
-        
-          if (isPlaying) {
-            animationFrameId = requestAnimationFrame(updateProgress);
-          }
-        
-          return () => cancelAnimationFrame(animationFrameId);
-          }, [isPlaying, volume, isMuted]);
+            if (audioRef.current) {
+                audioRef.current.volume = volume;
+                audioRef.current.volume = isMuted ? 0 : volume;
+              }
+        }, [isPlaying, currentTrack, volume, isMuted]);
       
-        const calculeDuration = (sec: number) => {
+        useEffect(() => {
+            if (!audioRef.current) return;
+          
+            const context = new (window.AudioContext || window.webkitAudioContext)();
+            const source = context.createMediaElementSource(audioRef.current);
+            const convolver = context.createConvolver();
+            const wetGain = context.createGain();
+            const dryGain = context.createGain();
+          
+            wetGain.gain.value = reverbAmount;
+            dryGain.gain.value = 1 - reverbAmount;
+          
+            wetGainRef.current = wetGain;
+            dryGainRef.current = dryGain;
+          
+            fetch('/impulse/1halls02mediumhallm-to-s.wav') // mais fechado e molhado
+              .then(response => response.arrayBuffer())
+              .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+              .then(impulseBuffer => {
+                convolver.buffer = impulseBuffer;
+              });
+          
+            source.connect(dryGain);
+            source.connect(convolver);
+            convolver.connect(wetGain);
+          
+            dryGain.connect(context.destination);
+            wetGain.connect(context.destination);
+          
+            setAudioContext(context);
+          
+            return () => {
+              context.close();
+            };
+          }, [currentTrack]);
+
+          useEffect(() => {
+            if (!audioContext || !wetGainRef.current || !dryGainRef.current) return;
+          
+            wetGainRef.current.gain.setValueAtTime(reverbAmount, audioContext.currentTime);
+            dryGainRef.current.gain.setValueAtTime(1 - reverbAmount, audioContext.currentTime);
+          }, [reverbAmount, audioContext]);
+
+          const calculeDuration = (sec: number) => {
             const minutes = Math.floor(sec / 60)
             const newMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
             const seconds = Math.floor(sec % 60)
@@ -93,68 +108,6 @@ const Player: React.FC = () => {
             setIsModalOpenFx(true);
             console.log('modal fx open');
         }
-
-        const initializePizzicatoSound = (audioUrl: string) => {
-            if (pizziSoundRef.current) {
-              pizziSoundRef.current.stop();
-              pizziSoundRef.current.disconnect();
-            }
-          
-            const sound = new Pizzicato.Sound(
-              {
-                source: 'file',
-                options: { path: audioUrl }
-              },
-              (error) => {
-                if (error) {
-                  console.error('Erro ao carregar o som:', error);
-                  return;
-                }
-          
-                console.log("Som carregado com sucesso.");
-                pizziSoundRef.current = sound;
-                pizziSoundRef.current.volume = isMuted ? 0 : volume;
-          
-                if (isPlaying) {
-                  Pizzicato.context.resume().then(() => {
-                    pizziSoundRef.current?.play();
-                  });
-                }
-              }
-            );
-          };
-      
-        const applyReverb = () => {
-            if (!pizziSoundRef.current) return;
-      
-            if (!reverbEffectRef.current) {
-               reverbEffectRef.current = new Pizzicato.Effects.Reverb({
-                  time: 1.0, // Reverb time
-                  decay: 1.5,
-                  mix: 0.8, // Wet/dry mix
-                  reverse: false
-               });
-            }
-            pizziSoundRef.current.addEffect(reverbEffectRef.current);
-        };
-      
-        const removeReverb = () => {
-           if (pizziSoundRef.current && reverbEffectRef.current) {
-               pizziSoundRef.current.removeEffect(reverbEffectRef.current);
-               // Optional: Dispose of the effect if you won't reuse the exact instance
-               // reverbEffectRef.current = null;
-           }
-        };
-      
-        const toggleReverb = () => {
-           const newState = !isReverbEnabled;
-           setIsReverbEnabled(newState);
-           if (newState) {
-               applyReverb();
-           } else {
-               removeReverb();
-           }
-        };
 
         return(
             <div className="w-full flex justify-between bg-black rounded-md">
@@ -184,8 +137,8 @@ const Player: React.FC = () => {
                                         <ModalFx
                                        setIsOpen={setIsModalOpenFx}
                                        isOpen={isModalOpenFx}
-                                       toggleReverb={toggleReverb}
-                                       isReverbEnabled={isReverbEnabled}
+                                       reverbAmount={reverbAmount}
+                                       setReverbAmount={setReverbAmount}
                                         />
                                         )}
                                <audio
@@ -276,5 +229,3 @@ const Player: React.FC = () => {
         </div>
         )
 }
-
-export { Player };
