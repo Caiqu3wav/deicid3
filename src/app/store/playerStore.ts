@@ -24,6 +24,10 @@ interface PlayerState {
   setVolume: (volume: number) => void;
   setProgress: (progress: number) => void;
   setDuration: (duration: number) => void;
+  reverbAmount: number;
+  setReverbAmount: (reverbAmount: number) => void;
+  playbackRate: number;
+  setPlaybackRate: (playbackRate: number) => void;
 }
 
 const usePlayerStore = create<PlayerState>((set, get) => ({
@@ -35,6 +39,11 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
     progress: 0,
     duration: 0,
     isRandom: false,
+    reverbAmount: 0.0,
+    playbackRate: 1.0,
+    setPlaybackRate: (playbackRate) => set({ playbackRate }),
+
+    setReverbAmount: (reverbAmount) => set({ reverbAmount }),
     
   addTrack: (track) => set((state) => {
     if (state.playlist.some((t) => t.id === track.id)) return state;

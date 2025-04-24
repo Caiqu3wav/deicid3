@@ -1,14 +1,20 @@
 'use client';
 import "../../styles/Modal.css"
+import CircularSlider from '@fseehawer/react-circular-slider';
+import { RiResetLeftFill } from "react-icons/ri";
 
 interface ModalFxProps {
   setIsOpen: (isOpen: boolean) => void;
   isOpen: boolean;
   reverbAmount: number;
   setReverbAmount: (amount: number) => void;
+  playbackRate: number;
+  setPlaybackRate: (rate: number) => void;
 }
 
-const ModalFx: React.FC<ModalFxProps> = ({ isOpen, setIsOpen, reverbAmount, setReverbAmount }) => { 
+const ModalFx: React.FC<ModalFxProps> = ({ isOpen, setIsOpen, reverbAmount, setReverbAmount, playbackRate,
+  setPlaybackRate
+ }) => { 
   if (!isOpen) return null;
 
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -36,19 +42,39 @@ const ModalFx: React.FC<ModalFxProps> = ({ isOpen, setIsOpen, reverbAmount, setR
           <p className="text-gray-400 text-sm mt-4">
             Adjust audio effects to enhance your listening experience. Changes will apply to the current and future tracks.
           </p>
-
-          <div className="flex flex-col gap-2 text-white">
-          <label htmlFor="reverb">Reverb</label>
-            <input
-              id="reverb"
-              type="range"
+          
+          <div className="reverb-controls flex flex-col gap-4 items-center justify-center">
+          <h2 className="text-lg font-semibold">Reverb</h2>
+          <div className="flex gap-4">
+            <CircularSlider
+              width={120}
               min={0}
-              max={1}
-              step={0.01}
-              value={reverbAmount}
-              onChange={(e) => setReverbAmount(parseFloat(e.target.value))}
+              max={100}
+              knobColor="#3b82f6"
+              progressColorFrom="#9333ea"
+              progressColorTo="#3b82f6"
+              dataIndex={reverbAmount * 100}
+              onChange={(value) => setReverbAmount(Number(value) / 100)}
             />
-          </div>'
+          </div>
+
+          <div className="reverb-controls flex flex-col">
+          <div className="flex gap-4 items-center justify-center">
+            <label htmlFor="rate">Velocidade</label>
+            <button onClick={() => setPlaybackRate(1.0)}><RiResetLeftFill size={30} color="white"/></button>
+          </div>
+                <input
+                  id="rate"
+                  type="range"
+                  min="0.5"
+                  max="2"
+                  step="0.01"
+                  value={playbackRate}
+                  onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
+                />
+              <span>{playbackRate.toFixed(2)}x</span>
+            </div>
+         </div>
         </div>
       </div>
   );

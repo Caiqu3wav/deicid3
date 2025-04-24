@@ -17,5 +17,9 @@ export const usePlayerState = () => {
       setVolume: state.setVolume,
       setProgress: state.setProgress,
       setDuration: state.setDuration,
+      reverbAmount: state.reverbAmount,
+      setReverbAmount: state.setReverbAmount,
+      setPlaybackRate: state.setPlaybackRate,
+      playbackRate: state.playbackRate
     }));
   };

@@ -6,23 +6,30 @@ import React from "react";
 import { PiEqualizer } from "react-icons/pi"
 import ModalFx from  "../modalFx/ModalFx"
 import {usePlayerState} from '../../utils/index'
+import { useReverb } from '../../Audio/index'
+import * as Tone from 'tone'
 
-const Player: React.FC = () => {
+export const Player: React.FC = () => {
     const {
         currentTrack, isPlaying, isMuted,
         isRandom, volume, progress,
         duration, toggleMute, togglePlay, toggleRandom,
         playNextTrack, playPrevTrack, setVolume, setProgress,
-        setDuration,
+        setDuration, reverbAmount, setReverbAmount, playbackRate,
+        setPlaybackRate
       } = usePlayerState();
 
     const audioRef = useRef<HTMLAudioElement>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [isModalOpenFx, setIsModalOpenFx] = useState(false);
-    const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
-    const [reverbAmount, setReverbAmount] = useState<number>(0.0);
-    const wetGainRef = useRef<GainNode | null>(null);
-    const dryGainRef = useRef<GainNode | null>(null);
+    const [bpmRate, setBpmRate] = useState(1.0); // 1.0 = 100%, 1.2 = 120%
+    const [pitch, setPitch] = useState(0);
+
+    useReverb({
+        audioElement: audioRef.current,
+        impulseUrl: "/impulse/1halls01largehallm-to-s.wav",
+        reverbAmount,
+      });
 
     useEffect(() => {
             if (audioRef.current && currentTrack) {
@@ -39,50 +46,13 @@ const Player: React.FC = () => {
                 audioRef.current.volume = isMuted ? 0 : volume;
               }
         }, [isPlaying, currentTrack, volume, isMuted]);
-      
+
         useEffect(() => {
-            if (!audioRef.current) return;
-          
-            const context = new (window.AudioContext || window.webkitAudioContext)();
-            const source = context.createMediaElementSource(audioRef.current);
-            const convolver = context.createConvolver();
-            const wetGain = context.createGain();
-            const dryGain = context.createGain();
-          
-            wetGain.gain.value = reverbAmount;
-            dryGain.gain.value = 1 - reverbAmount;
-          
-            wetGainRef.current = wetGain;
-            dryGainRef.current = dryGain;
-          
-            fetch('/impulse/1halls02mediumhallm-to-s.wav') // mais fechado e molhado
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
-              .then(impulseBuffer => {
-                convolver.buffer = impulseBuffer;
-              });
-          
-            source.connect(dryGain);
-            source.connect(convolver);
-            convolver.connect(wetGain);
-          
-            dryGain.connect(context.destination);
-            wetGain.connect(context.destination);
-          
-            setAudioContext(context);
-          
-            return () => {
-              context.close();
-            };
-          }, [currentTrack]);
-
-          useEffect(() => {
-            if (!audioContext || !wetGainRef.current || !dryGainRef.current) return;
-          
-            wetGainRef.current.gain.setValueAtTime(reverbAmount, audioContext.currentTime);
-            dryGainRef.current.gain.setValueAtTime(1 - reverbAmount, audioContext.currentTime);
-          }, [reverbAmount, audioContext]);
-
+            if (audioRef.current) {
+              audioRef.current.playbackRate = playbackRate;
+            }
+          }, [playbackRate]);
+      
           const calculeDuration = (sec: number) => {
             const minutes = Math.floor(sec / 60)
             const newMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
@@ -102,12 +72,7 @@ const Player: React.FC = () => {
             if (audioRef.current) {
                 setDuration(audioRef.current.duration);
             }
-        };
-
-        const handleModalFxOpen = () => {
-            setIsModalOpenFx(true);
-            console.log('modal fx open');
-        }
+        }; 
 
         return(
             <div className="w-full flex justify-between bg-black rounded-md">
@@ -139,6 +104,8 @@ const Player: React.FC = () => {
                                        isOpen={isModalOpenFx}
                                        reverbAmount={reverbAmount}
                                        setReverbAmount={setReverbAmount}
+                                       playbackRate={playbackRate}
+                                       setPlaybackRate={setPlaybackRate}
                                         />
                                         )}
                                <audio
@@ -201,7 +168,7 @@ const Player: React.FC = () => {
                 </div>
             </div>
 
-            <button onClick={handleModalFxOpen}>
+            <button onClick={() => setIsModalOpenFx(!isModalOpenFx)}>
                 <PiEqualizer className="text-gray-300 text-3xl midtwo3:hidden" />
             </button>
 
